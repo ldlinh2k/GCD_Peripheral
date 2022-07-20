@@ -22,7 +22,7 @@ void present_cipher(unsigned char operation, uint32_t *key, uint32_t *block, uin
 
 	//EN_OR_DE
 	if(operation == PRESENT_OP_EN) present_write(PRESENT_OP_EN,PRESENT_ADDR_EN_OR_DE);
-	else present_write(PRESENT_OP_EN,PRESENT_ADDR_EN_OR_DE);
+	else present_write(PRESENT_OP_DE,PRESENT_ADDR_EN_OR_DE);
 
 	//PLAIN_TEXT
 	present_write(block[1],PRESENT_ADDR_BLOCK_BASE +1);

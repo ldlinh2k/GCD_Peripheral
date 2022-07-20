@@ -11,6 +11,23 @@ int main() {
 	uartConfig.stop = ONE;
 	uartConfig.clockDivider = (CORE_HZ / 8 / 115200) - 1;
 	uart_applyConfig(UART,&uartConfig);
+	print("===============================PRESENT TEST=====================================\r\n");
+		print("=========================LE DUY LINH - 18200157-============================\r\n");
+		print("============================================================================\r\n");
+	    unsigned int present_key[3] = {0x0, 0x0, 0x0};
+	    unsigned int present_block[2] 	= {0x0, 0x0};
+	    unsigned int present_res[2] 	= {0x0, 0x0};
+
+	    print("\r\n=================================TEST 1=====================================\r\n");
+
+	    present_block[1]=0x4c746e67;
+	    present_block[0]=0x7579656e;
+
+	    present_key[2] = 0x46657465;
+	    present_key[1] = 0x6c48636d;
+	    present_key[0] = 0x7573;
+
+	    present_cipher(PRESENT_OP_EN,present_key,present_block,present_res);
 
 	print("============================================================================\r\n");
 	print("===============================PRINCE TEST==================================\r\n");
@@ -162,23 +179,7 @@ int main() {
     aes_key_256[0]	= 0x603deb10;
 
     aes_256_cipher(AES_OP_DE, aes_key_256, aes_block, aes_res);
-	print("===============================PRESENT TEST=====================================\r\n");
-	print("=========================LE DUY LINH - 18200157-============================\r\n");
-	print("============================================================================\r\n");
-    unsigned int present_key[3] = {0x0, 0x0, 0x0};
-    unsigned int present_block[2] 	= {0x0, 0x0};
-    unsigned int present_res[2] 	= {0x0, 0x0};
 
-    print("\r\n=================================TEST 1=====================================\r\n");
-
-    present_block[1]=0x4c746e67;
-    present_block[0]=0x7579656e;
-
-    present_key[2] = 0x46657465;
-    present_key[1] = 0x6c48636d;
-    present_key[0] = 0x7573;
-
-    present_cipher(PRESENT_OP_EN,present_key,present_block,present_res);
 	return 0;	
 }
 void irqCallback(){

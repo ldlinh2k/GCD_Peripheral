@@ -67,7 +67,7 @@ trap_entry:
 80000060:	fc010113          	addi	sp,sp,-64
   call irqCallback
 80000064:	c0001097          	auipc	ra,0xc0001
-80000068:	c94080e7          	jalr	-876(ra) # 40000cf8 <irqCallback>
+80000068:	d38080e7          	jalr	-712(ra) # 40000d9c <irqCallback>
   lw x1 , 15*4(sp)
 8000006c:	03c12083          	lw	ra,60(sp)
   lw x5,  14*4(sp)
@@ -113,7 +113,7 @@ crtInit:
   .option norelax
   la gp, __global_pointer$
 800000b4:	c0003197          	auipc	gp,0xc0003
-800000b8:	3a418193          	addi	gp,gp,932 # 40003458 <__global_pointer$>
+800000b8:	49c18193          	addi	gp,gp,1180 # 40003550 <__global_pointer$>
   .option pop
   la sp, _stack_start
 800000bc:	00001117          	auipc	sp,0x1
@@ -124,10 +124,10 @@ crtInit:
 bss_init:
   la a0, _bss_start
 800000c4:	c0003517          	auipc	a0,0xc0003
-800000c8:	b9450513          	addi	a0,a0,-1132 # 40002c58 <_bss_end>
+800000c8:	c8c50513          	addi	a0,a0,-884 # 40002d50 <_bss_end>
   la a1, _bss_end
 800000cc:	c0003597          	auipc	a1,0xc0003
-800000d0:	b8c58593          	addi	a1,a1,-1140 # 40002c58 <_bss_end>
+800000d0:	c8458593          	addi	a1,a1,-892 # 40002d50 <_bss_end>
 
 800000d4 <bss_loop>:
 bss_loop:
@@ -146,7 +146,7 @@ bss_done:
 ctors_init:
   la a0, _ctors_start
 800000e4:	c0003517          	auipc	a0,0xc0003
-800000e8:	b7450513          	addi	a0,a0,-1164 # 40002c58 <_bss_end>
+800000e8:	c6c50513          	addi	a0,a0,-916 # 40002d50 <_bss_end>
   addi sp,sp,-4
 800000ec:	ffc10113          	addi	sp,sp,-4
 
@@ -154,7 +154,7 @@ ctors_init:
 ctors_loop:
   la a1, _ctors_end
 800000f0:	c0003597          	auipc	a1,0xc0003
-800000f4:	b6858593          	addi	a1,a1,-1176 # 40002c58 <_bss_end>
+800000f4:	c6058593          	addi	a1,a1,-928 # 40002d50 <_bss_end>
   beq a0,a1,ctors_done
 800000f8:	00b50e63          	beq	a0,a1,80000114 <ctors_done>
   lw a3,0(a0)
@@ -590,37 +590,37 @@ void prince_cipher(uint32_t mode, uint32_t *key, uint32_t *block, uint32_t *res)
 400003fc:	00f71a63          	bne	a4,a5,40000410 <prince_cipher+0x120>
 			print("=============================PRINCE ENCRYPTTION=============================\r\n");
 40000400:	400027b7          	lui	a5,0x40002
-40000404:	12478513          	addi	a0,a5,292 # 40002124 <vga_simRes_h160_v120+0x20>
-40000408:	011010ef          	jal	ra,40001c18 <print>
+40000404:	1c878513          	addi	a0,a5,456 # 400021c8 <vga_simRes_h160_v120+0x20>
+40000408:	0b5010ef          	jal	ra,40001cbc <print>
 4000040c:	0100006f          	j	4000041c <prince_cipher+0x12c>
 		else
 			print("=============================PRINCE DECRYPTTION=============================\r\n");
 40000410:	400027b7          	lui	a5,0x40002
-40000414:	17478513          	addi	a0,a5,372 # 40002174 <vga_simRes_h160_v120+0x70>
-40000418:	001010ef          	jal	ra,40001c18 <print>
+40000414:	21878513          	addi	a0,a5,536 # 40002218 <vga_simRes_h160_v120+0x70>
+40000418:	0a5010ef          	jal	ra,40001cbc <print>
 		print("\r\n");
 4000041c:	400027b7          	lui	a5,0x40002
-40000420:	1c478513          	addi	a0,a5,452 # 400021c4 <vga_simRes_h160_v120+0xc0>
-40000424:	7f4010ef          	jal	ra,40001c18 <print>
+40000420:	26878513          	addi	a0,a5,616 # 40002268 <vga_simRes_h160_v120+0xc0>
+40000424:	099010ef          	jal	ra,40001cbc <print>
 		print64bit("PLAIN_TEXT (64-bit) : ", block);
 40000428:	fe442583          	lw	a1,-28(s0)
 4000042c:	400027b7          	lui	a5,0x40002
-40000430:	1c878513          	addi	a0,a5,456 # 400021c8 <vga_simRes_h160_v120+0xc4>
-40000434:	24d010ef          	jal	ra,40001e80 <print64bit>
+40000430:	26c78513          	addi	a0,a5,620 # 4000226c <vga_simRes_h160_v120+0xc4>
+40000434:	2f1010ef          	jal	ra,40001f24 <print64bit>
 		print128bit("KEY (128-bit) : ", key);
 40000438:	fe842583          	lw	a1,-24(s0)
 4000043c:	400027b7          	lui	a5,0x40002
-40000440:	1e078513          	addi	a0,a5,480 # 400021e0 <vga_simRes_h160_v120+0xdc>
-40000444:	2a1010ef          	jal	ra,40001ee4 <print128bit>
+40000440:	28478513          	addi	a0,a5,644 # 40002284 <vga_simRes_h160_v120+0xdc>
+40000444:	345010ef          	jal	ra,40001f88 <print128bit>
 		print64bit("RESULT (64-bit) : ", res);
 40000448:	fe042583          	lw	a1,-32(s0)
 4000044c:	400027b7          	lui	a5,0x40002
-40000450:	1f478513          	addi	a0,a5,500 # 400021f4 <vga_simRes_h160_v120+0xf0>
-40000454:	22d010ef          	jal	ra,40001e80 <print64bit>
+40000450:	29878513          	addi	a0,a5,664 # 40002298 <vga_simRes_h160_v120+0xf0>
+40000454:	2d1010ef          	jal	ra,40001f24 <print64bit>
 		print("\r\n============================================================================\r\n");
 40000458:	400027b7          	lui	a5,0x40002
-4000045c:	20878513          	addi	a0,a5,520 # 40002208 <vga_simRes_h160_v120+0x104>
-40000460:	7b8010ef          	jal	ra,40001c18 <print>
+4000045c:	2ac78513          	addi	a0,a5,684 # 400022ac <vga_simRes_h160_v120+0x104>
+40000460:	05d010ef          	jal	ra,40001cbc <print>
 
 }
 40000464:	00000013          	nop
@@ -834,10 +834,10 @@ static void vga_stop(Vga_Reg *reg){
 
 
 int main() {
-400006b8:	f7010113          	addi	sp,sp,-144
-400006bc:	08112623          	sw	ra,140(sp)
-400006c0:	08812423          	sw	s0,136(sp)
-400006c4:	09010413          	addi	s0,sp,144
+400006b8:	f5010113          	addi	sp,sp,-176
+400006bc:	0a112623          	sw	ra,172(sp)
+400006c0:	0a812423          	sw	s0,168(sp)
+400006c4:	0b010413          	addi	s0,sp,176
 	Uart_Config uartConfig;
 	uartConfig.dataLength = 8;
 400006c8:	00800793          	li	a5,8
@@ -854,2264 +854,2323 @@ int main() {
 400006e4:	00078593          	mv	a1,a5
 400006e8:	f0010537          	lui	a0,0xf0010
 400006ec:	ebdff0ef          	jal	ra,400005a8 <uart_applyConfig>
+	print("===============================PRESENT TEST=====================================\r\n");
+400006f0:	400027b7          	lui	a5,0x40002
+400006f4:	36078513          	addi	a0,a5,864 # 40002360 <vga_simRes_h160_v120+0x20>
+400006f8:	5c4010ef          	jal	ra,40001cbc <print>
+		print("=========================LE DUY LINH - 18200157-============================\r\n");
+400006fc:	400027b7          	lui	a5,0x40002
+40000700:	3b478513          	addi	a0,a5,948 # 400023b4 <vga_simRes_h160_v120+0x74>
+40000704:	5b8010ef          	jal	ra,40001cbc <print>
+		print("============================================================================\r\n");
+40000708:	400027b7          	lui	a5,0x40002
+4000070c:	40478513          	addi	a0,a5,1028 # 40002404 <vga_simRes_h160_v120+0xc4>
+40000710:	5ac010ef          	jal	ra,40001cbc <print>
+	    unsigned int present_key[3] = {0x0, 0x0, 0x0};
+40000714:	fc042a23          	sw	zero,-44(s0)
+40000718:	fc042c23          	sw	zero,-40(s0)
+4000071c:	fc042e23          	sw	zero,-36(s0)
+	    unsigned int present_block[2] 	= {0x0, 0x0};
+40000720:	fc042623          	sw	zero,-52(s0)
+40000724:	fc042823          	sw	zero,-48(s0)
+	    unsigned int present_res[2] 	= {0x0, 0x0};
+40000728:	fc042223          	sw	zero,-60(s0)
+4000072c:	fc042423          	sw	zero,-56(s0)
+
+	    print("\r\n=================================TEST 1=====================================\r\n");
+40000730:	400027b7          	lui	a5,0x40002
+40000734:	45478513          	addi	a0,a5,1108 # 40002454 <vga_simRes_h160_v120+0x114>
+40000738:	584010ef          	jal	ra,40001cbc <print>
+
+	    present_block[1]=0x4c746e67;
+4000073c:	4c7477b7          	lui	a5,0x4c747
+40000740:	e6778793          	addi	a5,a5,-409 # 4c746e67 <__global_pointer$+0xc743917>
+40000744:	fcf42823          	sw	a5,-48(s0)
+	    present_block[0]=0x7579656e;
+40000748:	757967b7          	lui	a5,0x75796
+4000074c:	56e78793          	addi	a5,a5,1390 # 7579656e <__global_pointer$+0x3579301e>
+40000750:	fcf42623          	sw	a5,-52(s0)
+
+	    present_key[2] = 0x46657465;
+40000754:	466577b7          	lui	a5,0x46657
+40000758:	46578793          	addi	a5,a5,1125 # 46657465 <__global_pointer$+0x6653f15>
+4000075c:	fcf42e23          	sw	a5,-36(s0)
+	    present_key[1] = 0x6c48636d;
+40000760:	6c4867b7          	lui	a5,0x6c486
+40000764:	36d78793          	addi	a5,a5,877 # 6c48636d <__global_pointer$+0x2c482e1d>
+40000768:	fcf42c23          	sw	a5,-40(s0)
+	    present_key[0] = 0x7573;
+4000076c:	000077b7          	lui	a5,0x7
+40000770:	57378793          	addi	a5,a5,1395 # 7573 <_stack_size+0x6d73>
+40000774:	fcf42a23          	sw	a5,-44(s0)
+
+	    present_cipher(PRESENT_OP_EN,present_key,present_block,present_res);
+40000778:	fc440693          	addi	a3,s0,-60
+4000077c:	fcc40713          	addi	a4,s0,-52
+40000780:	fd440793          	addi	a5,s0,-44
+40000784:	00070613          	mv	a2,a4
+40000788:	00078593          	mv	a1,a5
+4000078c:	00000513          	li	a0,0
+40000790:	15d000ef          	jal	ra,400010ec <present_cipher>
 
 	print("============================================================================\r\n");
-400006f0:	400027b7          	lui	a5,0x40002
-400006f4:	2bc78513          	addi	a0,a5,700 # 400022bc <vga_simRes_h160_v120+0x20>
-400006f8:	520010ef          	jal	ra,40001c18 <print>
+40000794:	400027b7          	lui	a5,0x40002
+40000798:	40478513          	addi	a0,a5,1028 # 40002404 <vga_simRes_h160_v120+0xc4>
+4000079c:	520010ef          	jal	ra,40001cbc <print>
 	print("===============================PRINCE TEST==================================\r\n");
-400006fc:	400027b7          	lui	a5,0x40002
-40000700:	30c78513          	addi	a0,a5,780 # 4000230c <vga_simRes_h160_v120+0x70>
-40000704:	514010ef          	jal	ra,40001c18 <print>
+400007a0:	400027b7          	lui	a5,0x40002
+400007a4:	4a878513          	addi	a0,a5,1192 # 400024a8 <vga_simRes_h160_v120+0x168>
+400007a8:	514010ef          	jal	ra,40001cbc <print>
 	print("=========================LE DUY LINH - 18200157-============================\r\n");
-40000708:	400027b7          	lui	a5,0x40002
-4000070c:	35c78513          	addi	a0,a5,860 # 4000235c <vga_simRes_h160_v120+0xc0>
-40000710:	508010ef          	jal	ra,40001c18 <print>
+400007ac:	400027b7          	lui	a5,0x40002
+400007b0:	3b478513          	addi	a0,a5,948 # 400023b4 <vga_simRes_h160_v120+0x74>
+400007b4:	508010ef          	jal	ra,40001cbc <print>
 	print("============================================================================\r\n");
-40000714:	400027b7          	lui	a5,0x40002
-40000718:	2bc78513          	addi	a0,a5,700 # 400022bc <vga_simRes_h160_v120+0x20>
-4000071c:	4fc010ef          	jal	ra,40001c18 <print>
+400007b8:	400027b7          	lui	a5,0x40002
+400007bc:	40478513          	addi	a0,a5,1028 # 40002404 <vga_simRes_h160_v120+0xc4>
+400007c0:	4fc010ef          	jal	ra,40001cbc <print>
 	uint32_t prince_key[4] 		= {0x0, 0x0, 0x0, 0x0};
-40000720:	fc042823          	sw	zero,-48(s0)
-40000724:	fc042a23          	sw	zero,-44(s0)
-40000728:	fc042c23          	sw	zero,-40(s0)
-4000072c:	fc042e23          	sw	zero,-36(s0)
+400007c4:	fa042a23          	sw	zero,-76(s0)
+400007c8:	fa042c23          	sw	zero,-72(s0)
+400007cc:	fa042e23          	sw	zero,-68(s0)
+400007d0:	fc042023          	sw	zero,-64(s0)
 	uint32_t prince_block[2] 		= {0x0, 0x0};
-40000730:	fc042423          	sw	zero,-56(s0)
-40000734:	fc042623          	sw	zero,-52(s0)
+400007d4:	fa042623          	sw	zero,-84(s0)
+400007d8:	fa042823          	sw	zero,-80(s0)
 	uint32_t prince_res[2] 	= {0x0,0x0};
-40000738:	fc042023          	sw	zero,-64(s0)
-4000073c:	fc042223          	sw	zero,-60(s0)
+400007dc:	fa042223          	sw	zero,-92(s0)
+400007e0:	fa042423          	sw	zero,-88(s0)
 	print("\r\n===================================TEST 1===================================\r\n");
-40000740:	400027b7          	lui	a5,0x40002
-40000744:	3ac78513          	addi	a0,a5,940 # 400023ac <vga_simRes_h160_v120+0x110>
-40000748:	4d0010ef          	jal	ra,40001c18 <print>
+400007e4:	400027b7          	lui	a5,0x40002
+400007e8:	4f878513          	addi	a0,a5,1272 # 400024f8 <vga_simRes_h160_v120+0x1b8>
+400007ec:	4d0010ef          	jal	ra,40001cbc <print>
 
 	prince_block[1] 	= 0x01234567;
-4000074c:	012347b7          	lui	a5,0x1234
-40000750:	56778793          	addi	a5,a5,1383 # 1234567 <_stack_size+0x1233d67>
-40000754:	fcf42623          	sw	a5,-52(s0)
+400007f0:	012347b7          	lui	a5,0x1234
+400007f4:	56778793          	addi	a5,a5,1383 # 1234567 <_stack_size+0x1233d67>
+400007f8:	faf42823          	sw	a5,-80(s0)
 	prince_block[0] 	= 0x89abcdef;
-40000758:	89abd7b7          	lui	a5,0x89abd
-4000075c:	def78793          	addi	a5,a5,-529 # 89abcdef <_stack_start+0x9abc4af>
-40000760:	fcf42423          	sw	a5,-56(s0)
+400007fc:	89abd7b7          	lui	a5,0x89abd
+40000800:	def78793          	addi	a5,a5,-529 # 89abcdef <_stack_start+0x9abc4af>
+40000804:	faf42623          	sw	a5,-84(s0)
 
 	prince_key[3]		= 0x00112233;
-40000764:	001127b7          	lui	a5,0x112
-40000768:	23378793          	addi	a5,a5,563 # 112233 <_stack_size+0x111a33>
-4000076c:	fcf42e23          	sw	a5,-36(s0)
+40000808:	001127b7          	lui	a5,0x112
+4000080c:	23378793          	addi	a5,a5,563 # 112233 <_stack_size+0x111a33>
+40000810:	fcf42023          	sw	a5,-64(s0)
 	prince_key[2]		= 0x44556677;
-40000770:	445567b7          	lui	a5,0x44556
-40000774:	67778793          	addi	a5,a5,1655 # 44556677 <__global_pointer$+0x455321f>
-40000778:	fcf42c23          	sw	a5,-40(s0)
+40000814:	445567b7          	lui	a5,0x44556
+40000818:	67778793          	addi	a5,a5,1655 # 44556677 <__global_pointer$+0x4553127>
+4000081c:	faf42e23          	sw	a5,-68(s0)
 	prince_key[1]		= 0x8899aabb;
-4000077c:	8899b7b7          	lui	a5,0x8899b
-40000780:	abb78793          	addi	a5,a5,-1349 # 8899aabb <_stack_start+0x899a17b>
-40000784:	fcf42a23          	sw	a5,-44(s0)
+40000820:	8899b7b7          	lui	a5,0x8899b
+40000824:	abb78793          	addi	a5,a5,-1349 # 8899aabb <_stack_start+0x899a17b>
+40000828:	faf42c23          	sw	a5,-72(s0)
 	prince_key[0]		= 0xccddeeff;
-40000788:	ccddf7b7          	lui	a5,0xccddf
-4000078c:	eff78793          	addi	a5,a5,-257 # ccddeeff <_stack_start+0x4cdde5bf>
-40000790:	fcf42823          	sw	a5,-48(s0)
+4000082c:	ccddf7b7          	lui	a5,0xccddf
+40000830:	eff78793          	addi	a5,a5,-257 # ccddeeff <_stack_start+0x4cdde5bf>
+40000834:	faf42a23          	sw	a5,-76(s0)
 
 	prince_cipher(PRINCE_OP_EN,prince_key,prince_block,prince_res);
-40000794:	fc040693          	addi	a3,s0,-64
-40000798:	fc840713          	addi	a4,s0,-56
-4000079c:	fd040793          	addi	a5,s0,-48
-400007a0:	00070613          	mv	a2,a4
-400007a4:	00078593          	mv	a1,a5
-400007a8:	00100513          	li	a0,1
-400007ac:	b45ff0ef          	jal	ra,400002f0 <prince_cipher>
+40000838:	fa440693          	addi	a3,s0,-92
+4000083c:	fac40713          	addi	a4,s0,-84
+40000840:	fb440793          	addi	a5,s0,-76
+40000844:	00070613          	mv	a2,a4
+40000848:	00078593          	mv	a1,a5
+4000084c:	00100513          	li	a0,1
+40000850:	aa1ff0ef          	jal	ra,400002f0 <prince_cipher>
 
 	print("\r\n===================================TEST 2===================================\r\n");
-400007b0:	400027b7          	lui	a5,0x40002
-400007b4:	40078513          	addi	a0,a5,1024 # 40002400 <vga_simRes_h160_v120+0x164>
-400007b8:	460010ef          	jal	ra,40001c18 <print>
+40000854:	400027b7          	lui	a5,0x40002
+40000858:	54c78513          	addi	a0,a5,1356 # 4000254c <vga_simRes_h160_v120+0x20c>
+4000085c:	460010ef          	jal	ra,40001cbc <print>
 
 	prince_block[1] 	= 0x00000000;
-400007bc:	fc042623          	sw	zero,-52(s0)
+40000860:	fa042823          	sw	zero,-80(s0)
 	prince_block[0] 	= 0x00000000;
-400007c0:	fc042423          	sw	zero,-56(s0)
+40000864:	fa042623          	sw	zero,-84(s0)
 
 	prince_key[3]		= 0x00000000;
-400007c4:	fc042e23          	sw	zero,-36(s0)
+40000868:	fc042023          	sw	zero,-64(s0)
 	prince_key[2]		= 0x00000000;
-400007c8:	fc042c23          	sw	zero,-40(s0)
+4000086c:	fa042e23          	sw	zero,-68(s0)
 	prince_key[1]		= 0x00000000;
-400007cc:	fc042a23          	sw	zero,-44(s0)
+40000870:	fa042c23          	sw	zero,-72(s0)
 	prince_key[0]		= 0x00000000;
-400007d0:	fc042823          	sw	zero,-48(s0)
+40000874:	fa042a23          	sw	zero,-76(s0)
 
 	prince_cipher(PRINCE_OP_EN,prince_key,prince_block,prince_res);
-400007d4:	fc040693          	addi	a3,s0,-64
-400007d8:	fc840713          	addi	a4,s0,-56
-400007dc:	fd040793          	addi	a5,s0,-48
-400007e0:	00070613          	mv	a2,a4
-400007e4:	00078593          	mv	a1,a5
-400007e8:	00100513          	li	a0,1
-400007ec:	b05ff0ef          	jal	ra,400002f0 <prince_cipher>
+40000878:	fa440693          	addi	a3,s0,-92
+4000087c:	fac40713          	addi	a4,s0,-84
+40000880:	fb440793          	addi	a5,s0,-76
+40000884:	00070613          	mv	a2,a4
+40000888:	00078593          	mv	a1,a5
+4000088c:	00100513          	li	a0,1
+40000890:	a61ff0ef          	jal	ra,400002f0 <prince_cipher>
 	print("\r\n===================================TEST 3===================================\r\n");
-400007f0:	400027b7          	lui	a5,0x40002
-400007f4:	45478513          	addi	a0,a5,1108 # 40002454 <vga_simRes_h160_v120+0x1b8>
-400007f8:	420010ef          	jal	ra,40001c18 <print>
+40000894:	400027b7          	lui	a5,0x40002
+40000898:	5a078513          	addi	a0,a5,1440 # 400025a0 <vga_simRes_h160_v120+0x260>
+4000089c:	420010ef          	jal	ra,40001cbc <print>
 
 	prince_block[1] 	= 0x69c4e0d8;
-400007fc:	69c4e7b7          	lui	a5,0x69c4e
-40000800:	0d878793          	addi	a5,a5,216 # 69c4e0d8 <__global_pointer$+0x29c4ac80>
-40000804:	fcf42623          	sw	a5,-52(s0)
+400008a0:	69c4e7b7          	lui	a5,0x69c4e
+400008a4:	0d878793          	addi	a5,a5,216 # 69c4e0d8 <__global_pointer$+0x29c4ab88>
+400008a8:	faf42823          	sw	a5,-80(s0)
 	prince_block[0] 	= 0x6a7b0430;
-40000808:	6a7b07b7          	lui	a5,0x6a7b0
-4000080c:	43078793          	addi	a5,a5,1072 # 6a7b0430 <__global_pointer$+0x2a7acfd8>
-40000810:	fcf42423          	sw	a5,-56(s0)
+400008ac:	6a7b07b7          	lui	a5,0x6a7b0
+400008b0:	43078793          	addi	a5,a5,1072 # 6a7b0430 <__global_pointer$+0x2a7acee0>
+400008b4:	faf42623          	sw	a5,-84(s0)
 
 	prince_key[3]		= 0xd8cdb780;
-40000814:	d8cdb7b7          	lui	a5,0xd8cdb
-40000818:	78078793          	addi	a5,a5,1920 # d8cdb780 <_stack_start+0x58cdae40>
-4000081c:	fcf42e23          	sw	a5,-36(s0)
+400008b8:	d8cdb7b7          	lui	a5,0xd8cdb
+400008bc:	78078793          	addi	a5,a5,1920 # d8cdb780 <_stack_start+0x58cdae40>
+400008c0:	fcf42023          	sw	a5,-64(s0)
 	prince_key[2]		= 0x70b4c55a;
-40000820:	70b4c7b7          	lui	a5,0x70b4c
-40000824:	55a78793          	addi	a5,a5,1370 # 70b4c55a <__global_pointer$+0x30b49102>
-40000828:	fcf42c23          	sw	a5,-40(s0)
+400008c4:	70b4c7b7          	lui	a5,0x70b4c
+400008c8:	55a78793          	addi	a5,a5,1370 # 70b4c55a <__global_pointer$+0x30b4900a>
+400008cc:	faf42e23          	sw	a5,-68(s0)
 	prince_key[1]		= 0x818665aa;
-4000082c:	818667b7          	lui	a5,0x81866
-40000830:	5aa78793          	addi	a5,a5,1450 # 818665aa <_stack_start+0x1865c6a>
-40000834:	fcf42a23          	sw	a5,-44(s0)
+400008d0:	818667b7          	lui	a5,0x81866
+400008d4:	5aa78793          	addi	a5,a5,1450 # 818665aa <_stack_start+0x1865c6a>
+400008d8:	faf42c23          	sw	a5,-72(s0)
 	prince_key[0]		= 0x0d02dfda;
-40000838:	0d02e7b7          	lui	a5,0xd02e
-4000083c:	fda78793          	addi	a5,a5,-38 # d02dfda <_stack_size+0xd02d7da>
-40000840:	fcf42823          	sw	a5,-48(s0)
+400008dc:	0d02e7b7          	lui	a5,0xd02e
+400008e0:	fda78793          	addi	a5,a5,-38 # d02dfda <_stack_size+0xd02d7da>
+400008e4:	faf42a23          	sw	a5,-76(s0)
 
 	prince_cipher(PRINCE_OP_EN,prince_key,prince_block,prince_res);
-40000844:	fc040693          	addi	a3,s0,-64
-40000848:	fc840713          	addi	a4,s0,-56
-4000084c:	fd040793          	addi	a5,s0,-48
-40000850:	00070613          	mv	a2,a4
-40000854:	00078593          	mv	a1,a5
-40000858:	00100513          	li	a0,1
-4000085c:	a95ff0ef          	jal	ra,400002f0 <prince_cipher>
+400008e8:	fa440693          	addi	a3,s0,-92
+400008ec:	fac40713          	addi	a4,s0,-84
+400008f0:	fb440793          	addi	a5,s0,-76
+400008f4:	00070613          	mv	a2,a4
+400008f8:	00078593          	mv	a1,a5
+400008fc:	00100513          	li	a0,1
+40000900:	9f1ff0ef          	jal	ra,400002f0 <prince_cipher>
 	print("\r\n===================================TEST 4===================================\r\n");
-40000860:	400027b7          	lui	a5,0x40002
-40000864:	4a878513          	addi	a0,a5,1192 # 400024a8 <vga_simRes_h160_v120+0x20c>
-40000868:	3b0010ef          	jal	ra,40001c18 <print>
+40000904:	400027b7          	lui	a5,0x40002
+40000908:	5f478513          	addi	a0,a5,1524 # 400025f4 <vga_simRes_h160_v120+0x2b4>
+4000090c:	3b0010ef          	jal	ra,40001cbc <print>
 
 	prince_block[1] 	= 0x43c6b256;
-4000086c:	43c6b7b7          	lui	a5,0x43c6b
-40000870:	25678793          	addi	a5,a5,598 # 43c6b256 <__global_pointer$+0x3c67dfe>
-40000874:	fcf42623          	sw	a5,-52(s0)
+40000910:	43c6b7b7          	lui	a5,0x43c6b
+40000914:	25678793          	addi	a5,a5,598 # 43c6b256 <__global_pointer$+0x3c67d06>
+40000918:	faf42823          	sw	a5,-80(s0)
 	prince_block[0] 	= 0xd79de7e8;
-40000878:	d79de7b7          	lui	a5,0xd79de
-4000087c:	7e878793          	addi	a5,a5,2024 # d79de7e8 <_stack_start+0x579ddea8>
-40000880:	fcf42423          	sw	a5,-56(s0)
+4000091c:	d79de7b7          	lui	a5,0xd79de
+40000920:	7e878793          	addi	a5,a5,2024 # d79de7e8 <_stack_start+0x579ddea8>
+40000924:	faf42623          	sw	a5,-84(s0)
 
 	prince_key[3]		= 0xd8cdb780;
-40000884:	d8cdb7b7          	lui	a5,0xd8cdb
-40000888:	78078793          	addi	a5,a5,1920 # d8cdb780 <_stack_start+0x58cdae40>
-4000088c:	fcf42e23          	sw	a5,-36(s0)
+40000928:	d8cdb7b7          	lui	a5,0xd8cdb
+4000092c:	78078793          	addi	a5,a5,1920 # d8cdb780 <_stack_start+0x58cdae40>
+40000930:	fcf42023          	sw	a5,-64(s0)
 	prince_key[2]		= 0x70b4c55a;
-40000890:	70b4c7b7          	lui	a5,0x70b4c
-40000894:	55a78793          	addi	a5,a5,1370 # 70b4c55a <__global_pointer$+0x30b49102>
-40000898:	fcf42c23          	sw	a5,-40(s0)
+40000934:	70b4c7b7          	lui	a5,0x70b4c
+40000938:	55a78793          	addi	a5,a5,1370 # 70b4c55a <__global_pointer$+0x30b4900a>
+4000093c:	faf42e23          	sw	a5,-68(s0)
 	prince_key[1]		= 0x818665aa;
-4000089c:	818667b7          	lui	a5,0x81866
-400008a0:	5aa78793          	addi	a5,a5,1450 # 818665aa <_stack_start+0x1865c6a>
-400008a4:	fcf42a23          	sw	a5,-44(s0)
+40000940:	818667b7          	lui	a5,0x81866
+40000944:	5aa78793          	addi	a5,a5,1450 # 818665aa <_stack_start+0x1865c6a>
+40000948:	faf42c23          	sw	a5,-72(s0)
 	prince_key[0]		= 0x0d02dfda;
-400008a8:	0d02e7b7          	lui	a5,0xd02e
-400008ac:	fda78793          	addi	a5,a5,-38 # d02dfda <_stack_size+0xd02d7da>
-400008b0:	fcf42823          	sw	a5,-48(s0)
+4000094c:	0d02e7b7          	lui	a5,0xd02e
+40000950:	fda78793          	addi	a5,a5,-38 # d02dfda <_stack_size+0xd02d7da>
+40000954:	faf42a23          	sw	a5,-76(s0)
 
 	prince_cipher(PRINCE_OP_DE,prince_key,prince_block,prince_res);
-400008b4:	fc040693          	addi	a3,s0,-64
-400008b8:	fc840713          	addi	a4,s0,-56
-400008bc:	fd040793          	addi	a5,s0,-48
-400008c0:	00070613          	mv	a2,a4
-400008c4:	00078593          	mv	a1,a5
-400008c8:	00000513          	li	a0,0
-400008cc:	a25ff0ef          	jal	ra,400002f0 <prince_cipher>
+40000958:	fa440693          	addi	a3,s0,-92
+4000095c:	fac40713          	addi	a4,s0,-84
+40000960:	fb440793          	addi	a5,s0,-76
+40000964:	00070613          	mv	a2,a4
+40000968:	00078593          	mv	a1,a5
+4000096c:	00000513          	li	a0,0
+40000970:	981ff0ef          	jal	ra,400002f0 <prince_cipher>
 
 	print("============================================================================\r\n");
-400008d0:	400027b7          	lui	a5,0x40002
-400008d4:	2bc78513          	addi	a0,a5,700 # 400022bc <vga_simRes_h160_v120+0x20>
-400008d8:	340010ef          	jal	ra,40001c18 <print>
+40000974:	400027b7          	lui	a5,0x40002
+40000978:	40478513          	addi	a0,a5,1028 # 40002404 <vga_simRes_h160_v120+0xc4>
+4000097c:	340010ef          	jal	ra,40001cbc <print>
 	print("===============================AES TEST=====================================\r\n");
-400008dc:	400027b7          	lui	a5,0x40002
-400008e0:	4fc78513          	addi	a0,a5,1276 # 400024fc <vga_simRes_h160_v120+0x260>
-400008e4:	334010ef          	jal	ra,40001c18 <print>
+40000980:	400027b7          	lui	a5,0x40002
+40000984:	64878513          	addi	a0,a5,1608 # 40002648 <vga_simRes_h160_v120+0x308>
+40000988:	334010ef          	jal	ra,40001cbc <print>
 	print("=========================LE DUY LINH - 18200157-============================\r\n");
-400008e8:	400027b7          	lui	a5,0x40002
-400008ec:	35c78513          	addi	a0,a5,860 # 4000235c <vga_simRes_h160_v120+0xc0>
-400008f0:	328010ef          	jal	ra,40001c18 <print>
+4000098c:	400027b7          	lui	a5,0x40002
+40000990:	3b478513          	addi	a0,a5,948 # 400023b4 <vga_simRes_h160_v120+0x74>
+40000994:	328010ef          	jal	ra,40001cbc <print>
 	print("============================================================================\r\n");
-400008f4:	400027b7          	lui	a5,0x40002
-400008f8:	2bc78513          	addi	a0,a5,700 # 400022bc <vga_simRes_h160_v120+0x20>
-400008fc:	31c010ef          	jal	ra,40001c18 <print>
+40000998:	400027b7          	lui	a5,0x40002
+4000099c:	40478513          	addi	a0,a5,1028 # 40002404 <vga_simRes_h160_v120+0xc4>
+400009a0:	31c010ef          	jal	ra,40001cbc <print>
     unsigned int aes_key_128[4] = {0x0, 0x0, 0x0, 0x0};
-40000900:	fa042823          	sw	zero,-80(s0)
-40000904:	fa042a23          	sw	zero,-76(s0)
-40000908:	fa042c23          	sw	zero,-72(s0)
-4000090c:	fa042e23          	sw	zero,-68(s0)
+400009a4:	f8042a23          	sw	zero,-108(s0)
+400009a8:	f8042c23          	sw	zero,-104(s0)
+400009ac:	f8042e23          	sw	zero,-100(s0)
+400009b0:	fa042023          	sw	zero,-96(s0)
     unsigned int aes_block[4] 	= {0x0, 0x0, 0x0, 0x0};
-40000910:	fa042023          	sw	zero,-96(s0)
-40000914:	fa042223          	sw	zero,-92(s0)
-40000918:	fa042423          	sw	zero,-88(s0)
-4000091c:	fa042623          	sw	zero,-84(s0)
+400009b4:	f8042223          	sw	zero,-124(s0)
+400009b8:	f8042423          	sw	zero,-120(s0)
+400009bc:	f8042623          	sw	zero,-116(s0)
+400009c0:	f8042823          	sw	zero,-112(s0)
 
     unsigned int aes_res[4] 	= {0x0, 0x0, 0x0, 0x0};
-40000920:	f8042823          	sw	zero,-112(s0)
-40000924:	f8042a23          	sw	zero,-108(s0)
-40000928:	f8042c23          	sw	zero,-104(s0)
-4000092c:	f8042e23          	sw	zero,-100(s0)
+400009c4:	f6042a23          	sw	zero,-140(s0)
+400009c8:	f6042c23          	sw	zero,-136(s0)
+400009cc:	f6042e23          	sw	zero,-132(s0)
+400009d0:	f8042023          	sw	zero,-128(s0)
 
 	print("\r\n=================================TEST 1=====================================\r\n");
-40000930:	400027b7          	lui	a5,0x40002
-40000934:	54c78513          	addi	a0,a5,1356 # 4000254c <vga_simRes_h160_v120+0x2b0>
-40000938:	2e0010ef          	jal	ra,40001c18 <print>
+400009d4:	400027b7          	lui	a5,0x40002
+400009d8:	45478513          	addi	a0,a5,1108 # 40002454 <vga_simRes_h160_v120+0x114>
+400009dc:	2e0010ef          	jal	ra,40001cbc <print>
 
     aes_block[3] 	= 0x33343536;
-4000093c:	333437b7          	lui	a5,0x33343
-40000940:	53678793          	addi	a5,a5,1334 # 33343536 <_stack_size+0x33342d36>
-40000944:	faf42623          	sw	a5,-84(s0)
+400009e0:	333437b7          	lui	a5,0x33343
+400009e4:	53678793          	addi	a5,a5,1334 # 33343536 <_stack_size+0x33342d36>
+400009e8:	f8f42823          	sw	a5,-112(s0)
     aes_block[2] 	= 0x39303132;
-40000948:	393037b7          	lui	a5,0x39303
-4000094c:	13278793          	addi	a5,a5,306 # 39303132 <_stack_size+0x39302932>
-40000950:	faf42423          	sw	a5,-88(s0)
+400009ec:	393037b7          	lui	a5,0x39303
+400009f0:	13278793          	addi	a5,a5,306 # 39303132 <_stack_size+0x39302932>
+400009f4:	f8f42623          	sw	a5,-116(s0)
     aes_block[1] 	= 0x35363738;
-40000954:	353637b7          	lui	a5,0x35363
-40000958:	73878793          	addi	a5,a5,1848 # 35363738 <_stack_size+0x35362f38>
-4000095c:	faf42223          	sw	a5,-92(s0)
+400009f8:	353637b7          	lui	a5,0x35363
+400009fc:	73878793          	addi	a5,a5,1848 # 35363738 <_stack_size+0x35362f38>
+40000a00:	f8f42423          	sw	a5,-120(s0)
     aes_block[0] 	= 0x31323334;
-40000960:	313237b7          	lui	a5,0x31323
-40000964:	33478793          	addi	a5,a5,820 # 31323334 <_stack_size+0x31322b34>
-40000968:	faf42023          	sw	a5,-96(s0)
+40000a04:	313237b7          	lui	a5,0x31323
+40000a08:	33478793          	addi	a5,a5,820 # 31323334 <_stack_size+0x31322b34>
+40000a0c:	f8f42223          	sw	a5,-124(s0)
 
 	aes_key_128[3] 	= 0x37363534;
-4000096c:	373637b7          	lui	a5,0x37363
-40000970:	53478793          	addi	a5,a5,1332 # 37363534 <_stack_size+0x37362d34>
-40000974:	faf42e23          	sw	a5,-68(s0)
+40000a10:	373637b7          	lui	a5,0x37363
+40000a14:	53478793          	addi	a5,a5,1332 # 37363534 <_stack_size+0x37362d34>
+40000a18:	faf42023          	sw	a5,-96(s0)
     aes_key_128[2] 	= 0x31303938;
-40000978:	313047b7          	lui	a5,0x31304
-4000097c:	93878793          	addi	a5,a5,-1736 # 31303938 <_stack_size+0x31303138>
-40000980:	faf42c23          	sw	a5,-72(s0)
+40000a1c:	313047b7          	lui	a5,0x31304
+40000a20:	93878793          	addi	a5,a5,-1736 # 31303938 <_stack_size+0x31303138>
+40000a24:	f8f42e23          	sw	a5,-100(s0)
     aes_key_128[1] 	= 0x35343332;
-40000984:	353437b7          	lui	a5,0x35343
-40000988:	33278793          	addi	a5,a5,818 # 35343332 <_stack_size+0x35342b32>
-4000098c:	faf42a23          	sw	a5,-76(s0)
+40000a28:	353437b7          	lui	a5,0x35343
+40000a2c:	33278793          	addi	a5,a5,818 # 35343332 <_stack_size+0x35342b32>
+40000a30:	f8f42c23          	sw	a5,-104(s0)
     aes_key_128[0]	= 0x39383736;
-40000990:	393837b7          	lui	a5,0x39383
-40000994:	73678793          	addi	a5,a5,1846 # 39383736 <_stack_size+0x39382f36>
-40000998:	faf42823          	sw	a5,-80(s0)
+40000a34:	393837b7          	lui	a5,0x39383
+40000a38:	73678793          	addi	a5,a5,1846 # 39383736 <_stack_size+0x39382f36>
+40000a3c:	f8f42a23          	sw	a5,-108(s0)
 
    	aes_128_cipher(AES_OP_EN, aes_key_128, aes_block, aes_res);
-4000099c:	f9040693          	addi	a3,s0,-112
-400009a0:	fa040713          	addi	a4,s0,-96
-400009a4:	fb040793          	addi	a5,s0,-80
-400009a8:	00070613          	mv	a2,a4
-400009ac:	00078593          	mv	a1,a5
-400009b0:	00100513          	li	a0,1
-400009b4:	32d000ef          	jal	ra,400014e0 <aes_128_cipher>
+40000a40:	f7440693          	addi	a3,s0,-140
+40000a44:	f8440713          	addi	a4,s0,-124
+40000a48:	f9440793          	addi	a5,s0,-108
+40000a4c:	00070613          	mv	a2,a4
+40000a50:	00078593          	mv	a1,a5
+40000a54:	00100513          	li	a0,1
+40000a58:	32d000ef          	jal	ra,40001584 <aes_128_cipher>
 	print("\r\n=================================TEST 2=====================================\r\n");
-400009b8:	400027b7          	lui	a5,0x40002
-400009bc:	5a078513          	addi	a0,a5,1440 # 400025a0 <vga_simRes_h160_v120+0x304>
-400009c0:	258010ef          	jal	ra,40001c18 <print>
+40000a5c:	400027b7          	lui	a5,0x40002
+40000a60:	69878513          	addi	a0,a5,1688 # 40002698 <vga_simRes_h160_v120+0x358>
+40000a64:	258010ef          	jal	ra,40001cbc <print>
 
     aes_block[3] 	= 0xfd1ee6b4;
-400009c4:	fd1ee7b7          	lui	a5,0xfd1ee
-400009c8:	6b478793          	addi	a5,a5,1716 # fd1ee6b4 <_stack_start+0x7d1edd74>
-400009cc:	faf42623          	sw	a5,-84(s0)
+40000a68:	fd1ee7b7          	lui	a5,0xfd1ee
+40000a6c:	6b478793          	addi	a5,a5,1716 # fd1ee6b4 <_stack_start+0x7d1edd74>
+40000a70:	f8f42823          	sw	a5,-112(s0)
     aes_block[2] 	= 0xbd2fb855;
-400009d0:	bd2fc7b7          	lui	a5,0xbd2fc
-400009d4:	85578793          	addi	a5,a5,-1963 # bd2fb855 <_stack_start+0x3d2faf15>
-400009d8:	faf42423          	sw	a5,-88(s0)
+40000a74:	bd2fc7b7          	lui	a5,0xbd2fc
+40000a78:	85578793          	addi	a5,a5,-1963 # bd2fb855 <_stack_start+0x3d2faf15>
+40000a7c:	f8f42623          	sw	a5,-116(s0)
     aes_block[1] 	= 0x6428318a;
-400009dc:	642837b7          	lui	a5,0x64283
-400009e0:	18a78793          	addi	a5,a5,394 # 6428318a <__global_pointer$+0x2427fd32>
-400009e4:	faf42223          	sw	a5,-92(s0)
+40000a80:	642837b7          	lui	a5,0x64283
+40000a84:	18a78793          	addi	a5,a5,394 # 6428318a <__global_pointer$+0x2427fc3a>
+40000a88:	f8f42423          	sw	a5,-120(s0)
     aes_block[0] 	= 0x6e6f9733;
-400009e8:	6e6f97b7          	lui	a5,0x6e6f9
-400009ec:	73378793          	addi	a5,a5,1843 # 6e6f9733 <__global_pointer$+0x2e6f62db>
-400009f0:	faf42023          	sw	a5,-96(s0)
+40000a8c:	6e6f97b7          	lui	a5,0x6e6f9
+40000a90:	73378793          	addi	a5,a5,1843 # 6e6f9733 <__global_pointer$+0x2e6f61e3>
+40000a94:	f8f42223          	sw	a5,-124(s0)
 
 	aes_key_128[3] 	= 0x33343536;
-400009f4:	333437b7          	lui	a5,0x33343
-400009f8:	53678793          	addi	a5,a5,1334 # 33343536 <_stack_size+0x33342d36>
-400009fc:	faf42e23          	sw	a5,-68(s0)
+40000a98:	333437b7          	lui	a5,0x33343
+40000a9c:	53678793          	addi	a5,a5,1334 # 33343536 <_stack_size+0x33342d36>
+40000aa0:	faf42023          	sw	a5,-96(s0)
     aes_key_128[2] 	= 0x39303132;
-40000a00:	393037b7          	lui	a5,0x39303
-40000a04:	13278793          	addi	a5,a5,306 # 39303132 <_stack_size+0x39302932>
-40000a08:	faf42c23          	sw	a5,-72(s0)
+40000aa4:	393037b7          	lui	a5,0x39303
+40000aa8:	13278793          	addi	a5,a5,306 # 39303132 <_stack_size+0x39302932>
+40000aac:	f8f42e23          	sw	a5,-100(s0)
     aes_key_128[1] 	= 0x35363738;
-40000a0c:	353637b7          	lui	a5,0x35363
-40000a10:	73878793          	addi	a5,a5,1848 # 35363738 <_stack_size+0x35362f38>
-40000a14:	faf42a23          	sw	a5,-76(s0)
+40000ab0:	353637b7          	lui	a5,0x35363
+40000ab4:	73878793          	addi	a5,a5,1848 # 35363738 <_stack_size+0x35362f38>
+40000ab8:	f8f42c23          	sw	a5,-104(s0)
     aes_key_128[0]	= 0x31323334;
-40000a18:	313237b7          	lui	a5,0x31323
-40000a1c:	33478793          	addi	a5,a5,820 # 31323334 <_stack_size+0x31322b34>
-40000a20:	faf42823          	sw	a5,-80(s0)
+40000abc:	313237b7          	lui	a5,0x31323
+40000ac0:	33478793          	addi	a5,a5,820 # 31323334 <_stack_size+0x31322b34>
+40000ac4:	f8f42a23          	sw	a5,-108(s0)
 
    	aes_128_cipher(AES_OP_DE, aes_key_128, aes_block, aes_res);
-40000a24:	f9040693          	addi	a3,s0,-112
-40000a28:	fa040713          	addi	a4,s0,-96
-40000a2c:	fb040793          	addi	a5,s0,-80
-40000a30:	00070613          	mv	a2,a4
-40000a34:	00078593          	mv	a1,a5
-40000a38:	00000513          	li	a0,0
-40000a3c:	2a5000ef          	jal	ra,400014e0 <aes_128_cipher>
+40000ac8:	f7440693          	addi	a3,s0,-140
+40000acc:	f8440713          	addi	a4,s0,-124
+40000ad0:	f9440793          	addi	a5,s0,-108
+40000ad4:	00070613          	mv	a2,a4
+40000ad8:	00078593          	mv	a1,a5
+40000adc:	00000513          	li	a0,0
+40000ae0:	2a5000ef          	jal	ra,40001584 <aes_128_cipher>
 	print("\r\n=================================TEST 3=====================================\r\n");
-40000a40:	400027b7          	lui	a5,0x40002
-40000a44:	5f478513          	addi	a0,a5,1524 # 400025f4 <vga_simRes_h160_v120+0x358>
-40000a48:	1d0010ef          	jal	ra,40001c18 <print>
+40000ae4:	400027b7          	lui	a5,0x40002
+40000ae8:	6ec78513          	addi	a0,a5,1772 # 400026ec <vga_simRes_h160_v120+0x3ac>
+40000aec:	1d0010ef          	jal	ra,40001cbc <print>
 
     aes_block[3] 	= 0x7393172a;
-40000a4c:	739317b7          	lui	a5,0x73931
-40000a50:	72a78793          	addi	a5,a5,1834 # 7393172a <__global_pointer$+0x3392e2d2>
-40000a54:	faf42623          	sw	a5,-84(s0)
+40000af0:	739317b7          	lui	a5,0x73931
+40000af4:	72a78793          	addi	a5,a5,1834 # 7393172a <__global_pointer$+0x3392e1da>
+40000af8:	f8f42823          	sw	a5,-112(s0)
     aes_block[2] 	= 0xe93d7e11;
-40000a58:	e93d87b7          	lui	a5,0xe93d8
-40000a5c:	e1178793          	addi	a5,a5,-495 # e93d7e11 <_stack_start+0x693d74d1>
-40000a60:	faf42423          	sw	a5,-88(s0)
+40000afc:	e93d87b7          	lui	a5,0xe93d8
+40000b00:	e1178793          	addi	a5,a5,-495 # e93d7e11 <_stack_start+0x693d74d1>
+40000b04:	f8f42623          	sw	a5,-116(s0)
     aes_block[1] 	= 0x2e409f96;
-40000a64:	2e40a7b7          	lui	a5,0x2e40a
-40000a68:	f9678793          	addi	a5,a5,-106 # 2e409f96 <_stack_size+0x2e409796>
-40000a6c:	faf42223          	sw	a5,-92(s0)
+40000b08:	2e40a7b7          	lui	a5,0x2e40a
+40000b0c:	f9678793          	addi	a5,a5,-106 # 2e409f96 <_stack_size+0x2e409796>
+40000b10:	f8f42423          	sw	a5,-120(s0)
     aes_block[0] 	= 0x6bc1bee2;
-40000a70:	6bc1c7b7          	lui	a5,0x6bc1c
-40000a74:	ee278793          	addi	a5,a5,-286 # 6bc1bee2 <__global_pointer$+0x2bc18a8a>
-40000a78:	faf42023          	sw	a5,-96(s0)
+40000b14:	6bc1c7b7          	lui	a5,0x6bc1c
+40000b18:	ee278793          	addi	a5,a5,-286 # 6bc1bee2 <__global_pointer$+0x2bc18992>
+40000b1c:	f8f42223          	sw	a5,-124(s0)
 
 	aes_key_128[3] 	= 0x09cf4f3c;
-40000a7c:	09cf57b7          	lui	a5,0x9cf5
-40000a80:	f3c78793          	addi	a5,a5,-196 # 9cf4f3c <_stack_size+0x9cf473c>
-40000a84:	faf42e23          	sw	a5,-68(s0)
+40000b20:	09cf57b7          	lui	a5,0x9cf5
+40000b24:	f3c78793          	addi	a5,a5,-196 # 9cf4f3c <_stack_size+0x9cf473c>
+40000b28:	faf42023          	sw	a5,-96(s0)
     aes_key_128[2] 	= 0xabf71588;
-40000a88:	abf717b7          	lui	a5,0xabf71
-40000a8c:	58878793          	addi	a5,a5,1416 # abf71588 <_stack_start+0x2bf70c48>
-40000a90:	faf42c23          	sw	a5,-72(s0)
+40000b2c:	abf717b7          	lui	a5,0xabf71
+40000b30:	58878793          	addi	a5,a5,1416 # abf71588 <_stack_start+0x2bf70c48>
+40000b34:	f8f42e23          	sw	a5,-100(s0)
     aes_key_128[1] 	= 0x28aed2a6;
-40000a94:	28aed7b7          	lui	a5,0x28aed
-40000a98:	2a678793          	addi	a5,a5,678 # 28aed2a6 <_stack_size+0x28aecaa6>
-40000a9c:	faf42a23          	sw	a5,-76(s0)
+40000b38:	28aed7b7          	lui	a5,0x28aed
+40000b3c:	2a678793          	addi	a5,a5,678 # 28aed2a6 <_stack_size+0x28aecaa6>
+40000b40:	f8f42c23          	sw	a5,-104(s0)
     aes_key_128[0]	= 0x2b7e1516;
-40000aa0:	2b7e17b7          	lui	a5,0x2b7e1
-40000aa4:	51678793          	addi	a5,a5,1302 # 2b7e1516 <_stack_size+0x2b7e0d16>
-40000aa8:	faf42823          	sw	a5,-80(s0)
+40000b44:	2b7e17b7          	lui	a5,0x2b7e1
+40000b48:	51678793          	addi	a5,a5,1302 # 2b7e1516 <_stack_size+0x2b7e0d16>
+40000b4c:	f8f42a23          	sw	a5,-108(s0)
    	aes_128_cipher(AES_OP_EN, aes_key_128, aes_block, aes_res);
-40000aac:	f9040693          	addi	a3,s0,-112
-40000ab0:	fa040713          	addi	a4,s0,-96
-40000ab4:	fb040793          	addi	a5,s0,-80
-40000ab8:	00070613          	mv	a2,a4
-40000abc:	00078593          	mv	a1,a5
-40000ac0:	00100513          	li	a0,1
-40000ac4:	21d000ef          	jal	ra,400014e0 <aes_128_cipher>
+40000b50:	f7440693          	addi	a3,s0,-140
+40000b54:	f8440713          	addi	a4,s0,-124
+40000b58:	f9440793          	addi	a5,s0,-108
+40000b5c:	00070613          	mv	a2,a4
+40000b60:	00078593          	mv	a1,a5
+40000b64:	00100513          	li	a0,1
+40000b68:	21d000ef          	jal	ra,40001584 <aes_128_cipher>
 	print("\r\n=================================TEST 4=====================================\r\n");
-40000ac8:	400027b7          	lui	a5,0x40002
-40000acc:	64878513          	addi	a0,a5,1608 # 40002648 <vga_simRes_h160_v120+0x3ac>
-40000ad0:	148010ef          	jal	ra,40001c18 <print>
+40000b6c:	400027b7          	lui	a5,0x40002
+40000b70:	74078513          	addi	a0,a5,1856 # 40002740 <vga_simRes_h160_v120+0x400>
+40000b74:	148010ef          	jal	ra,40001cbc <print>
 
     aes_block[3] 	= 0x2466ef97;
-40000ad4:	2466f7b7          	lui	a5,0x2466f
-40000ad8:	f9778793          	addi	a5,a5,-105 # 2466ef97 <_stack_size+0x2466e797>
-40000adc:	faf42623          	sw	a5,-84(s0)
+40000b78:	2466f7b7          	lui	a5,0x2466f
+40000b7c:	f9778793          	addi	a5,a5,-105 # 2466ef97 <_stack_size+0x2466e797>
+40000b80:	f8f42823          	sw	a5,-112(s0)
     aes_block[2] 	= 0xa89ecaf3;
-40000ae0:	a89ed7b7          	lui	a5,0xa89ed
-40000ae4:	af378793          	addi	a5,a5,-1293 # a89ecaf3 <_stack_start+0x289ec1b3>
-40000ae8:	faf42423          	sw	a5,-88(s0)
+40000b84:	a89ed7b7          	lui	a5,0xa89ed
+40000b88:	af378793          	addi	a5,a5,-1293 # a89ecaf3 <_stack_start+0x289ec1b3>
+40000b8c:	f8f42623          	sw	a5,-116(s0)
     aes_block[1] 	= 0x0d7a3660;
-40000aec:	0d7a37b7          	lui	a5,0xd7a3
-40000af0:	66078793          	addi	a5,a5,1632 # d7a3660 <_stack_size+0xd7a2e60>
-40000af4:	faf42223          	sw	a5,-92(s0)
+40000b90:	0d7a37b7          	lui	a5,0xd7a3
+40000b94:	66078793          	addi	a5,a5,1632 # d7a3660 <_stack_size+0xd7a2e60>
+40000b98:	f8f42423          	sw	a5,-120(s0)
     aes_block[0] 	= 0x3ad77bb4;
-40000af8:	3ad787b7          	lui	a5,0x3ad78
-40000afc:	bb478793          	addi	a5,a5,-1100 # 3ad77bb4 <_stack_size+0x3ad773b4>
-40000b00:	faf42023          	sw	a5,-96(s0)
+40000b9c:	3ad787b7          	lui	a5,0x3ad78
+40000ba0:	bb478793          	addi	a5,a5,-1100 # 3ad77bb4 <_stack_size+0x3ad773b4>
+40000ba4:	f8f42223          	sw	a5,-124(s0)
 
 	aes_key_128[3] 	= 0x09cf4f3c;
-40000b04:	09cf57b7          	lui	a5,0x9cf5
-40000b08:	f3c78793          	addi	a5,a5,-196 # 9cf4f3c <_stack_size+0x9cf473c>
-40000b0c:	faf42e23          	sw	a5,-68(s0)
+40000ba8:	09cf57b7          	lui	a5,0x9cf5
+40000bac:	f3c78793          	addi	a5,a5,-196 # 9cf4f3c <_stack_size+0x9cf473c>
+40000bb0:	faf42023          	sw	a5,-96(s0)
     aes_key_128[2] 	= 0xabf71588;
-40000b10:	abf717b7          	lui	a5,0xabf71
-40000b14:	58878793          	addi	a5,a5,1416 # abf71588 <_stack_start+0x2bf70c48>
-40000b18:	faf42c23          	sw	a5,-72(s0)
+40000bb4:	abf717b7          	lui	a5,0xabf71
+40000bb8:	58878793          	addi	a5,a5,1416 # abf71588 <_stack_start+0x2bf70c48>
+40000bbc:	f8f42e23          	sw	a5,-100(s0)
     aes_key_128[1] 	= 0x28aed2a6;
-40000b1c:	28aed7b7          	lui	a5,0x28aed
-40000b20:	2a678793          	addi	a5,a5,678 # 28aed2a6 <_stack_size+0x28aecaa6>
-40000b24:	faf42a23          	sw	a5,-76(s0)
+40000bc0:	28aed7b7          	lui	a5,0x28aed
+40000bc4:	2a678793          	addi	a5,a5,678 # 28aed2a6 <_stack_size+0x28aecaa6>
+40000bc8:	f8f42c23          	sw	a5,-104(s0)
     aes_key_128[0]	= 0x2b7e1516;
-40000b28:	2b7e17b7          	lui	a5,0x2b7e1
-40000b2c:	51678793          	addi	a5,a5,1302 # 2b7e1516 <_stack_size+0x2b7e0d16>
-40000b30:	faf42823          	sw	a5,-80(s0)
+40000bcc:	2b7e17b7          	lui	a5,0x2b7e1
+40000bd0:	51678793          	addi	a5,a5,1302 # 2b7e1516 <_stack_size+0x2b7e0d16>
+40000bd4:	f8f42a23          	sw	a5,-108(s0)
 
    	aes_128_cipher(AES_OP_DE, aes_key_128, aes_block, aes_res);
-40000b34:	f9040693          	addi	a3,s0,-112
-40000b38:	fa040713          	addi	a4,s0,-96
-40000b3c:	fb040793          	addi	a5,s0,-80
-40000b40:	00070613          	mv	a2,a4
-40000b44:	00078593          	mv	a1,a5
-40000b48:	00000513          	li	a0,0
-40000b4c:	195000ef          	jal	ra,400014e0 <aes_128_cipher>
+40000bd8:	f7440693          	addi	a3,s0,-140
+40000bdc:	f8440713          	addi	a4,s0,-124
+40000be0:	f9440793          	addi	a5,s0,-108
+40000be4:	00070613          	mv	a2,a4
+40000be8:	00078593          	mv	a1,a5
+40000bec:	00000513          	li	a0,0
+40000bf0:	195000ef          	jal	ra,40001584 <aes_128_cipher>
 
    	print("\r\n==========================================TEST 5(AES256)========================================\r\n");
-40000b50:	400027b7          	lui	a5,0x40002
-40000b54:	69c78513          	addi	a0,a5,1692 # 4000269c <vga_simRes_h160_v120+0x400>
-40000b58:	0c0010ef          	jal	ra,40001c18 <print>
+40000bf4:	400027b7          	lui	a5,0x40002
+40000bf8:	79478513          	addi	a0,a5,1940 # 40002794 <vga_simRes_h160_v120+0x454>
+40000bfc:	0c0010ef          	jal	ra,40001cbc <print>
     unsigned int aes_key_256[8] = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0};
-40000b5c:	f6042823          	sw	zero,-144(s0)
-40000b60:	f6042a23          	sw	zero,-140(s0)
-40000b64:	f6042c23          	sw	zero,-136(s0)
-40000b68:	f6042e23          	sw	zero,-132(s0)
-40000b6c:	f8042023          	sw	zero,-128(s0)
-40000b70:	f8042223          	sw	zero,-124(s0)
-40000b74:	f8042423          	sw	zero,-120(s0)
-40000b78:	f8042623          	sw	zero,-116(s0)
+40000c00:	f4042a23          	sw	zero,-172(s0)
+40000c04:	f4042c23          	sw	zero,-168(s0)
+40000c08:	f4042e23          	sw	zero,-164(s0)
+40000c0c:	f6042023          	sw	zero,-160(s0)
+40000c10:	f6042223          	sw	zero,-156(s0)
+40000c14:	f6042423          	sw	zero,-152(s0)
+40000c18:	f6042623          	sw	zero,-148(s0)
+40000c1c:	f6042823          	sw	zero,-144(s0)
 
     aes_block[3] 	= 0x7393172a;
-40000b7c:	739317b7          	lui	a5,0x73931
-40000b80:	72a78793          	addi	a5,a5,1834 # 7393172a <__global_pointer$+0x3392e2d2>
-40000b84:	faf42623          	sw	a5,-84(s0)
+40000c20:	739317b7          	lui	a5,0x73931
+40000c24:	72a78793          	addi	a5,a5,1834 # 7393172a <__global_pointer$+0x3392e1da>
+40000c28:	f8f42823          	sw	a5,-112(s0)
     aes_block[2] 	= 0xe93d7e11;
-40000b88:	e93d87b7          	lui	a5,0xe93d8
-40000b8c:	e1178793          	addi	a5,a5,-495 # e93d7e11 <_stack_start+0x693d74d1>
-40000b90:	faf42423          	sw	a5,-88(s0)
+40000c2c:	e93d87b7          	lui	a5,0xe93d8
+40000c30:	e1178793          	addi	a5,a5,-495 # e93d7e11 <_stack_start+0x693d74d1>
+40000c34:	f8f42623          	sw	a5,-116(s0)
     aes_block[1] 	= 0x2e409f96;
-40000b94:	2e40a7b7          	lui	a5,0x2e40a
-40000b98:	f9678793          	addi	a5,a5,-106 # 2e409f96 <_stack_size+0x2e409796>
-40000b9c:	faf42223          	sw	a5,-92(s0)
+40000c38:	2e40a7b7          	lui	a5,0x2e40a
+40000c3c:	f9678793          	addi	a5,a5,-106 # 2e409f96 <_stack_size+0x2e409796>
+40000c40:	f8f42423          	sw	a5,-120(s0)
     aes_block[0] 	= 0x6bc1bee2;
-40000ba0:	6bc1c7b7          	lui	a5,0x6bc1c
-40000ba4:	ee278793          	addi	a5,a5,-286 # 6bc1bee2 <__global_pointer$+0x2bc18a8a>
-40000ba8:	faf42023          	sw	a5,-96(s0)
+40000c44:	6bc1c7b7          	lui	a5,0x6bc1c
+40000c48:	ee278793          	addi	a5,a5,-286 # 6bc1bee2 <__global_pointer$+0x2bc18992>
+40000c4c:	f8f42223          	sw	a5,-124(s0)
 
     aes_key_256[7] 	= 0x0914dff4;
-40000bac:	0914e7b7          	lui	a5,0x914e
-40000bb0:	ff478793          	addi	a5,a5,-12 # 914dff4 <_stack_size+0x914d7f4>
-40000bb4:	f8f42623          	sw	a5,-116(s0)
+40000c50:	0914e7b7          	lui	a5,0x914e
+40000c54:	ff478793          	addi	a5,a5,-12 # 914dff4 <_stack_size+0x914d7f4>
+40000c58:	f6f42823          	sw	a5,-144(s0)
     aes_key_256[6] 	= 0x2d9810a3;
-40000bb8:	2d9817b7          	lui	a5,0x2d981
-40000bbc:	0a378793          	addi	a5,a5,163 # 2d9810a3 <_stack_size+0x2d9808a3>
-40000bc0:	f8f42423          	sw	a5,-120(s0)
+40000c5c:	2d9817b7          	lui	a5,0x2d981
+40000c60:	0a378793          	addi	a5,a5,163 # 2d9810a3 <_stack_size+0x2d9808a3>
+40000c64:	f6f42623          	sw	a5,-148(s0)
     aes_key_256[5] 	= 0x3b6108d7;
-40000bc4:	3b6117b7          	lui	a5,0x3b611
-40000bc8:	8d778793          	addi	a5,a5,-1833 # 3b6108d7 <_stack_size+0x3b6100d7>
-40000bcc:	f8f42223          	sw	a5,-124(s0)
+40000c68:	3b6117b7          	lui	a5,0x3b611
+40000c6c:	8d778793          	addi	a5,a5,-1833 # 3b6108d7 <_stack_size+0x3b6100d7>
+40000c70:	f6f42423          	sw	a5,-152(s0)
     aes_key_256[4]	= 0x1f352c07;
-40000bd0:	1f3537b7          	lui	a5,0x1f353
-40000bd4:	c0778793          	addi	a5,a5,-1017 # 1f352c07 <_stack_size+0x1f352407>
-40000bd8:	f8f42023          	sw	a5,-128(s0)
+40000c74:	1f3537b7          	lui	a5,0x1f353
+40000c78:	c0778793          	addi	a5,a5,-1017 # 1f352c07 <_stack_size+0x1f352407>
+40000c7c:	f6f42223          	sw	a5,-156(s0)
     aes_key_256[3] 	= 0x857d7781;
-40000bdc:	857d77b7          	lui	a5,0x857d7
-40000be0:	78178793          	addi	a5,a5,1921 # 857d7781 <_stack_start+0x57d6e41>
-40000be4:	f6f42e23          	sw	a5,-132(s0)
+40000c80:	857d77b7          	lui	a5,0x857d7
+40000c84:	78178793          	addi	a5,a5,1921 # 857d7781 <_stack_start+0x57d6e41>
+40000c88:	f6f42023          	sw	a5,-160(s0)
     aes_key_256[2] 	= 0x2b73aef0;
-40000be8:	2b73b7b7          	lui	a5,0x2b73b
-40000bec:	ef078793          	addi	a5,a5,-272 # 2b73aef0 <_stack_size+0x2b73a6f0>
-40000bf0:	f6f42c23          	sw	a5,-136(s0)
+40000c8c:	2b73b7b7          	lui	a5,0x2b73b
+40000c90:	ef078793          	addi	a5,a5,-272 # 2b73aef0 <_stack_size+0x2b73a6f0>
+40000c94:	f4f42e23          	sw	a5,-164(s0)
     aes_key_256[1] 	= 0x15ca71be;
-40000bf4:	15ca77b7          	lui	a5,0x15ca7
-40000bf8:	1be78793          	addi	a5,a5,446 # 15ca71be <_stack_size+0x15ca69be>
-40000bfc:	f6f42a23          	sw	a5,-140(s0)
+40000c98:	15ca77b7          	lui	a5,0x15ca7
+40000c9c:	1be78793          	addi	a5,a5,446 # 15ca71be <_stack_size+0x15ca69be>
+40000ca0:	f4f42c23          	sw	a5,-168(s0)
     aes_key_256[0]	= 0x603deb10;
-40000c00:	603df7b7          	lui	a5,0x603df
-40000c04:	b1078793          	addi	a5,a5,-1264 # 603deb10 <__global_pointer$+0x203db6b8>
-40000c08:	f6f42823          	sw	a5,-144(s0)
+40000ca4:	603df7b7          	lui	a5,0x603df
+40000ca8:	b1078793          	addi	a5,a5,-1264 # 603deb10 <__global_pointer$+0x203db5c0>
+40000cac:	f4f42a23          	sw	a5,-172(s0)
 
     aes_256_cipher(AES_OP_EN, aes_key_256, aes_block, aes_res);
-40000c0c:	f9040693          	addi	a3,s0,-112
-40000c10:	fa040713          	addi	a4,s0,-96
-40000c14:	f7040793          	addi	a5,s0,-144
-40000c18:	00070613          	mv	a2,a4
-40000c1c:	00078593          	mv	a1,a5
-40000c20:	00100513          	li	a0,1
-40000c24:	321000ef          	jal	ra,40001744 <aes_256_cipher>
+40000cb0:	f7440693          	addi	a3,s0,-140
+40000cb4:	f8440713          	addi	a4,s0,-124
+40000cb8:	f5440793          	addi	a5,s0,-172
+40000cbc:	00070613          	mv	a2,a4
+40000cc0:	00078593          	mv	a1,a5
+40000cc4:	00100513          	li	a0,1
+40000cc8:	321000ef          	jal	ra,400017e8 <aes_256_cipher>
 
    	print("\r\n==========================================TEST 6(AES256)========================================\r\n");
-40000c28:	400027b7          	lui	a5,0x40002
-40000c2c:	70478513          	addi	a0,a5,1796 # 40002704 <vga_simRes_h160_v120+0x468>
-40000c30:	7e9000ef          	jal	ra,40001c18 <print>
+40000ccc:	400027b7          	lui	a5,0x40002
+40000cd0:	7fc78513          	addi	a0,a5,2044 # 400027fc <vga_simRes_h160_v120+0x4bc>
+40000cd4:	7e9000ef          	jal	ra,40001cbc <print>
 
     aes_block[3] 	= 0x3db181f8 ;
-40000c34:	3db187b7          	lui	a5,0x3db18
-40000c38:	1f878793          	addi	a5,a5,504 # 3db181f8 <_stack_size+0x3db179f8>
-40000c3c:	faf42623          	sw	a5,-84(s0)
+40000cd8:	3db187b7          	lui	a5,0x3db18
+40000cdc:	1f878793          	addi	a5,a5,504 # 3db181f8 <_stack_size+0x3db179f8>
+40000ce0:	f8f42823          	sw	a5,-112(s0)
     aes_block[2] 	= 0x064b5a7e ;
-40000c40:	064b67b7          	lui	a5,0x64b6
-40000c44:	a7e78793          	addi	a5,a5,-1410 # 64b5a7e <_stack_size+0x64b527e>
-40000c48:	faf42423          	sw	a5,-88(s0)
+40000ce4:	064b67b7          	lui	a5,0x64b6
+40000ce8:	a7e78793          	addi	a5,a5,-1410 # 64b5a7e <_stack_size+0x64b527e>
+40000cec:	f8f42623          	sw	a5,-116(s0)
     aes_block[1] 	= 0xb5d2a03c;
-40000c4c:	b5d2a7b7          	lui	a5,0xb5d2a
-40000c50:	03c78793          	addi	a5,a5,60 # b5d2a03c <_stack_start+0x35d296fc>
-40000c54:	faf42223          	sw	a5,-92(s0)
+40000cf0:	b5d2a7b7          	lui	a5,0xb5d2a
+40000cf4:	03c78793          	addi	a5,a5,60 # b5d2a03c <_stack_start+0x35d296fc>
+40000cf8:	f8f42423          	sw	a5,-120(s0)
     aes_block[0] 	= 0xf3eed1bd;
-40000c58:	f3eed7b7          	lui	a5,0xf3eed
-40000c5c:	1bd78793          	addi	a5,a5,445 # f3eed1bd <_stack_start+0x73eec87d>
-40000c60:	faf42023          	sw	a5,-96(s0)
+40000cfc:	f3eed7b7          	lui	a5,0xf3eed
+40000d00:	1bd78793          	addi	a5,a5,445 # f3eed1bd <_stack_start+0x73eec87d>
+40000d04:	f8f42223          	sw	a5,-124(s0)
 
     aes_key_256[7] 	= 0x0914dff4;
-40000c64:	0914e7b7          	lui	a5,0x914e
-40000c68:	ff478793          	addi	a5,a5,-12 # 914dff4 <_stack_size+0x914d7f4>
-40000c6c:	f8f42623          	sw	a5,-116(s0)
+40000d08:	0914e7b7          	lui	a5,0x914e
+40000d0c:	ff478793          	addi	a5,a5,-12 # 914dff4 <_stack_size+0x914d7f4>
+40000d10:	f6f42823          	sw	a5,-144(s0)
     aes_key_256[6] 	= 0x2d9810a3;
-40000c70:	2d9817b7          	lui	a5,0x2d981
-40000c74:	0a378793          	addi	a5,a5,163 # 2d9810a3 <_stack_size+0x2d9808a3>
-40000c78:	f8f42423          	sw	a5,-120(s0)
+40000d14:	2d9817b7          	lui	a5,0x2d981
+40000d18:	0a378793          	addi	a5,a5,163 # 2d9810a3 <_stack_size+0x2d9808a3>
+40000d1c:	f6f42623          	sw	a5,-148(s0)
     aes_key_256[5] 	= 0x3b6108d7;
-40000c7c:	3b6117b7          	lui	a5,0x3b611
-40000c80:	8d778793          	addi	a5,a5,-1833 # 3b6108d7 <_stack_size+0x3b6100d7>
-40000c84:	f8f42223          	sw	a5,-124(s0)
+40000d20:	3b6117b7          	lui	a5,0x3b611
+40000d24:	8d778793          	addi	a5,a5,-1833 # 3b6108d7 <_stack_size+0x3b6100d7>
+40000d28:	f6f42423          	sw	a5,-152(s0)
     aes_key_256[4]	= 0x1f352c07;
-40000c88:	1f3537b7          	lui	a5,0x1f353
-40000c8c:	c0778793          	addi	a5,a5,-1017 # 1f352c07 <_stack_size+0x1f352407>
-40000c90:	f8f42023          	sw	a5,-128(s0)
+40000d2c:	1f3537b7          	lui	a5,0x1f353
+40000d30:	c0778793          	addi	a5,a5,-1017 # 1f352c07 <_stack_size+0x1f352407>
+40000d34:	f6f42223          	sw	a5,-156(s0)
     aes_key_256[3] 	= 0x857d7781;
-40000c94:	857d77b7          	lui	a5,0x857d7
-40000c98:	78178793          	addi	a5,a5,1921 # 857d7781 <_stack_start+0x57d6e41>
-40000c9c:	f6f42e23          	sw	a5,-132(s0)
+40000d38:	857d77b7          	lui	a5,0x857d7
+40000d3c:	78178793          	addi	a5,a5,1921 # 857d7781 <_stack_start+0x57d6e41>
+40000d40:	f6f42023          	sw	a5,-160(s0)
     aes_key_256[2] 	= 0x2b73aef0;
-40000ca0:	2b73b7b7          	lui	a5,0x2b73b
-40000ca4:	ef078793          	addi	a5,a5,-272 # 2b73aef0 <_stack_size+0x2b73a6f0>
-40000ca8:	f6f42c23          	sw	a5,-136(s0)
+40000d44:	2b73b7b7          	lui	a5,0x2b73b
+40000d48:	ef078793          	addi	a5,a5,-272 # 2b73aef0 <_stack_size+0x2b73a6f0>
+40000d4c:	f4f42e23          	sw	a5,-164(s0)
     aes_key_256[1] 	= 0x15ca71be;
-40000cac:	15ca77b7          	lui	a5,0x15ca7
-40000cb0:	1be78793          	addi	a5,a5,446 # 15ca71be <_stack_size+0x15ca69be>
-40000cb4:	f6f42a23          	sw	a5,-140(s0)
+40000d50:	15ca77b7          	lui	a5,0x15ca7
+40000d54:	1be78793          	addi	a5,a5,446 # 15ca71be <_stack_size+0x15ca69be>
+40000d58:	f4f42c23          	sw	a5,-168(s0)
     aes_key_256[0]	= 0x603deb10;
-40000cb8:	603df7b7          	lui	a5,0x603df
-40000cbc:	b1078793          	addi	a5,a5,-1264 # 603deb10 <__global_pointer$+0x203db6b8>
-40000cc0:	f6f42823          	sw	a5,-144(s0)
+40000d5c:	603df7b7          	lui	a5,0x603df
+40000d60:	b1078793          	addi	a5,a5,-1264 # 603deb10 <__global_pointer$+0x203db5c0>
+40000d64:	f4f42a23          	sw	a5,-172(s0)
 
     aes_256_cipher(AES_OP_DE, aes_key_256, aes_block, aes_res);
-40000cc4:	f9040693          	addi	a3,s0,-112
-40000cc8:	fa040713          	addi	a4,s0,-96
-40000ccc:	f7040793          	addi	a5,s0,-144
-40000cd0:	00070613          	mv	a2,a4
-40000cd4:	00078593          	mv	a1,a5
-40000cd8:	00000513          	li	a0,0
-40000cdc:	269000ef          	jal	ra,40001744 <aes_256_cipher>
+40000d68:	f7440693          	addi	a3,s0,-140
+40000d6c:	f8440713          	addi	a4,s0,-124
+40000d70:	f5440793          	addi	a5,s0,-172
+40000d74:	00070613          	mv	a2,a4
+40000d78:	00078593          	mv	a1,a5
+40000d7c:	00000513          	li	a0,0
+40000d80:	269000ef          	jal	ra,400017e8 <aes_256_cipher>
+
 	return 0;	
-40000ce0:	00000793          	li	a5,0
+40000d84:	00000793          	li	a5,0
 }
-40000ce4:	00078513          	mv	a0,a5
-40000ce8:	08c12083          	lw	ra,140(sp)
-40000cec:	08812403          	lw	s0,136(sp)
-40000cf0:	09010113          	addi	sp,sp,144
-40000cf4:	00008067          	ret
+40000d88:	00078513          	mv	a0,a5
+40000d8c:	0ac12083          	lw	ra,172(sp)
+40000d90:	0a812403          	lw	s0,168(sp)
+40000d94:	0b010113          	addi	sp,sp,176
+40000d98:	00008067          	ret
 
-40000cf8 <irqCallback>:
+40000d9c <irqCallback>:
 void irqCallback(){
-40000cf8:	ff010113          	addi	sp,sp,-16
-40000cfc:	00812623          	sw	s0,12(sp)
-40000d00:	01010413          	addi	s0,sp,16
+40000d9c:	ff010113          	addi	sp,sp,-16
+40000da0:	00812623          	sw	s0,12(sp)
+40000da4:	01010413          	addi	s0,sp,16
 
 }
-40000d04:	00000013          	nop
-40000d08:	00c12403          	lw	s0,12(sp)
-40000d0c:	01010113          	addi	sp,sp,16
-40000d10:	00008067          	ret
+40000da8:	00000013          	nop
+40000dac:	00c12403          	lw	s0,12(sp)
+40000db0:	01010113          	addi	sp,sp,16
+40000db4:	00008067          	ret
 
-40000d14 <timer_init>:
+40000db8 <timer_init>:
 static void timer_init(Timer_Reg *reg){
-40000d14:	fe010113          	addi	sp,sp,-32
-40000d18:	00812e23          	sw	s0,28(sp)
-40000d1c:	02010413          	addi	s0,sp,32
-40000d20:	fea42623          	sw	a0,-20(s0)
+40000db8:	fe010113          	addi	sp,sp,-32
+40000dbc:	00812e23          	sw	s0,28(sp)
+40000dc0:	02010413          	addi	s0,sp,32
+40000dc4:	fea42623          	sw	a0,-20(s0)
 	reg->CLEARS_TICKS  = 0;
-40000d24:	fec42783          	lw	a5,-20(s0)
-40000d28:	0007a023          	sw	zero,0(a5)
+40000dc8:	fec42783          	lw	a5,-20(s0)
+40000dcc:	0007a023          	sw	zero,0(a5)
 	reg->VALUE = 0;
-40000d2c:	fec42783          	lw	a5,-20(s0)
-40000d30:	0007a423          	sw	zero,8(a5)
+40000dd0:	fec42783          	lw	a5,-20(s0)
+40000dd4:	0007a423          	sw	zero,8(a5)
 }
-40000d34:	00000013          	nop
-40000d38:	01c12403          	lw	s0,28(sp)
-40000d3c:	02010113          	addi	sp,sp,32
-40000d40:	00008067          	ret
+40000dd8:	00000013          	nop
+40000ddc:	01c12403          	lw	s0,28(sp)
+40000de0:	02010113          	addi	sp,sp,32
+40000de4:	00008067          	ret
 
-40000d44 <prescaler_init>:
+40000de8 <prescaler_init>:
 static void prescaler_init(Prescaler_Reg* reg){
-40000d44:	fe010113          	addi	sp,sp,-32
-40000d48:	00812e23          	sw	s0,28(sp)
-40000d4c:	02010413          	addi	s0,sp,32
-40000d50:	fea42623          	sw	a0,-20(s0)
+40000de8:	fe010113          	addi	sp,sp,-32
+40000dec:	00812e23          	sw	s0,28(sp)
+40000df0:	02010413          	addi	s0,sp,32
+40000df4:	fea42623          	sw	a0,-20(s0)
 }
-40000d54:	00000013          	nop
-40000d58:	01c12403          	lw	s0,28(sp)
-40000d5c:	02010113          	addi	sp,sp,32
-40000d60:	00008067          	ret
+40000df8:	00000013          	nop
+40000dfc:	01c12403          	lw	s0,28(sp)
+40000e00:	02010113          	addi	sp,sp,32
+40000e04:	00008067          	ret
 
-40000d64 <interruptCtrl_init>:
+40000e08 <interruptCtrl_init>:
 static void interruptCtrl_init(InterruptCtrl_Reg* reg){
-40000d64:	fe010113          	addi	sp,sp,-32
-40000d68:	00812e23          	sw	s0,28(sp)
-40000d6c:	02010413          	addi	s0,sp,32
-40000d70:	fea42623          	sw	a0,-20(s0)
+40000e08:	fe010113          	addi	sp,sp,-32
+40000e0c:	00812e23          	sw	s0,28(sp)
+40000e10:	02010413          	addi	s0,sp,32
+40000e14:	fea42623          	sw	a0,-20(s0)
 	reg->MASKS = 0;
-40000d74:	fec42783          	lw	a5,-20(s0)
-40000d78:	0007a223          	sw	zero,4(a5)
+40000e18:	fec42783          	lw	a5,-20(s0)
+40000e1c:	0007a223          	sw	zero,4(a5)
 	reg->PENDINGS = 0xFFFFFFFF;
-40000d7c:	fec42783          	lw	a5,-20(s0)
-40000d80:	fff00713          	li	a4,-1
-40000d84:	00e7a023          	sw	a4,0(a5)
-}
-40000d88:	00000013          	nop
-40000d8c:	01c12403          	lw	s0,28(sp)
-40000d90:	02010113          	addi	sp,sp,32
-40000d94:	00008067          	ret
-
-40000d98 <uart_writeAvailability>:
-static uint32_t uart_writeAvailability(Uart_Reg *reg){
-40000d98:	fe010113          	addi	sp,sp,-32
-40000d9c:	00812e23          	sw	s0,28(sp)
-40000da0:	02010413          	addi	s0,sp,32
-40000da4:	fea42623          	sw	a0,-20(s0)
-	return (reg->STATUS >> 16) & 0xFF;
-40000da8:	fec42783          	lw	a5,-20(s0)
-40000dac:	0047a783          	lw	a5,4(a5)
-40000db0:	0107d793          	srli	a5,a5,0x10
-40000db4:	0ff7f793          	zext.b	a5,a5
-}
-40000db8:	00078513          	mv	a0,a5
-40000dbc:	01c12403          	lw	s0,28(sp)
-40000dc0:	02010113          	addi	sp,sp,32
-40000dc4:	00008067          	ret
-
-40000dc8 <uart_readOccupancy>:
-static uint32_t uart_readOccupancy(Uart_Reg *reg){
-40000dc8:	fe010113          	addi	sp,sp,-32
-40000dcc:	00812e23          	sw	s0,28(sp)
-40000dd0:	02010413          	addi	s0,sp,32
-40000dd4:	fea42623          	sw	a0,-20(s0)
-	return reg->STATUS >> 24;
-40000dd8:	fec42783          	lw	a5,-20(s0)
-40000ddc:	0047a783          	lw	a5,4(a5)
-40000de0:	0187d793          	srli	a5,a5,0x18
-}
-40000de4:	00078513          	mv	a0,a5
-40000de8:	01c12403          	lw	s0,28(sp)
-40000dec:	02010113          	addi	sp,sp,32
-40000df0:	00008067          	ret
-
-40000df4 <uart_write>:
-static void uart_write(Uart_Reg *reg, uint32_t data){
-40000df4:	fe010113          	addi	sp,sp,-32
-40000df8:	00112e23          	sw	ra,28(sp)
-40000dfc:	00812c23          	sw	s0,24(sp)
-40000e00:	02010413          	addi	s0,sp,32
-40000e04:	fea42623          	sw	a0,-20(s0)
-40000e08:	feb42423          	sw	a1,-24(s0)
-	while(uart_writeAvailability(reg) == 0);
-40000e0c:	00000013          	nop
-40000e10:	fec42503          	lw	a0,-20(s0)
-40000e14:	f85ff0ef          	jal	ra,40000d98 <uart_writeAvailability>
-40000e18:	00050793          	mv	a5,a0
-40000e1c:	fe078ae3          	beqz	a5,40000e10 <uart_write+0x1c>
-	reg->DATA = data;
 40000e20:	fec42783          	lw	a5,-20(s0)
-40000e24:	fe842703          	lw	a4,-24(s0)
+40000e24:	fff00713          	li	a4,-1
 40000e28:	00e7a023          	sw	a4,0(a5)
 }
 40000e2c:	00000013          	nop
-40000e30:	01c12083          	lw	ra,28(sp)
-40000e34:	01812403          	lw	s0,24(sp)
-40000e38:	02010113          	addi	sp,sp,32
-40000e3c:	00008067          	ret
+40000e30:	01c12403          	lw	s0,28(sp)
+40000e34:	02010113          	addi	sp,sp,32
+40000e38:	00008067          	ret
 
-40000e40 <uart_applyConfig>:
+40000e3c <uart_writeAvailability>:
+static uint32_t uart_writeAvailability(Uart_Reg *reg){
+40000e3c:	fe010113          	addi	sp,sp,-32
+40000e40:	00812e23          	sw	s0,28(sp)
+40000e44:	02010413          	addi	s0,sp,32
+40000e48:	fea42623          	sw	a0,-20(s0)
+	return (reg->STATUS >> 16) & 0xFF;
+40000e4c:	fec42783          	lw	a5,-20(s0)
+40000e50:	0047a783          	lw	a5,4(a5)
+40000e54:	0107d793          	srli	a5,a5,0x10
+40000e58:	0ff7f793          	zext.b	a5,a5
+}
+40000e5c:	00078513          	mv	a0,a5
+40000e60:	01c12403          	lw	s0,28(sp)
+40000e64:	02010113          	addi	sp,sp,32
+40000e68:	00008067          	ret
+
+40000e6c <uart_readOccupancy>:
+static uint32_t uart_readOccupancy(Uart_Reg *reg){
+40000e6c:	fe010113          	addi	sp,sp,-32
+40000e70:	00812e23          	sw	s0,28(sp)
+40000e74:	02010413          	addi	s0,sp,32
+40000e78:	fea42623          	sw	a0,-20(s0)
+	return reg->STATUS >> 24;
+40000e7c:	fec42783          	lw	a5,-20(s0)
+40000e80:	0047a783          	lw	a5,4(a5)
+40000e84:	0187d793          	srli	a5,a5,0x18
+}
+40000e88:	00078513          	mv	a0,a5
+40000e8c:	01c12403          	lw	s0,28(sp)
+40000e90:	02010113          	addi	sp,sp,32
+40000e94:	00008067          	ret
+
+40000e98 <uart_write>:
+static void uart_write(Uart_Reg *reg, uint32_t data){
+40000e98:	fe010113          	addi	sp,sp,-32
+40000e9c:	00112e23          	sw	ra,28(sp)
+40000ea0:	00812c23          	sw	s0,24(sp)
+40000ea4:	02010413          	addi	s0,sp,32
+40000ea8:	fea42623          	sw	a0,-20(s0)
+40000eac:	feb42423          	sw	a1,-24(s0)
+	while(uart_writeAvailability(reg) == 0);
+40000eb0:	00000013          	nop
+40000eb4:	fec42503          	lw	a0,-20(s0)
+40000eb8:	f85ff0ef          	jal	ra,40000e3c <uart_writeAvailability>
+40000ebc:	00050793          	mv	a5,a0
+40000ec0:	fe078ae3          	beqz	a5,40000eb4 <uart_write+0x1c>
+	reg->DATA = data;
+40000ec4:	fec42783          	lw	a5,-20(s0)
+40000ec8:	fe842703          	lw	a4,-24(s0)
+40000ecc:	00e7a023          	sw	a4,0(a5)
+}
+40000ed0:	00000013          	nop
+40000ed4:	01c12083          	lw	ra,28(sp)
+40000ed8:	01812403          	lw	s0,24(sp)
+40000edc:	02010113          	addi	sp,sp,32
+40000ee0:	00008067          	ret
+
+40000ee4 <uart_applyConfig>:
 static void uart_applyConfig(Uart_Reg *reg, Uart_Config *config){
-40000e40:	fe010113          	addi	sp,sp,-32
-40000e44:	00812e23          	sw	s0,28(sp)
-40000e48:	02010413          	addi	s0,sp,32
-40000e4c:	fea42623          	sw	a0,-20(s0)
-40000e50:	feb42423          	sw	a1,-24(s0)
+40000ee4:	fe010113          	addi	sp,sp,-32
+40000ee8:	00812e23          	sw	s0,28(sp)
+40000eec:	02010413          	addi	s0,sp,32
+40000ef0:	fea42623          	sw	a0,-20(s0)
+40000ef4:	feb42423          	sw	a1,-24(s0)
 	reg->CLOCK_DIVIDER = config->clockDivider;
-40000e54:	fe842783          	lw	a5,-24(s0)
-40000e58:	00c7a703          	lw	a4,12(a5)
-40000e5c:	fec42783          	lw	a5,-20(s0)
-40000e60:	00e7a423          	sw	a4,8(a5)
+40000ef8:	fe842783          	lw	a5,-24(s0)
+40000efc:	00c7a703          	lw	a4,12(a5)
+40000f00:	fec42783          	lw	a5,-20(s0)
+40000f04:	00e7a423          	sw	a4,8(a5)
 	reg->FRAME_CONFIG = ((config->dataLength-1) << 0) | (config->parity << 8) | (config->stop << 16);
-40000e64:	fe842783          	lw	a5,-24(s0)
-40000e68:	0007a783          	lw	a5,0(a5)
-40000e6c:	fff78713          	addi	a4,a5,-1
-40000e70:	fe842783          	lw	a5,-24(s0)
-40000e74:	0047a783          	lw	a5,4(a5)
-40000e78:	00879793          	slli	a5,a5,0x8
-40000e7c:	00f76733          	or	a4,a4,a5
-40000e80:	fe842783          	lw	a5,-24(s0)
-40000e84:	0087a783          	lw	a5,8(a5)
-40000e88:	01079793          	slli	a5,a5,0x10
-40000e8c:	00f76733          	or	a4,a4,a5
-40000e90:	fec42783          	lw	a5,-20(s0)
-40000e94:	00e7a623          	sw	a4,12(a5)
+40000f08:	fe842783          	lw	a5,-24(s0)
+40000f0c:	0007a783          	lw	a5,0(a5)
+40000f10:	fff78713          	addi	a4,a5,-1
+40000f14:	fe842783          	lw	a5,-24(s0)
+40000f18:	0047a783          	lw	a5,4(a5)
+40000f1c:	00879793          	slli	a5,a5,0x8
+40000f20:	00f76733          	or	a4,a4,a5
+40000f24:	fe842783          	lw	a5,-24(s0)
+40000f28:	0087a783          	lw	a5,8(a5)
+40000f2c:	01079793          	slli	a5,a5,0x10
+40000f30:	00f76733          	or	a4,a4,a5
+40000f34:	fec42783          	lw	a5,-20(s0)
+40000f38:	00e7a623          	sw	a4,12(a5)
 }
-40000e98:	00000013          	nop
-40000e9c:	01c12403          	lw	s0,28(sp)
-40000ea0:	02010113          	addi	sp,sp,32
-40000ea4:	00008067          	ret
-
-40000ea8 <vga_isBusy>:
-static uint32_t vga_isBusy(Vga_Reg *reg){
-40000ea8:	fe010113          	addi	sp,sp,-32
-40000eac:	00812e23          	sw	s0,28(sp)
-40000eb0:	02010413          	addi	s0,sp,32
-40000eb4:	fea42623          	sw	a0,-20(s0)
-	return (reg->STATUS & 2) != 0;
-40000eb8:	fec42783          	lw	a5,-20(s0)
-40000ebc:	0007a783          	lw	a5,0(a5)
-40000ec0:	0027f793          	andi	a5,a5,2
-40000ec4:	00f037b3          	snez	a5,a5
-40000ec8:	0ff7f793          	zext.b	a5,a5
-}
-40000ecc:	00078513          	mv	a0,a5
-40000ed0:	01c12403          	lw	s0,28(sp)
-40000ed4:	02010113          	addi	sp,sp,32
-40000ed8:	00008067          	ret
-
-40000edc <vga_run>:
-static void vga_run(Vga_Reg *reg){
-40000edc:	fe010113          	addi	sp,sp,-32
-40000ee0:	00812e23          	sw	s0,28(sp)
-40000ee4:	02010413          	addi	s0,sp,32
-40000ee8:	fea42623          	sw	a0,-20(s0)
-	reg->STATUS  = 1;
-40000eec:	fec42783          	lw	a5,-20(s0)
-40000ef0:	00100713          	li	a4,1
-40000ef4:	00e7a023          	sw	a4,0(a5)
-}
-40000ef8:	00000013          	nop
-40000efc:	01c12403          	lw	s0,28(sp)
-40000f00:	02010113          	addi	sp,sp,32
-40000f04:	00008067          	ret
-
-40000f08 <vga_stop>:
-static void vga_stop(Vga_Reg *reg){
-40000f08:	fe010113          	addi	sp,sp,-32
-40000f0c:	00112e23          	sw	ra,28(sp)
-40000f10:	00812c23          	sw	s0,24(sp)
-40000f14:	02010413          	addi	s0,sp,32
-40000f18:	fea42623          	sw	a0,-20(s0)
-	reg->STATUS  = 0;
-40000f1c:	fec42783          	lw	a5,-20(s0)
-40000f20:	0007a023          	sw	zero,0(a5)
-	while(vga_isBusy(reg));
-40000f24:	00000013          	nop
-40000f28:	fec42503          	lw	a0,-20(s0)
-40000f2c:	f7dff0ef          	jal	ra,40000ea8 <vga_isBusy>
-40000f30:	00050793          	mv	a5,a0
-40000f34:	fe079ae3          	bnez	a5,40000f28 <vga_stop+0x20>
-}
-40000f38:	00000013          	nop
 40000f3c:	00000013          	nop
-40000f40:	01c12083          	lw	ra,28(sp)
-40000f44:	01812403          	lw	s0,24(sp)
-40000f48:	02010113          	addi	sp,sp,32
-40000f4c:	00008067          	ret
+40000f40:	01c12403          	lw	s0,28(sp)
+40000f44:	02010113          	addi	sp,sp,32
+40000f48:	00008067          	ret
 
-40000f50 <present_write>:
+40000f4c <vga_isBusy>:
+static uint32_t vga_isBusy(Vga_Reg *reg){
+40000f4c:	fe010113          	addi	sp,sp,-32
+40000f50:	00812e23          	sw	s0,28(sp)
+40000f54:	02010413          	addi	s0,sp,32
+40000f58:	fea42623          	sw	a0,-20(s0)
+	return (reg->STATUS & 2) != 0;
+40000f5c:	fec42783          	lw	a5,-20(s0)
+40000f60:	0007a783          	lw	a5,0(a5)
+40000f64:	0027f793          	andi	a5,a5,2
+40000f68:	00f037b3          	snez	a5,a5
+40000f6c:	0ff7f793          	zext.b	a5,a5
+}
+40000f70:	00078513          	mv	a0,a5
+40000f74:	01c12403          	lw	s0,28(sp)
+40000f78:	02010113          	addi	sp,sp,32
+40000f7c:	00008067          	ret
+
+40000f80 <vga_run>:
+static void vga_run(Vga_Reg *reg){
+40000f80:	fe010113          	addi	sp,sp,-32
+40000f84:	00812e23          	sw	s0,28(sp)
+40000f88:	02010413          	addi	s0,sp,32
+40000f8c:	fea42623          	sw	a0,-20(s0)
+	reg->STATUS  = 1;
+40000f90:	fec42783          	lw	a5,-20(s0)
+40000f94:	00100713          	li	a4,1
+40000f98:	00e7a023          	sw	a4,0(a5)
+}
+40000f9c:	00000013          	nop
+40000fa0:	01c12403          	lw	s0,28(sp)
+40000fa4:	02010113          	addi	sp,sp,32
+40000fa8:	00008067          	ret
+
+40000fac <vga_stop>:
+static void vga_stop(Vga_Reg *reg){
+40000fac:	fe010113          	addi	sp,sp,-32
+40000fb0:	00112e23          	sw	ra,28(sp)
+40000fb4:	00812c23          	sw	s0,24(sp)
+40000fb8:	02010413          	addi	s0,sp,32
+40000fbc:	fea42623          	sw	a0,-20(s0)
+	reg->STATUS  = 0;
+40000fc0:	fec42783          	lw	a5,-20(s0)
+40000fc4:	0007a023          	sw	zero,0(a5)
+	while(vga_isBusy(reg));
+40000fc8:	00000013          	nop
+40000fcc:	fec42503          	lw	a0,-20(s0)
+40000fd0:	f7dff0ef          	jal	ra,40000f4c <vga_isBusy>
+40000fd4:	00050793          	mv	a5,a0
+40000fd8:	fe079ae3          	bnez	a5,40000fcc <vga_stop+0x20>
+}
+40000fdc:	00000013          	nop
+40000fe0:	00000013          	nop
+40000fe4:	01c12083          	lw	ra,28(sp)
+40000fe8:	01812403          	lw	s0,24(sp)
+40000fec:	02010113          	addi	sp,sp,32
+40000ff0:	00008067          	ret
+
+40000ff4 <present_write>:
 #include "briey.h"
 void present_write(uint32_t iData, uint32_t iAddress)
 {
-40000f50:	fe010113          	addi	sp,sp,-32
-40000f54:	00812e23          	sw	s0,28(sp)
-40000f58:	02010413          	addi	s0,sp,32
-40000f5c:	fea42623          	sw	a0,-20(s0)
-40000f60:	feb42423          	sw	a1,-24(s0)
+40000ff4:	fe010113          	addi	sp,sp,-32
+40000ff8:	00812e23          	sw	s0,28(sp)
+40000ffc:	02010413          	addi	s0,sp,32
+40001000:	fea42623          	sw	a0,-20(s0)
+40001004:	feb42423          	sw	a1,-24(s0)
 	PRESENT_BASE->ADDRESS		= iAddress;
-40000f64:	f00037b7          	lui	a5,0xf0003
-40000f68:	80078793          	addi	a5,a5,-2048 # f0002800 <_stack_start+0x70001ec0>
-40000f6c:	fe842703          	lw	a4,-24(s0)
-40000f70:	00e7a623          	sw	a4,12(a5)
-	PRESENT_BASE->WRITE_N 		= 0;
-40000f74:	f00037b7          	lui	a5,0xf0003
-40000f78:	80078793          	addi	a5,a5,-2048 # f0002800 <_stack_start+0x70001ec0>
-40000f7c:	0007a223          	sw	zero,4(a5)
-	PRESENT_BASE->READ_N 		= 1;
-40000f80:	f00037b7          	lui	a5,0xf0003
-40000f84:	80078793          	addi	a5,a5,-2048 # f0002800 <_stack_start+0x70001ec0>
-40000f88:	00100713          	li	a4,1
-40000f8c:	00e7a423          	sw	a4,8(a5)
-	PRESENT_BASE->IDATA			= iData;
-40000f90:	f00037b7          	lui	a5,0xf0003
-40000f94:	80078793          	addi	a5,a5,-2048 # f0002800 <_stack_start+0x70001ec0>
-40000f98:	fec42703          	lw	a4,-20(s0)
-40000f9c:	00e7a823          	sw	a4,16(a5)
-	PRESENT_BASE->CHIP_SELECT_N	= 0;
-40000fa0:	f00037b7          	lui	a5,0xf0003
-40000fa4:	80078793          	addi	a5,a5,-2048 # f0002800 <_stack_start+0x70001ec0>
-40000fa8:	0007a023          	sw	zero,0(a5)
-	PRESENT_BASE->CHIP_SELECT_N	= 1;
-40000fac:	f00037b7          	lui	a5,0xf0003
-40000fb0:	80078793          	addi	a5,a5,-2048 # f0002800 <_stack_start+0x70001ec0>
-40000fb4:	00100713          	li	a4,1
-40000fb8:	00e7a023          	sw	a4,0(a5)
-}
-40000fbc:	00000013          	nop
-40000fc0:	01c12403          	lw	s0,28(sp)
-40000fc4:	02010113          	addi	sp,sp,32
-40000fc8:	00008067          	ret
-
-40000fcc <present_read>:
-uint32_t present_read(uint32_t iAddress)
-{
-40000fcc:	fd010113          	addi	sp,sp,-48
-40000fd0:	02812623          	sw	s0,44(sp)
-40000fd4:	03010413          	addi	s0,sp,48
-40000fd8:	fca42e23          	sw	a0,-36(s0)
-	PRESENT_BASE->ADDRESS		= iAddress;
-40000fdc:	f00037b7          	lui	a5,0xf0003
-40000fe0:	80078793          	addi	a5,a5,-2048 # f0002800 <_stack_start+0x70001ec0>
-40000fe4:	fdc42703          	lw	a4,-36(s0)
-40000fe8:	00e7a623          	sw	a4,12(a5)
-	PRESENT_BASE->READ_N		= 0;
-40000fec:	f00037b7          	lui	a5,0xf0003
-40000ff0:	80078793          	addi	a5,a5,-2048 # f0002800 <_stack_start+0x70001ec0>
-40000ff4:	0007a423          	sw	zero,8(a5)
-	PRESENT_BASE->WRITE_N		= 1;
-40000ff8:	f00037b7          	lui	a5,0xf0003
-40000ffc:	80078793          	addi	a5,a5,-2048 # f0002800 <_stack_start+0x70001ec0>
-40001000:	00100713          	li	a4,1
-40001004:	00e7a223          	sw	a4,4(a5)
-	PRESENT_BASE->CHIP_SELECT_N	= 0;
 40001008:	f00037b7          	lui	a5,0xf0003
 4000100c:	80078793          	addi	a5,a5,-2048 # f0002800 <_stack_start+0x70001ec0>
-40001010:	0007a023          	sw	zero,0(a5)
-	uint32_t res 				= PRESENT_BASE->ODATA;
-40001014:	f00037b7          	lui	a5,0xf0003
-40001018:	80078793          	addi	a5,a5,-2048 # f0002800 <_stack_start+0x70001ec0>
-4000101c:	0147a783          	lw	a5,20(a5)
-40001020:	fef42623          	sw	a5,-20(s0)
-	PRESENT_BASE->CHIP_SELECT_N	= 1;
+40001010:	fe842703          	lw	a4,-24(s0)
+40001014:	00e7a623          	sw	a4,12(a5)
+	PRESENT_BASE->WRITE_N 		= 0;
+40001018:	f00037b7          	lui	a5,0xf0003
+4000101c:	80078793          	addi	a5,a5,-2048 # f0002800 <_stack_start+0x70001ec0>
+40001020:	0007a223          	sw	zero,4(a5)
+	PRESENT_BASE->READ_N 		= 1;
 40001024:	f00037b7          	lui	a5,0xf0003
 40001028:	80078793          	addi	a5,a5,-2048 # f0002800 <_stack_start+0x70001ec0>
 4000102c:	00100713          	li	a4,1
-40001030:	00e7a023          	sw	a4,0(a5)
-	return res;
-40001034:	fec42783          	lw	a5,-20(s0)
+40001030:	00e7a423          	sw	a4,8(a5)
+	PRESENT_BASE->IDATA			= iData;
+40001034:	f00037b7          	lui	a5,0xf0003
+40001038:	80078793          	addi	a5,a5,-2048 # f0002800 <_stack_start+0x70001ec0>
+4000103c:	fec42703          	lw	a4,-20(s0)
+40001040:	00e7a823          	sw	a4,16(a5)
+	PRESENT_BASE->CHIP_SELECT_N	= 0;
+40001044:	f00037b7          	lui	a5,0xf0003
+40001048:	80078793          	addi	a5,a5,-2048 # f0002800 <_stack_start+0x70001ec0>
+4000104c:	0007a023          	sw	zero,0(a5)
+	PRESENT_BASE->CHIP_SELECT_N	= 1;
+40001050:	f00037b7          	lui	a5,0xf0003
+40001054:	80078793          	addi	a5,a5,-2048 # f0002800 <_stack_start+0x70001ec0>
+40001058:	00100713          	li	a4,1
+4000105c:	00e7a023          	sw	a4,0(a5)
 }
-40001038:	00078513          	mv	a0,a5
-4000103c:	02c12403          	lw	s0,44(sp)
-40001040:	03010113          	addi	sp,sp,48
-40001044:	00008067          	ret
+40001060:	00000013          	nop
+40001064:	01c12403          	lw	s0,28(sp)
+40001068:	02010113          	addi	sp,sp,32
+4000106c:	00008067          	ret
 
-40001048 <present_cipher>:
+40001070 <present_read>:
+uint32_t present_read(uint32_t iAddress)
+{
+40001070:	fd010113          	addi	sp,sp,-48
+40001074:	02812623          	sw	s0,44(sp)
+40001078:	03010413          	addi	s0,sp,48
+4000107c:	fca42e23          	sw	a0,-36(s0)
+	PRESENT_BASE->ADDRESS		= iAddress;
+40001080:	f00037b7          	lui	a5,0xf0003
+40001084:	80078793          	addi	a5,a5,-2048 # f0002800 <_stack_start+0x70001ec0>
+40001088:	fdc42703          	lw	a4,-36(s0)
+4000108c:	00e7a623          	sw	a4,12(a5)
+	PRESENT_BASE->READ_N		= 0;
+40001090:	f00037b7          	lui	a5,0xf0003
+40001094:	80078793          	addi	a5,a5,-2048 # f0002800 <_stack_start+0x70001ec0>
+40001098:	0007a423          	sw	zero,8(a5)
+	PRESENT_BASE->WRITE_N		= 1;
+4000109c:	f00037b7          	lui	a5,0xf0003
+400010a0:	80078793          	addi	a5,a5,-2048 # f0002800 <_stack_start+0x70001ec0>
+400010a4:	00100713          	li	a4,1
+400010a8:	00e7a223          	sw	a4,4(a5)
+	PRESENT_BASE->CHIP_SELECT_N	= 0;
+400010ac:	f00037b7          	lui	a5,0xf0003
+400010b0:	80078793          	addi	a5,a5,-2048 # f0002800 <_stack_start+0x70001ec0>
+400010b4:	0007a023          	sw	zero,0(a5)
+	uint32_t res 				= PRESENT_BASE->ODATA;
+400010b8:	f00037b7          	lui	a5,0xf0003
+400010bc:	80078793          	addi	a5,a5,-2048 # f0002800 <_stack_start+0x70001ec0>
+400010c0:	0147a783          	lw	a5,20(a5)
+400010c4:	fef42623          	sw	a5,-20(s0)
+	PRESENT_BASE->CHIP_SELECT_N	= 1;
+400010c8:	f00037b7          	lui	a5,0xf0003
+400010cc:	80078793          	addi	a5,a5,-2048 # f0002800 <_stack_start+0x70001ec0>
+400010d0:	00100713          	li	a4,1
+400010d4:	00e7a023          	sw	a4,0(a5)
+	return res;
+400010d8:	fec42783          	lw	a5,-20(s0)
+}
+400010dc:	00078513          	mv	a0,a5
+400010e0:	02c12403          	lw	s0,44(sp)
+400010e4:	03010113          	addi	sp,sp,48
+400010e8:	00008067          	ret
+
+400010ec <present_cipher>:
 void present_cipher(unsigned char operation, uint32_t *key, uint32_t *block, uint32_t *res) {
-40001048:	fe010113          	addi	sp,sp,-32
-4000104c:	00112e23          	sw	ra,28(sp)
-40001050:	00812c23          	sw	s0,24(sp)
-40001054:	00912a23          	sw	s1,20(sp)
-40001058:	02010413          	addi	s0,sp,32
-4000105c:	00050793          	mv	a5,a0
-40001060:	feb42423          	sw	a1,-24(s0)
-40001064:	fec42223          	sw	a2,-28(s0)
-40001068:	fed42023          	sw	a3,-32(s0)
-4000106c:	fef407a3          	sb	a5,-17(s0)
+400010ec:	fe010113          	addi	sp,sp,-32
+400010f0:	00112e23          	sw	ra,28(sp)
+400010f4:	00812c23          	sw	s0,24(sp)
+400010f8:	00912a23          	sw	s1,20(sp)
+400010fc:	02010413          	addi	s0,sp,32
+40001100:	00050793          	mv	a5,a0
+40001104:	feb42423          	sw	a1,-24(s0)
+40001108:	fec42223          	sw	a2,-28(s0)
+4000110c:	fed42023          	sw	a3,-32(s0)
+40001110:	fef407a3          	sb	a5,-17(s0)
 
 	//EN_OR_DE
 	if(operation == PRESENT_OP_EN) present_write(PRESENT_OP_EN,PRESENT_ADDR_EN_OR_DE);
-40001070:	fef44783          	lbu	a5,-17(s0)
-40001074:	00079a63          	bnez	a5,40001088 <present_cipher+0x40>
-40001078:	00800593          	li	a1,8
-4000107c:	00000513          	li	a0,0
-40001080:	ed1ff0ef          	jal	ra,40000f50 <present_write>
-40001084:	0100006f          	j	40001094 <present_cipher+0x4c>
+40001114:	fef44783          	lbu	a5,-17(s0)
+40001118:	00079a63          	bnez	a5,4000112c <present_cipher+0x40>
+4000111c:	00800593          	li	a1,8
+40001120:	00000513          	li	a0,0
+40001124:	ed1ff0ef          	jal	ra,40000ff4 <present_write>
+40001128:	0100006f          	j	40001138 <present_cipher+0x4c>
 	else present_write(PRESENT_OP_EN,PRESENT_ADDR_EN_OR_DE);
-40001088:	00800593          	li	a1,8
-4000108c:	00000513          	li	a0,0
-40001090:	ec1ff0ef          	jal	ra,40000f50 <present_write>
+4000112c:	00800593          	li	a1,8
+40001130:	00000513          	li	a0,0
+40001134:	ec1ff0ef          	jal	ra,40000ff4 <present_write>
 
 	//PLAIN_TEXT
 	present_write(block[1],PRESENT_ADDR_BLOCK_BASE +1);
-40001094:	fe442783          	lw	a5,-28(s0)
-40001098:	00478793          	addi	a5,a5,4
-4000109c:	0007a783          	lw	a5,0(a5)
-400010a0:	00500593          	li	a1,5
-400010a4:	00078513          	mv	a0,a5
-400010a8:	ea9ff0ef          	jal	ra,40000f50 <present_write>
+40001138:	fe442783          	lw	a5,-28(s0)
+4000113c:	00478793          	addi	a5,a5,4
+40001140:	0007a783          	lw	a5,0(a5)
+40001144:	00500593          	li	a1,5
+40001148:	00078513          	mv	a0,a5
+4000114c:	ea9ff0ef          	jal	ra,40000ff4 <present_write>
 	present_write(block[0],PRESENT_ADDR_BLOCK_BASE);
-400010ac:	fe442783          	lw	a5,-28(s0)
-400010b0:	0007a783          	lw	a5,0(a5)
-400010b4:	00400593          	li	a1,4
-400010b8:	00078513          	mv	a0,a5
-400010bc:	e95ff0ef          	jal	ra,40000f50 <present_write>
+40001150:	fe442783          	lw	a5,-28(s0)
+40001154:	0007a783          	lw	a5,0(a5)
+40001158:	00400593          	li	a1,4
+4000115c:	00078513          	mv	a0,a5
+40001160:	e95ff0ef          	jal	ra,40000ff4 <present_write>
 
 	//KEY
-	present_write(key[2],PRESENT_ADDR_BLOCK_BASE +2);
-400010c0:	fe842783          	lw	a5,-24(s0)
-400010c4:	00878793          	addi	a5,a5,8
-400010c8:	0007a783          	lw	a5,0(a5)
-400010cc:	00600593          	li	a1,6
-400010d0:	00078513          	mv	a0,a5
-400010d4:	e7dff0ef          	jal	ra,40000f50 <present_write>
-	present_write(key[1],PRESENT_ADDR_BLOCK_BASE +1);
-400010d8:	fe842783          	lw	a5,-24(s0)
-400010dc:	00478793          	addi	a5,a5,4
-400010e0:	0007a783          	lw	a5,0(a5)
-400010e4:	00500593          	li	a1,5
-400010e8:	00078513          	mv	a0,a5
-400010ec:	e65ff0ef          	jal	ra,40000f50 <present_write>
-	present_write(key[0],PRESENT_ADDR_BLOCK_BASE);
-400010f0:	fe842783          	lw	a5,-24(s0)
-400010f4:	0007a783          	lw	a5,0(a5)
-400010f8:	00400593          	li	a1,4
-400010fc:	00078513          	mv	a0,a5
-40001100:	e51ff0ef          	jal	ra,40000f50 <present_write>
+	present_write(key[2],PRESENT_ADDR_KEY_BASE +2);
+40001164:	fe842783          	lw	a5,-24(s0)
+40001168:	00878793          	addi	a5,a5,8
+4000116c:	0007a783          	lw	a5,0(a5)
+40001170:	00300593          	li	a1,3
+40001174:	00078513          	mv	a0,a5
+40001178:	e7dff0ef          	jal	ra,40000ff4 <present_write>
+	present_write(key[1],PRESENT_ADDR_KEY_BASE +1);
+4000117c:	fe842783          	lw	a5,-24(s0)
+40001180:	00478793          	addi	a5,a5,4
+40001184:	0007a783          	lw	a5,0(a5)
+40001188:	00200593          	li	a1,2
+4000118c:	00078513          	mv	a0,a5
+40001190:	e65ff0ef          	jal	ra,40000ff4 <present_write>
+	present_write(key[0],PRESENT_ADDR_KEY_BASE);
+40001194:	fe842783          	lw	a5,-24(s0)
+40001198:	0007a783          	lw	a5,0(a5)
+4000119c:	00100593          	li	a1,1
+400011a0:	00078513          	mv	a0,a5
+400011a4:	e51ff0ef          	jal	ra,40000ff4 <present_write>
 
 	//START
 	present_write(0x1,PRESENT_ADDR_START);
-40001104:	00000593          	li	a1,0
-40001108:	00100513          	li	a0,1
-4000110c:	e45ff0ef          	jal	ra,40000f50 <present_write>
+400011a8:	00000593          	li	a1,0
+400011ac:	00100513          	li	a0,1
+400011b0:	e45ff0ef          	jal	ra,40000ff4 <present_write>
     while(present_read(PRESENT_ADDR_RESULT_BASE) == 0);
-40001110:	00000013          	nop
-40001114:	00600513          	li	a0,6
-40001118:	eb5ff0ef          	jal	ra,40000fcc <present_read>
-4000111c:	00050793          	mv	a5,a0
-40001120:	fe078ae3          	beqz	a5,40001114 <present_cipher+0xcc>
+400011b4:	00000013          	nop
+400011b8:	00600513          	li	a0,6
+400011bc:	eb5ff0ef          	jal	ra,40001070 <present_read>
+400011c0:	00050793          	mv	a5,a0
+400011c4:	fe078ae3          	beqz	a5,400011b8 <present_cipher+0xcc>
 
     res[1] = present_read(PRESENT_ADDR_RESULT_BASE +1);
-40001124:	fe042783          	lw	a5,-32(s0)
-40001128:	00478493          	addi	s1,a5,4
-4000112c:	00700513          	li	a0,7
-40001130:	e9dff0ef          	jal	ra,40000fcc <present_read>
-40001134:	00050793          	mv	a5,a0
-40001138:	00f4a023          	sw	a5,0(s1)
+400011c8:	fe042783          	lw	a5,-32(s0)
+400011cc:	00478493          	addi	s1,a5,4
+400011d0:	00700513          	li	a0,7
+400011d4:	e9dff0ef          	jal	ra,40001070 <present_read>
+400011d8:	00050793          	mv	a5,a0
+400011dc:	00f4a023          	sw	a5,0(s1)
     res[0] =present_read(PRESENT_ADDR_RESULT_BASE);
-4000113c:	00600513          	li	a0,6
-40001140:	e8dff0ef          	jal	ra,40000fcc <present_read>
-40001144:	00050713          	mv	a4,a0
-40001148:	fe042783          	lw	a5,-32(s0)
-4000114c:	00e7a023          	sw	a4,0(a5)
+400011e0:	00600513          	li	a0,6
+400011e4:	e8dff0ef          	jal	ra,40001070 <present_read>
+400011e8:	00050713          	mv	a4,a0
+400011ec:	fe042783          	lw	a5,-32(s0)
+400011f0:	00e7a023          	sw	a4,0(a5)
 
 
     //print result to terminal
 	if(operation == PRESENT_OP_EN)
-40001150:	fef44783          	lbu	a5,-17(s0)
-40001154:	00079a63          	bnez	a5,40001168 <present_cipher+0x120>
+400011f4:	fef44783          	lbu	a5,-17(s0)
+400011f8:	00079a63          	bnez	a5,4000120c <present_cipher+0x120>
 		print("============================PRESENT ENCRYPTTION==============================\r\n");
-40001158:	400027b7          	lui	a5,0x40002
-4000115c:	7cc78513          	addi	a0,a5,1996 # 400027cc <vga_simRes_h160_v120+0x20>
-40001160:	2b9000ef          	jal	ra,40001c18 <print>
-40001164:	0100006f          	j	40001174 <present_cipher+0x12c>
+400011fc:	400037b7          	lui	a5,0x40003
+40001200:	8c478513          	addi	a0,a5,-1852 # 400028c4 <vga_simRes_h160_v120+0x20>
+40001204:	2b9000ef          	jal	ra,40001cbc <print>
+40001208:	0100006f          	j	40001218 <present_cipher+0x12c>
 	else
 		print("============================PRESENT DECRYPTTION==============================\r\n");
-40001168:	400037b7          	lui	a5,0x40003
-4000116c:	81c78513          	addi	a0,a5,-2020 # 4000281c <vga_simRes_h160_v120+0x70>
-40001170:	2a9000ef          	jal	ra,40001c18 <print>
+4000120c:	400037b7          	lui	a5,0x40003
+40001210:	91478513          	addi	a0,a5,-1772 # 40002914 <vga_simRes_h160_v120+0x70>
+40001214:	2a9000ef          	jal	ra,40001cbc <print>
 	print64bit("\r\nPLAIN_TEXT (64-bit) : ", block);
-40001174:	fe442583          	lw	a1,-28(s0)
-40001178:	400037b7          	lui	a5,0x40003
-4000117c:	86c78513          	addi	a0,a5,-1940 # 4000286c <vga_simRes_h160_v120+0xc0>
-40001180:	501000ef          	jal	ra,40001e80 <print64bit>
+40001218:	fe442583          	lw	a1,-28(s0)
+4000121c:	400037b7          	lui	a5,0x40003
+40001220:	96478513          	addi	a0,a5,-1692 # 40002964 <vga_simRes_h160_v120+0xc0>
+40001224:	501000ef          	jal	ra,40001f24 <print64bit>
 	print80bit("KEY (80-bit) : ", key);
-40001184:	fe842583          	lw	a1,-24(s0)
-40001188:	400037b7          	lui	a5,0x40003
-4000118c:	88878513          	addi	a0,a5,-1912 # 40002888 <vga_simRes_h160_v120+0xdc>
-40001190:	5e1000ef          	jal	ra,40001f70 <print80bit>
+40001228:	fe842583          	lw	a1,-24(s0)
+4000122c:	400037b7          	lui	a5,0x40003
+40001230:	98078513          	addi	a0,a5,-1664 # 40002980 <vga_simRes_h160_v120+0xdc>
+40001234:	5e1000ef          	jal	ra,40002014 <print80bit>
 	print64bit("RESULT (64-bit) : ", res);
-40001194:	fe042583          	lw	a1,-32(s0)
-40001198:	400037b7          	lui	a5,0x40003
-4000119c:	89878513          	addi	a0,a5,-1896 # 40002898 <vga_simRes_h160_v120+0xec>
-400011a0:	4e1000ef          	jal	ra,40001e80 <print64bit>
+40001238:	fe042583          	lw	a1,-32(s0)
+4000123c:	400037b7          	lui	a5,0x40003
+40001240:	99078513          	addi	a0,a5,-1648 # 40002990 <vga_simRes_h160_v120+0xec>
+40001244:	4e1000ef          	jal	ra,40001f24 <print64bit>
 	print("\r\n============================================================================\r\n");
-400011a4:	400037b7          	lui	a5,0x40003
-400011a8:	8ac78513          	addi	a0,a5,-1876 # 400028ac <vga_simRes_h160_v120+0x100>
-400011ac:	26d000ef          	jal	ra,40001c18 <print>
+40001248:	400037b7          	lui	a5,0x40003
+4000124c:	9a478513          	addi	a0,a5,-1628 # 400029a4 <vga_simRes_h160_v120+0x100>
+40001250:	26d000ef          	jal	ra,40001cbc <print>
 }
-400011b0:	00000013          	nop
-400011b4:	01c12083          	lw	ra,28(sp)
-400011b8:	01812403          	lw	s0,24(sp)
-400011bc:	01412483          	lw	s1,20(sp)
-400011c0:	02010113          	addi	sp,sp,32
-400011c4:	00008067          	ret
+40001254:	00000013          	nop
+40001258:	01c12083          	lw	ra,28(sp)
+4000125c:	01812403          	lw	s0,24(sp)
+40001260:	01412483          	lw	s1,20(sp)
+40001264:	02010113          	addi	sp,sp,32
+40001268:	00008067          	ret
 
-400011c8 <timer_init>:
+4000126c <timer_init>:
 static void timer_init(Timer_Reg *reg){
-400011c8:	fe010113          	addi	sp,sp,-32
-400011cc:	00812e23          	sw	s0,28(sp)
-400011d0:	02010413          	addi	s0,sp,32
-400011d4:	fea42623          	sw	a0,-20(s0)
+4000126c:	fe010113          	addi	sp,sp,-32
+40001270:	00812e23          	sw	s0,28(sp)
+40001274:	02010413          	addi	s0,sp,32
+40001278:	fea42623          	sw	a0,-20(s0)
 	reg->CLEARS_TICKS  = 0;
-400011d8:	fec42783          	lw	a5,-20(s0)
-400011dc:	0007a023          	sw	zero,0(a5)
+4000127c:	fec42783          	lw	a5,-20(s0)
+40001280:	0007a023          	sw	zero,0(a5)
 	reg->VALUE = 0;
-400011e0:	fec42783          	lw	a5,-20(s0)
-400011e4:	0007a423          	sw	zero,8(a5)
+40001284:	fec42783          	lw	a5,-20(s0)
+40001288:	0007a423          	sw	zero,8(a5)
 }
-400011e8:	00000013          	nop
-400011ec:	01c12403          	lw	s0,28(sp)
-400011f0:	02010113          	addi	sp,sp,32
-400011f4:	00008067          	ret
+4000128c:	00000013          	nop
+40001290:	01c12403          	lw	s0,28(sp)
+40001294:	02010113          	addi	sp,sp,32
+40001298:	00008067          	ret
 
-400011f8 <prescaler_init>:
+4000129c <prescaler_init>:
 static void prescaler_init(Prescaler_Reg* reg){
-400011f8:	fe010113          	addi	sp,sp,-32
-400011fc:	00812e23          	sw	s0,28(sp)
-40001200:	02010413          	addi	s0,sp,32
-40001204:	fea42623          	sw	a0,-20(s0)
+4000129c:	fe010113          	addi	sp,sp,-32
+400012a0:	00812e23          	sw	s0,28(sp)
+400012a4:	02010413          	addi	s0,sp,32
+400012a8:	fea42623          	sw	a0,-20(s0)
 }
-40001208:	00000013          	nop
-4000120c:	01c12403          	lw	s0,28(sp)
-40001210:	02010113          	addi	sp,sp,32
-40001214:	00008067          	ret
+400012ac:	00000013          	nop
+400012b0:	01c12403          	lw	s0,28(sp)
+400012b4:	02010113          	addi	sp,sp,32
+400012b8:	00008067          	ret
 
-40001218 <interruptCtrl_init>:
+400012bc <interruptCtrl_init>:
 static void interruptCtrl_init(InterruptCtrl_Reg* reg){
-40001218:	fe010113          	addi	sp,sp,-32
-4000121c:	00812e23          	sw	s0,28(sp)
-40001220:	02010413          	addi	s0,sp,32
-40001224:	fea42623          	sw	a0,-20(s0)
+400012bc:	fe010113          	addi	sp,sp,-32
+400012c0:	00812e23          	sw	s0,28(sp)
+400012c4:	02010413          	addi	s0,sp,32
+400012c8:	fea42623          	sw	a0,-20(s0)
 	reg->MASKS = 0;
-40001228:	fec42783          	lw	a5,-20(s0)
-4000122c:	0007a223          	sw	zero,4(a5)
+400012cc:	fec42783          	lw	a5,-20(s0)
+400012d0:	0007a223          	sw	zero,4(a5)
 	reg->PENDINGS = 0xFFFFFFFF;
-40001230:	fec42783          	lw	a5,-20(s0)
-40001234:	fff00713          	li	a4,-1
-40001238:	00e7a023          	sw	a4,0(a5)
-}
-4000123c:	00000013          	nop
-40001240:	01c12403          	lw	s0,28(sp)
-40001244:	02010113          	addi	sp,sp,32
-40001248:	00008067          	ret
-
-4000124c <uart_writeAvailability>:
-static uint32_t uart_writeAvailability(Uart_Reg *reg){
-4000124c:	fe010113          	addi	sp,sp,-32
-40001250:	00812e23          	sw	s0,28(sp)
-40001254:	02010413          	addi	s0,sp,32
-40001258:	fea42623          	sw	a0,-20(s0)
-	return (reg->STATUS >> 16) & 0xFF;
-4000125c:	fec42783          	lw	a5,-20(s0)
-40001260:	0047a783          	lw	a5,4(a5)
-40001264:	0107d793          	srli	a5,a5,0x10
-40001268:	0ff7f793          	zext.b	a5,a5
-}
-4000126c:	00078513          	mv	a0,a5
-40001270:	01c12403          	lw	s0,28(sp)
-40001274:	02010113          	addi	sp,sp,32
-40001278:	00008067          	ret
-
-4000127c <uart_readOccupancy>:
-static uint32_t uart_readOccupancy(Uart_Reg *reg){
-4000127c:	fe010113          	addi	sp,sp,-32
-40001280:	00812e23          	sw	s0,28(sp)
-40001284:	02010413          	addi	s0,sp,32
-40001288:	fea42623          	sw	a0,-20(s0)
-	return reg->STATUS >> 24;
-4000128c:	fec42783          	lw	a5,-20(s0)
-40001290:	0047a783          	lw	a5,4(a5)
-40001294:	0187d793          	srli	a5,a5,0x18
-}
-40001298:	00078513          	mv	a0,a5
-4000129c:	01c12403          	lw	s0,28(sp)
-400012a0:	02010113          	addi	sp,sp,32
-400012a4:	00008067          	ret
-
-400012a8 <uart_write>:
-static void uart_write(Uart_Reg *reg, uint32_t data){
-400012a8:	fe010113          	addi	sp,sp,-32
-400012ac:	00112e23          	sw	ra,28(sp)
-400012b0:	00812c23          	sw	s0,24(sp)
-400012b4:	02010413          	addi	s0,sp,32
-400012b8:	fea42623          	sw	a0,-20(s0)
-400012bc:	feb42423          	sw	a1,-24(s0)
-	while(uart_writeAvailability(reg) == 0);
-400012c0:	00000013          	nop
-400012c4:	fec42503          	lw	a0,-20(s0)
-400012c8:	f85ff0ef          	jal	ra,4000124c <uart_writeAvailability>
-400012cc:	00050793          	mv	a5,a0
-400012d0:	fe078ae3          	beqz	a5,400012c4 <uart_write+0x1c>
-	reg->DATA = data;
 400012d4:	fec42783          	lw	a5,-20(s0)
-400012d8:	fe842703          	lw	a4,-24(s0)
+400012d8:	fff00713          	li	a4,-1
 400012dc:	00e7a023          	sw	a4,0(a5)
 }
 400012e0:	00000013          	nop
-400012e4:	01c12083          	lw	ra,28(sp)
-400012e8:	01812403          	lw	s0,24(sp)
-400012ec:	02010113          	addi	sp,sp,32
-400012f0:	00008067          	ret
+400012e4:	01c12403          	lw	s0,28(sp)
+400012e8:	02010113          	addi	sp,sp,32
+400012ec:	00008067          	ret
 
-400012f4 <uart_applyConfig>:
+400012f0 <uart_writeAvailability>:
+static uint32_t uart_writeAvailability(Uart_Reg *reg){
+400012f0:	fe010113          	addi	sp,sp,-32
+400012f4:	00812e23          	sw	s0,28(sp)
+400012f8:	02010413          	addi	s0,sp,32
+400012fc:	fea42623          	sw	a0,-20(s0)
+	return (reg->STATUS >> 16) & 0xFF;
+40001300:	fec42783          	lw	a5,-20(s0)
+40001304:	0047a783          	lw	a5,4(a5)
+40001308:	0107d793          	srli	a5,a5,0x10
+4000130c:	0ff7f793          	zext.b	a5,a5
+}
+40001310:	00078513          	mv	a0,a5
+40001314:	01c12403          	lw	s0,28(sp)
+40001318:	02010113          	addi	sp,sp,32
+4000131c:	00008067          	ret
+
+40001320 <uart_readOccupancy>:
+static uint32_t uart_readOccupancy(Uart_Reg *reg){
+40001320:	fe010113          	addi	sp,sp,-32
+40001324:	00812e23          	sw	s0,28(sp)
+40001328:	02010413          	addi	s0,sp,32
+4000132c:	fea42623          	sw	a0,-20(s0)
+	return reg->STATUS >> 24;
+40001330:	fec42783          	lw	a5,-20(s0)
+40001334:	0047a783          	lw	a5,4(a5)
+40001338:	0187d793          	srli	a5,a5,0x18
+}
+4000133c:	00078513          	mv	a0,a5
+40001340:	01c12403          	lw	s0,28(sp)
+40001344:	02010113          	addi	sp,sp,32
+40001348:	00008067          	ret
+
+4000134c <uart_write>:
+static void uart_write(Uart_Reg *reg, uint32_t data){
+4000134c:	fe010113          	addi	sp,sp,-32
+40001350:	00112e23          	sw	ra,28(sp)
+40001354:	00812c23          	sw	s0,24(sp)
+40001358:	02010413          	addi	s0,sp,32
+4000135c:	fea42623          	sw	a0,-20(s0)
+40001360:	feb42423          	sw	a1,-24(s0)
+	while(uart_writeAvailability(reg) == 0);
+40001364:	00000013          	nop
+40001368:	fec42503          	lw	a0,-20(s0)
+4000136c:	f85ff0ef          	jal	ra,400012f0 <uart_writeAvailability>
+40001370:	00050793          	mv	a5,a0
+40001374:	fe078ae3          	beqz	a5,40001368 <uart_write+0x1c>
+	reg->DATA = data;
+40001378:	fec42783          	lw	a5,-20(s0)
+4000137c:	fe842703          	lw	a4,-24(s0)
+40001380:	00e7a023          	sw	a4,0(a5)
+}
+40001384:	00000013          	nop
+40001388:	01c12083          	lw	ra,28(sp)
+4000138c:	01812403          	lw	s0,24(sp)
+40001390:	02010113          	addi	sp,sp,32
+40001394:	00008067          	ret
+
+40001398 <uart_applyConfig>:
 static void uart_applyConfig(Uart_Reg *reg, Uart_Config *config){
-400012f4:	fe010113          	addi	sp,sp,-32
-400012f8:	00812e23          	sw	s0,28(sp)
-400012fc:	02010413          	addi	s0,sp,32
-40001300:	fea42623          	sw	a0,-20(s0)
-40001304:	feb42423          	sw	a1,-24(s0)
+40001398:	fe010113          	addi	sp,sp,-32
+4000139c:	00812e23          	sw	s0,28(sp)
+400013a0:	02010413          	addi	s0,sp,32
+400013a4:	fea42623          	sw	a0,-20(s0)
+400013a8:	feb42423          	sw	a1,-24(s0)
 	reg->CLOCK_DIVIDER = config->clockDivider;
-40001308:	fe842783          	lw	a5,-24(s0)
-4000130c:	00c7a703          	lw	a4,12(a5)
-40001310:	fec42783          	lw	a5,-20(s0)
-40001314:	00e7a423          	sw	a4,8(a5)
+400013ac:	fe842783          	lw	a5,-24(s0)
+400013b0:	00c7a703          	lw	a4,12(a5)
+400013b4:	fec42783          	lw	a5,-20(s0)
+400013b8:	00e7a423          	sw	a4,8(a5)
 	reg->FRAME_CONFIG = ((config->dataLength-1) << 0) | (config->parity << 8) | (config->stop << 16);
-40001318:	fe842783          	lw	a5,-24(s0)
-4000131c:	0007a783          	lw	a5,0(a5)
-40001320:	fff78713          	addi	a4,a5,-1
-40001324:	fe842783          	lw	a5,-24(s0)
-40001328:	0047a783          	lw	a5,4(a5)
-4000132c:	00879793          	slli	a5,a5,0x8
-40001330:	00f76733          	or	a4,a4,a5
-40001334:	fe842783          	lw	a5,-24(s0)
-40001338:	0087a783          	lw	a5,8(a5)
-4000133c:	01079793          	slli	a5,a5,0x10
-40001340:	00f76733          	or	a4,a4,a5
-40001344:	fec42783          	lw	a5,-20(s0)
-40001348:	00e7a623          	sw	a4,12(a5)
+400013bc:	fe842783          	lw	a5,-24(s0)
+400013c0:	0007a783          	lw	a5,0(a5)
+400013c4:	fff78713          	addi	a4,a5,-1
+400013c8:	fe842783          	lw	a5,-24(s0)
+400013cc:	0047a783          	lw	a5,4(a5)
+400013d0:	00879793          	slli	a5,a5,0x8
+400013d4:	00f76733          	or	a4,a4,a5
+400013d8:	fe842783          	lw	a5,-24(s0)
+400013dc:	0087a783          	lw	a5,8(a5)
+400013e0:	01079793          	slli	a5,a5,0x10
+400013e4:	00f76733          	or	a4,a4,a5
+400013e8:	fec42783          	lw	a5,-20(s0)
+400013ec:	00e7a623          	sw	a4,12(a5)
 }
-4000134c:	00000013          	nop
-40001350:	01c12403          	lw	s0,28(sp)
-40001354:	02010113          	addi	sp,sp,32
-40001358:	00008067          	ret
-
-4000135c <vga_isBusy>:
-static uint32_t vga_isBusy(Vga_Reg *reg){
-4000135c:	fe010113          	addi	sp,sp,-32
-40001360:	00812e23          	sw	s0,28(sp)
-40001364:	02010413          	addi	s0,sp,32
-40001368:	fea42623          	sw	a0,-20(s0)
-	return (reg->STATUS & 2) != 0;
-4000136c:	fec42783          	lw	a5,-20(s0)
-40001370:	0007a783          	lw	a5,0(a5)
-40001374:	0027f793          	andi	a5,a5,2
-40001378:	00f037b3          	snez	a5,a5
-4000137c:	0ff7f793          	zext.b	a5,a5
-}
-40001380:	00078513          	mv	a0,a5
-40001384:	01c12403          	lw	s0,28(sp)
-40001388:	02010113          	addi	sp,sp,32
-4000138c:	00008067          	ret
-
-40001390 <vga_run>:
-static void vga_run(Vga_Reg *reg){
-40001390:	fe010113          	addi	sp,sp,-32
-40001394:	00812e23          	sw	s0,28(sp)
-40001398:	02010413          	addi	s0,sp,32
-4000139c:	fea42623          	sw	a0,-20(s0)
-	reg->STATUS  = 1;
-400013a0:	fec42783          	lw	a5,-20(s0)
-400013a4:	00100713          	li	a4,1
-400013a8:	00e7a023          	sw	a4,0(a5)
-}
-400013ac:	00000013          	nop
-400013b0:	01c12403          	lw	s0,28(sp)
-400013b4:	02010113          	addi	sp,sp,32
-400013b8:	00008067          	ret
-
-400013bc <vga_stop>:
-static void vga_stop(Vga_Reg *reg){
-400013bc:	fe010113          	addi	sp,sp,-32
-400013c0:	00112e23          	sw	ra,28(sp)
-400013c4:	00812c23          	sw	s0,24(sp)
-400013c8:	02010413          	addi	s0,sp,32
-400013cc:	fea42623          	sw	a0,-20(s0)
-	reg->STATUS  = 0;
-400013d0:	fec42783          	lw	a5,-20(s0)
-400013d4:	0007a023          	sw	zero,0(a5)
-	while(vga_isBusy(reg));
-400013d8:	00000013          	nop
-400013dc:	fec42503          	lw	a0,-20(s0)
-400013e0:	f7dff0ef          	jal	ra,4000135c <vga_isBusy>
-400013e4:	00050793          	mv	a5,a0
-400013e8:	fe079ae3          	bnez	a5,400013dc <vga_stop+0x20>
-}
-400013ec:	00000013          	nop
 400013f0:	00000013          	nop
-400013f4:	01c12083          	lw	ra,28(sp)
-400013f8:	01812403          	lw	s0,24(sp)
-400013fc:	02010113          	addi	sp,sp,32
-40001400:	00008067          	ret
+400013f4:	01c12403          	lw	s0,28(sp)
+400013f8:	02010113          	addi	sp,sp,32
+400013fc:	00008067          	ret
 
-40001404 <aes_write>:
+40001400 <vga_isBusy>:
+static uint32_t vga_isBusy(Vga_Reg *reg){
+40001400:	fe010113          	addi	sp,sp,-32
+40001404:	00812e23          	sw	s0,28(sp)
+40001408:	02010413          	addi	s0,sp,32
+4000140c:	fea42623          	sw	a0,-20(s0)
+	return (reg->STATUS & 2) != 0;
+40001410:	fec42783          	lw	a5,-20(s0)
+40001414:	0007a783          	lw	a5,0(a5)
+40001418:	0027f793          	andi	a5,a5,2
+4000141c:	00f037b3          	snez	a5,a5
+40001420:	0ff7f793          	zext.b	a5,a5
+}
+40001424:	00078513          	mv	a0,a5
+40001428:	01c12403          	lw	s0,28(sp)
+4000142c:	02010113          	addi	sp,sp,32
+40001430:	00008067          	ret
+
+40001434 <vga_run>:
+static void vga_run(Vga_Reg *reg){
+40001434:	fe010113          	addi	sp,sp,-32
+40001438:	00812e23          	sw	s0,28(sp)
+4000143c:	02010413          	addi	s0,sp,32
+40001440:	fea42623          	sw	a0,-20(s0)
+	reg->STATUS  = 1;
+40001444:	fec42783          	lw	a5,-20(s0)
+40001448:	00100713          	li	a4,1
+4000144c:	00e7a023          	sw	a4,0(a5)
+}
+40001450:	00000013          	nop
+40001454:	01c12403          	lw	s0,28(sp)
+40001458:	02010113          	addi	sp,sp,32
+4000145c:	00008067          	ret
+
+40001460 <vga_stop>:
+static void vga_stop(Vga_Reg *reg){
+40001460:	fe010113          	addi	sp,sp,-32
+40001464:	00112e23          	sw	ra,28(sp)
+40001468:	00812c23          	sw	s0,24(sp)
+4000146c:	02010413          	addi	s0,sp,32
+40001470:	fea42623          	sw	a0,-20(s0)
+	reg->STATUS  = 0;
+40001474:	fec42783          	lw	a5,-20(s0)
+40001478:	0007a023          	sw	zero,0(a5)
+	while(vga_isBusy(reg));
+4000147c:	00000013          	nop
+40001480:	fec42503          	lw	a0,-20(s0)
+40001484:	f7dff0ef          	jal	ra,40001400 <vga_isBusy>
+40001488:	00050793          	mv	a5,a0
+4000148c:	fe079ae3          	bnez	a5,40001480 <vga_stop+0x20>
+}
+40001490:	00000013          	nop
+40001494:	00000013          	nop
+40001498:	01c12083          	lw	ra,28(sp)
+4000149c:	01812403          	lw	s0,24(sp)
+400014a0:	02010113          	addi	sp,sp,32
+400014a4:	00008067          	ret
+
+400014a8 <aes_write>:
 #include "briey.h"
 void aes_write(uint32_t iData, uint32_t iAddress)
 {
-40001404:	fe010113          	addi	sp,sp,-32
-40001408:	00812e23          	sw	s0,28(sp)
-4000140c:	02010413          	addi	s0,sp,32
-40001410:	fea42623          	sw	a0,-20(s0)
-40001414:	feb42423          	sw	a1,-24(s0)
+400014a8:	fe010113          	addi	sp,sp,-32
+400014ac:	00812e23          	sw	s0,28(sp)
+400014b0:	02010413          	addi	s0,sp,32
+400014b4:	fea42623          	sw	a0,-20(s0)
+400014b8:	feb42423          	sw	a1,-24(s0)
 	AES_BASE->ADDRESS		= iAddress;
-40001418:	f00027b7          	lui	a5,0xf0002
-4000141c:	40078793          	addi	a5,a5,1024 # f0002400 <_stack_start+0x70001ac0>
-40001420:	fe842703          	lw	a4,-24(s0)
-40001424:	00e7a423          	sw	a4,8(a5)
+400014bc:	f00027b7          	lui	a5,0xf0002
+400014c0:	40078793          	addi	a5,a5,1024 # f0002400 <_stack_start+0x70001ac0>
+400014c4:	fe842703          	lw	a4,-24(s0)
+400014c8:	00e7a423          	sw	a4,8(a5)
 	AES_BASE->WRITE_ENABLE 	= 1;
-40001428:	f00027b7          	lui	a5,0xf0002
-4000142c:	40078793          	addi	a5,a5,1024 # f0002400 <_stack_start+0x70001ac0>
-40001430:	00100713          	li	a4,1
-40001434:	00e7a223          	sw	a4,4(a5)
+400014cc:	f00027b7          	lui	a5,0xf0002
+400014d0:	40078793          	addi	a5,a5,1024 # f0002400 <_stack_start+0x70001ac0>
+400014d4:	00100713          	li	a4,1
+400014d8:	00e7a223          	sw	a4,4(a5)
 	AES_BASE->IDATA			= iData;
-40001438:	f00027b7          	lui	a5,0xf0002
-4000143c:	40078793          	addi	a5,a5,1024 # f0002400 <_stack_start+0x70001ac0>
-40001440:	fec42703          	lw	a4,-20(s0)
-40001444:	00e7a623          	sw	a4,12(a5)
+400014dc:	f00027b7          	lui	a5,0xf0002
+400014e0:	40078793          	addi	a5,a5,1024 # f0002400 <_stack_start+0x70001ac0>
+400014e4:	fec42703          	lw	a4,-20(s0)
+400014e8:	00e7a623          	sw	a4,12(a5)
 	AES_BASE->CHIP_SELECT	= 1;
-40001448:	f00027b7          	lui	a5,0xf0002
-4000144c:	40078793          	addi	a5,a5,1024 # f0002400 <_stack_start+0x70001ac0>
-40001450:	00100713          	li	a4,1
-40001454:	00e7a023          	sw	a4,0(a5)
+400014ec:	f00027b7          	lui	a5,0xf0002
+400014f0:	40078793          	addi	a5,a5,1024 # f0002400 <_stack_start+0x70001ac0>
+400014f4:	00100713          	li	a4,1
+400014f8:	00e7a023          	sw	a4,0(a5)
 	AES_BASE->CHIP_SELECT	= 0;
-40001458:	f00027b7          	lui	a5,0xf0002
-4000145c:	40078793          	addi	a5,a5,1024 # f0002400 <_stack_start+0x70001ac0>
-40001460:	0007a023          	sw	zero,0(a5)
+400014fc:	f00027b7          	lui	a5,0xf0002
+40001500:	40078793          	addi	a5,a5,1024 # f0002400 <_stack_start+0x70001ac0>
+40001504:	0007a023          	sw	zero,0(a5)
 }
-40001464:	00000013          	nop
-40001468:	01c12403          	lw	s0,28(sp)
-4000146c:	02010113          	addi	sp,sp,32
-40001470:	00008067          	ret
+40001508:	00000013          	nop
+4000150c:	01c12403          	lw	s0,28(sp)
+40001510:	02010113          	addi	sp,sp,32
+40001514:	00008067          	ret
 
-40001474 <aes_read>:
+40001518 <aes_read>:
 uint32_t aes_read(uint32_t iAddress)
 {
-40001474:	fd010113          	addi	sp,sp,-48
-40001478:	02812623          	sw	s0,44(sp)
-4000147c:	03010413          	addi	s0,sp,48
-40001480:	fca42e23          	sw	a0,-36(s0)
+40001518:	fd010113          	addi	sp,sp,-48
+4000151c:	02812623          	sw	s0,44(sp)
+40001520:	03010413          	addi	s0,sp,48
+40001524:	fca42e23          	sw	a0,-36(s0)
 	AES_BASE->ADDRESS		= iAddress;
-40001484:	f00027b7          	lui	a5,0xf0002
-40001488:	40078793          	addi	a5,a5,1024 # f0002400 <_stack_start+0x70001ac0>
-4000148c:	fdc42703          	lw	a4,-36(s0)
-40001490:	00e7a423          	sw	a4,8(a5)
+40001528:	f00027b7          	lui	a5,0xf0002
+4000152c:	40078793          	addi	a5,a5,1024 # f0002400 <_stack_start+0x70001ac0>
+40001530:	fdc42703          	lw	a4,-36(s0)
+40001534:	00e7a423          	sw	a4,8(a5)
 	AES_BASE->WRITE_ENABLE	= 0;
-40001494:	f00027b7          	lui	a5,0xf0002
-40001498:	40078793          	addi	a5,a5,1024 # f0002400 <_stack_start+0x70001ac0>
-4000149c:	0007a223          	sw	zero,4(a5)
+40001538:	f00027b7          	lui	a5,0xf0002
+4000153c:	40078793          	addi	a5,a5,1024 # f0002400 <_stack_start+0x70001ac0>
+40001540:	0007a223          	sw	zero,4(a5)
 	AES_BASE->CHIP_SELECT	= 1;
-400014a0:	f00027b7          	lui	a5,0xf0002
-400014a4:	40078793          	addi	a5,a5,1024 # f0002400 <_stack_start+0x70001ac0>
-400014a8:	00100713          	li	a4,1
-400014ac:	00e7a023          	sw	a4,0(a5)
+40001544:	f00027b7          	lui	a5,0xf0002
+40001548:	40078793          	addi	a5,a5,1024 # f0002400 <_stack_start+0x70001ac0>
+4000154c:	00100713          	li	a4,1
+40001550:	00e7a023          	sw	a4,0(a5)
 	uint32_t res 				= AES_BASE->ODATA;
-400014b0:	f00027b7          	lui	a5,0xf0002
-400014b4:	40078793          	addi	a5,a5,1024 # f0002400 <_stack_start+0x70001ac0>
-400014b8:	0107a783          	lw	a5,16(a5)
-400014bc:	fef42623          	sw	a5,-20(s0)
+40001554:	f00027b7          	lui	a5,0xf0002
+40001558:	40078793          	addi	a5,a5,1024 # f0002400 <_stack_start+0x70001ac0>
+4000155c:	0107a783          	lw	a5,16(a5)
+40001560:	fef42623          	sw	a5,-20(s0)
 	AES_BASE->CHIP_SELECT	= 0;
-400014c0:	f00027b7          	lui	a5,0xf0002
-400014c4:	40078793          	addi	a5,a5,1024 # f0002400 <_stack_start+0x70001ac0>
-400014c8:	0007a023          	sw	zero,0(a5)
+40001564:	f00027b7          	lui	a5,0xf0002
+40001568:	40078793          	addi	a5,a5,1024 # f0002400 <_stack_start+0x70001ac0>
+4000156c:	0007a023          	sw	zero,0(a5)
 	return res;
-400014cc:	fec42783          	lw	a5,-20(s0)
+40001570:	fec42783          	lw	a5,-20(s0)
 }
-400014d0:	00078513          	mv	a0,a5
-400014d4:	02c12403          	lw	s0,44(sp)
-400014d8:	03010113          	addi	sp,sp,48
-400014dc:	00008067          	ret
+40001574:	00078513          	mv	a0,a5
+40001578:	02c12403          	lw	s0,44(sp)
+4000157c:	03010113          	addi	sp,sp,48
+40001580:	00008067          	ret
 
-400014e0 <aes_128_cipher>:
+40001584 <aes_128_cipher>:
 void aes_128_cipher(unsigned char operation, uint32_t *key, uint32_t *block, uint32_t *res) {
-400014e0:	fd010113          	addi	sp,sp,-48
-400014e4:	02112623          	sw	ra,44(sp)
-400014e8:	02812423          	sw	s0,40(sp)
-400014ec:	02912223          	sw	s1,36(sp)
-400014f0:	03010413          	addi	s0,sp,48
-400014f4:	00050793          	mv	a5,a0
-400014f8:	fcb42c23          	sw	a1,-40(s0)
-400014fc:	fcc42a23          	sw	a2,-44(s0)
-40001500:	fcd42823          	sw	a3,-48(s0)
-40001504:	fcf40fa3          	sb	a5,-33(s0)
+40001584:	fd010113          	addi	sp,sp,-48
+40001588:	02112623          	sw	ra,44(sp)
+4000158c:	02812423          	sw	s0,40(sp)
+40001590:	02912223          	sw	s1,36(sp)
+40001594:	03010413          	addi	s0,sp,48
+40001598:	00050793          	mv	a5,a0
+4000159c:	fcb42c23          	sw	a1,-40(s0)
+400015a0:	fcc42a23          	sw	a2,-44(s0)
+400015a4:	fcd42823          	sw	a3,-48(s0)
+400015a8:	fcf40fa3          	sb	a5,-33(s0)
 	aes_write(0x0,AES_ADDR_KEY_BASE +7);
-40001508:	01700593          	li	a1,23
-4000150c:	00000513          	li	a0,0
-40001510:	ef5ff0ef          	jal	ra,40001404 <aes_write>
+400015ac:	01700593          	li	a1,23
+400015b0:	00000513          	li	a0,0
+400015b4:	ef5ff0ef          	jal	ra,400014a8 <aes_write>
 	aes_write(0x0,AES_ADDR_KEY_BASE +6);
-40001514:	01600593          	li	a1,22
-40001518:	00000513          	li	a0,0
-4000151c:	ee9ff0ef          	jal	ra,40001404 <aes_write>
+400015b8:	01600593          	li	a1,22
+400015bc:	00000513          	li	a0,0
+400015c0:	ee9ff0ef          	jal	ra,400014a8 <aes_write>
 	aes_write(0x0,AES_ADDR_KEY_BASE +5);
-40001520:	01500593          	li	a1,21
-40001524:	00000513          	li	a0,0
-40001528:	eddff0ef          	jal	ra,40001404 <aes_write>
+400015c4:	01500593          	li	a1,21
+400015c8:	00000513          	li	a0,0
+400015cc:	eddff0ef          	jal	ra,400014a8 <aes_write>
 	aes_write(0x0,AES_ADDR_KEY_BASE +4);
-4000152c:	01400593          	li	a1,20
-40001530:	00000513          	li	a0,0
-40001534:	ed1ff0ef          	jal	ra,40001404 <aes_write>
+400015d0:	01400593          	li	a1,20
+400015d4:	00000513          	li	a0,0
+400015d8:	ed1ff0ef          	jal	ra,400014a8 <aes_write>
 	aes_write(key[3],AES_ADDR_KEY_BASE +3);
-40001538:	fd842783          	lw	a5,-40(s0)
-4000153c:	00c78793          	addi	a5,a5,12
-40001540:	0007a783          	lw	a5,0(a5)
-40001544:	01300593          	li	a1,19
-40001548:	00078513          	mv	a0,a5
-4000154c:	eb9ff0ef          	jal	ra,40001404 <aes_write>
+400015dc:	fd842783          	lw	a5,-40(s0)
+400015e0:	00c78793          	addi	a5,a5,12
+400015e4:	0007a783          	lw	a5,0(a5)
+400015e8:	01300593          	li	a1,19
+400015ec:	00078513          	mv	a0,a5
+400015f0:	eb9ff0ef          	jal	ra,400014a8 <aes_write>
 	aes_write(key[2],AES_ADDR_KEY_BASE +2);
-40001550:	fd842783          	lw	a5,-40(s0)
-40001554:	00878793          	addi	a5,a5,8
-40001558:	0007a783          	lw	a5,0(a5)
-4000155c:	01200593          	li	a1,18
-40001560:	00078513          	mv	a0,a5
-40001564:	ea1ff0ef          	jal	ra,40001404 <aes_write>
+400015f4:	fd842783          	lw	a5,-40(s0)
+400015f8:	00878793          	addi	a5,a5,8
+400015fc:	0007a783          	lw	a5,0(a5)
+40001600:	01200593          	li	a1,18
+40001604:	00078513          	mv	a0,a5
+40001608:	ea1ff0ef          	jal	ra,400014a8 <aes_write>
 	aes_write(key[1],AES_ADDR_KEY_BASE +1);
-40001568:	fd842783          	lw	a5,-40(s0)
-4000156c:	00478793          	addi	a5,a5,4
-40001570:	0007a783          	lw	a5,0(a5)
-40001574:	01100593          	li	a1,17
-40001578:	00078513          	mv	a0,a5
-4000157c:	e89ff0ef          	jal	ra,40001404 <aes_write>
+4000160c:	fd842783          	lw	a5,-40(s0)
+40001610:	00478793          	addi	a5,a5,4
+40001614:	0007a783          	lw	a5,0(a5)
+40001618:	01100593          	li	a1,17
+4000161c:	00078513          	mv	a0,a5
+40001620:	e89ff0ef          	jal	ra,400014a8 <aes_write>
 	aes_write(key[0],AES_ADDR_KEY_BASE);
-40001580:	fd842783          	lw	a5,-40(s0)
-40001584:	0007a783          	lw	a5,0(a5)
-40001588:	01000593          	li	a1,16
-4000158c:	00078513          	mv	a0,a5
-40001590:	e75ff0ef          	jal	ra,40001404 <aes_write>
+40001624:	fd842783          	lw	a5,-40(s0)
+40001628:	0007a783          	lw	a5,0(a5)
+4000162c:	01000593          	li	a1,16
+40001630:	00078513          	mv	a0,a5
+40001634:	e75ff0ef          	jal	ra,400014a8 <aes_write>
 
 	aes_write(AES_CONFIG_128_KEY,AES_ADDR_CONFIG);
-40001594:	00a00593          	li	a1,10
-40001598:	00000513          	li	a0,0
-4000159c:	e69ff0ef          	jal	ra,40001404 <aes_write>
+40001638:	00a00593          	li	a1,10
+4000163c:	00000513          	li	a0,0
+40001640:	e69ff0ef          	jal	ra,400014a8 <aes_write>
 	aes_write(AES_CTRL_INIT_KEY,AES_ADDR_CTRL);
-400015a0:	00800593          	li	a1,8
-400015a4:	00100513          	li	a0,1
-400015a8:	e5dff0ef          	jal	ra,40001404 <aes_write>
+40001644:	00800593          	li	a1,8
+40001648:	00100513          	li	a0,1
+4000164c:	e5dff0ef          	jal	ra,400014a8 <aes_write>
 
     while(aes_read(AES_ADDR_STATUS) == 0);
-400015ac:	00000013          	nop
-400015b0:	00900513          	li	a0,9
-400015b4:	ec1ff0ef          	jal	ra,40001474 <aes_read>
-400015b8:	00050793          	mv	a5,a0
-400015bc:	fe078ae3          	beqz	a5,400015b0 <aes_128_cipher+0xd0>
+40001650:	00000013          	nop
+40001654:	00900513          	li	a0,9
+40001658:	ec1ff0ef          	jal	ra,40001518 <aes_read>
+4000165c:	00050793          	mv	a5,a0
+40001660:	fe078ae3          	beqz	a5,40001654 <aes_128_cipher+0xd0>
 
     aes_write(block[3],AES_ADDR_BLOCK_BASE + 3);
-400015c0:	fd442783          	lw	a5,-44(s0)
-400015c4:	00c78793          	addi	a5,a5,12
-400015c8:	0007a783          	lw	a5,0(a5)
-400015cc:	02300593          	li	a1,35
-400015d0:	00078513          	mv	a0,a5
-400015d4:	e31ff0ef          	jal	ra,40001404 <aes_write>
+40001664:	fd442783          	lw	a5,-44(s0)
+40001668:	00c78793          	addi	a5,a5,12
+4000166c:	0007a783          	lw	a5,0(a5)
+40001670:	02300593          	li	a1,35
+40001674:	00078513          	mv	a0,a5
+40001678:	e31ff0ef          	jal	ra,400014a8 <aes_write>
     aes_write(block[2],AES_ADDR_BLOCK_BASE + 2);
-400015d8:	fd442783          	lw	a5,-44(s0)
-400015dc:	00878793          	addi	a5,a5,8
-400015e0:	0007a783          	lw	a5,0(a5)
-400015e4:	02200593          	li	a1,34
-400015e8:	00078513          	mv	a0,a5
-400015ec:	e19ff0ef          	jal	ra,40001404 <aes_write>
+4000167c:	fd442783          	lw	a5,-44(s0)
+40001680:	00878793          	addi	a5,a5,8
+40001684:	0007a783          	lw	a5,0(a5)
+40001688:	02200593          	li	a1,34
+4000168c:	00078513          	mv	a0,a5
+40001690:	e19ff0ef          	jal	ra,400014a8 <aes_write>
     aes_write(block[1],AES_ADDR_BLOCK_BASE + 1);
-400015f0:	fd442783          	lw	a5,-44(s0)
-400015f4:	00478793          	addi	a5,a5,4
-400015f8:	0007a783          	lw	a5,0(a5)
-400015fc:	02100593          	li	a1,33
-40001600:	00078513          	mv	a0,a5
-40001604:	e01ff0ef          	jal	ra,40001404 <aes_write>
+40001694:	fd442783          	lw	a5,-44(s0)
+40001698:	00478793          	addi	a5,a5,4
+4000169c:	0007a783          	lw	a5,0(a5)
+400016a0:	02100593          	li	a1,33
+400016a4:	00078513          	mv	a0,a5
+400016a8:	e01ff0ef          	jal	ra,400014a8 <aes_write>
     aes_write(block[0],AES_ADDR_BLOCK_BASE + 0);
-40001608:	fd442783          	lw	a5,-44(s0)
-4000160c:	0007a783          	lw	a5,0(a5)
-40001610:	02000593          	li	a1,32
-40001614:	00078513          	mv	a0,a5
-40001618:	dedff0ef          	jal	ra,40001404 <aes_write>
+400016ac:	fd442783          	lw	a5,-44(s0)
+400016b0:	0007a783          	lw	a5,0(a5)
+400016b4:	02000593          	li	a1,32
+400016b8:	00078513          	mv	a0,a5
+400016bc:	dedff0ef          	jal	ra,400014a8 <aes_write>
 
 
     unsigned char AES_CONFIG = 0x00;
-4000161c:	fe0407a3          	sb	zero,-17(s0)
+400016c0:	fe0407a3          	sb	zero,-17(s0)
 	if (operation == 0x01)
-40001620:	fdf44703          	lbu	a4,-33(s0)
-40001624:	00100793          	li	a5,1
-40001628:	00f71863          	bne	a4,a5,40001638 <aes_128_cipher+0x158>
+400016c4:	fdf44703          	lbu	a4,-33(s0)
+400016c8:	00100793          	li	a5,1
+400016cc:	00f71863          	bne	a4,a5,400016dc <aes_128_cipher+0x158>
 		AES_CONFIG = AES_CONFIG_128_EN;
-4000162c:	00100793          	li	a5,1
-40001630:	fef407a3          	sb	a5,-17(s0)
-40001634:	0080006f          	j	4000163c <aes_128_cipher+0x15c>
+400016d0:	00100793          	li	a5,1
+400016d4:	fef407a3          	sb	a5,-17(s0)
+400016d8:	0080006f          	j	400016e0 <aes_128_cipher+0x15c>
 	else
 		AES_CONFIG = AES_CONFIG_128_DE;
-40001638:	fe0407a3          	sb	zero,-17(s0)
+400016dc:	fe0407a3          	sb	zero,-17(s0)
 
 	aes_write(AES_CONFIG,AES_ADDR_CONFIG);
-4000163c:	fef44783          	lbu	a5,-17(s0)
-40001640:	00a00593          	li	a1,10
-40001644:	00078513          	mv	a0,a5
-40001648:	dbdff0ef          	jal	ra,40001404 <aes_write>
+400016e0:	fef44783          	lbu	a5,-17(s0)
+400016e4:	00a00593          	li	a1,10
+400016e8:	00078513          	mv	a0,a5
+400016ec:	dbdff0ef          	jal	ra,400014a8 <aes_write>
     aes_write(AES_CTRL_START, AES_ADDR_CTRL);
-4000164c:	00800593          	li	a1,8
-40001650:	00200513          	li	a0,2
-40001654:	db1ff0ef          	jal	ra,40001404 <aes_write>
+400016f0:	00800593          	li	a1,8
+400016f4:	00200513          	li	a0,2
+400016f8:	db1ff0ef          	jal	ra,400014a8 <aes_write>
 
     while(aes_read(AES_ADDR_STATUS) == 0);
-40001658:	00000013          	nop
-4000165c:	00900513          	li	a0,9
-40001660:	e15ff0ef          	jal	ra,40001474 <aes_read>
-40001664:	00050793          	mv	a5,a0
-40001668:	fe078ae3          	beqz	a5,4000165c <aes_128_cipher+0x17c>
+400016fc:	00000013          	nop
+40001700:	00900513          	li	a0,9
+40001704:	e15ff0ef          	jal	ra,40001518 <aes_read>
+40001708:	00050793          	mv	a5,a0
+4000170c:	fe078ae3          	beqz	a5,40001700 <aes_128_cipher+0x17c>
 
     res[3] = aes_read(AES_ADDR_RESULT_BASE + 3);
-4000166c:	fd042783          	lw	a5,-48(s0)
-40001670:	00c78493          	addi	s1,a5,12
-40001674:	03300513          	li	a0,51
-40001678:	dfdff0ef          	jal	ra,40001474 <aes_read>
-4000167c:	00050793          	mv	a5,a0
-40001680:	00f4a023          	sw	a5,0(s1)
+40001710:	fd042783          	lw	a5,-48(s0)
+40001714:	00c78493          	addi	s1,a5,12
+40001718:	03300513          	li	a0,51
+4000171c:	dfdff0ef          	jal	ra,40001518 <aes_read>
+40001720:	00050793          	mv	a5,a0
+40001724:	00f4a023          	sw	a5,0(s1)
     res[2] = aes_read(AES_ADDR_RESULT_BASE + 2);
-40001684:	fd042783          	lw	a5,-48(s0)
-40001688:	00878493          	addi	s1,a5,8
-4000168c:	03200513          	li	a0,50
-40001690:	de5ff0ef          	jal	ra,40001474 <aes_read>
-40001694:	00050793          	mv	a5,a0
-40001698:	00f4a023          	sw	a5,0(s1)
+40001728:	fd042783          	lw	a5,-48(s0)
+4000172c:	00878493          	addi	s1,a5,8
+40001730:	03200513          	li	a0,50
+40001734:	de5ff0ef          	jal	ra,40001518 <aes_read>
+40001738:	00050793          	mv	a5,a0
+4000173c:	00f4a023          	sw	a5,0(s1)
     res[1] = aes_read(AES_ADDR_RESULT_BASE + 1);
-4000169c:	fd042783          	lw	a5,-48(s0)
-400016a0:	00478493          	addi	s1,a5,4
-400016a4:	03100513          	li	a0,49
-400016a8:	dcdff0ef          	jal	ra,40001474 <aes_read>
-400016ac:	00050793          	mv	a5,a0
-400016b0:	00f4a023          	sw	a5,0(s1)
+40001740:	fd042783          	lw	a5,-48(s0)
+40001744:	00478493          	addi	s1,a5,4
+40001748:	03100513          	li	a0,49
+4000174c:	dcdff0ef          	jal	ra,40001518 <aes_read>
+40001750:	00050793          	mv	a5,a0
+40001754:	00f4a023          	sw	a5,0(s1)
     res[0] = aes_read(AES_ADDR_RESULT_BASE + 0);
-400016b4:	03000513          	li	a0,48
-400016b8:	dbdff0ef          	jal	ra,40001474 <aes_read>
-400016bc:	00050713          	mv	a4,a0
-400016c0:	fd042783          	lw	a5,-48(s0)
-400016c4:	00e7a023          	sw	a4,0(a5)
+40001758:	03000513          	li	a0,48
+4000175c:	dbdff0ef          	jal	ra,40001518 <aes_read>
+40001760:	00050713          	mv	a4,a0
+40001764:	fd042783          	lw	a5,-48(s0)
+40001768:	00e7a023          	sw	a4,0(a5)
 
     //print result to terminal
 	if(operation == 0x1)
-400016c8:	fdf44703          	lbu	a4,-33(s0)
-400016cc:	00100793          	li	a5,1
-400016d0:	00f71a63          	bne	a4,a5,400016e4 <aes_128_cipher+0x204>
+4000176c:	fdf44703          	lbu	a4,-33(s0)
+40001770:	00100793          	li	a5,1
+40001774:	00f71a63          	bne	a4,a5,40001788 <aes_128_cipher+0x204>
 		print("============================AES128 ENCRYPTTION==============================\r\n");
-400016d4:	400037b7          	lui	a5,0x40003
-400016d8:	96078513          	addi	a0,a5,-1696 # 40002960 <vga_simRes_h160_v120+0x20>
-400016dc:	53c000ef          	jal	ra,40001c18 <print>
-400016e0:	0100006f          	j	400016f0 <aes_128_cipher+0x210>
+40001778:	400037b7          	lui	a5,0x40003
+4000177c:	a5878513          	addi	a0,a5,-1448 # 40002a58 <vga_simRes_h160_v120+0x20>
+40001780:	53c000ef          	jal	ra,40001cbc <print>
+40001784:	0100006f          	j	40001794 <aes_128_cipher+0x210>
 	else
 		print("============================AES128 DECRYPTTION==============================\r\n");
-400016e4:	400037b7          	lui	a5,0x40003
-400016e8:	9b078513          	addi	a0,a5,-1616 # 400029b0 <vga_simRes_h160_v120+0x70>
-400016ec:	52c000ef          	jal	ra,40001c18 <print>
+40001788:	400037b7          	lui	a5,0x40003
+4000178c:	aa878513          	addi	a0,a5,-1368 # 40002aa8 <vga_simRes_h160_v120+0x70>
+40001790:	52c000ef          	jal	ra,40001cbc <print>
 	print128bit("\r\nPLAIN_TEXT (128-bit) : ", block);
-400016f0:	fd442583          	lw	a1,-44(s0)
-400016f4:	400037b7          	lui	a5,0x40003
-400016f8:	a0078513          	addi	a0,a5,-1536 # 40002a00 <vga_simRes_h160_v120+0xc0>
-400016fc:	7e8000ef          	jal	ra,40001ee4 <print128bit>
+40001794:	fd442583          	lw	a1,-44(s0)
+40001798:	400037b7          	lui	a5,0x40003
+4000179c:	af878513          	addi	a0,a5,-1288 # 40002af8 <vga_simRes_h160_v120+0xc0>
+400017a0:	7e8000ef          	jal	ra,40001f88 <print128bit>
 	print128bit("KEY (128-bit) : ", key);
-40001700:	fd842583          	lw	a1,-40(s0)
-40001704:	400037b7          	lui	a5,0x40003
-40001708:	a1c78513          	addi	a0,a5,-1508 # 40002a1c <vga_simRes_h160_v120+0xdc>
-4000170c:	7d8000ef          	jal	ra,40001ee4 <print128bit>
+400017a4:	fd842583          	lw	a1,-40(s0)
+400017a8:	400037b7          	lui	a5,0x40003
+400017ac:	b1478513          	addi	a0,a5,-1260 # 40002b14 <vga_simRes_h160_v120+0xdc>
+400017b0:	7d8000ef          	jal	ra,40001f88 <print128bit>
 	print128bit("RESULT (128-bit) : ", res);
-40001710:	fd042583          	lw	a1,-48(s0)
-40001714:	400037b7          	lui	a5,0x40003
-40001718:	a3078513          	addi	a0,a5,-1488 # 40002a30 <vga_simRes_h160_v120+0xf0>
-4000171c:	7c8000ef          	jal	ra,40001ee4 <print128bit>
+400017b4:	fd042583          	lw	a1,-48(s0)
+400017b8:	400037b7          	lui	a5,0x40003
+400017bc:	b2878513          	addi	a0,a5,-1240 # 40002b28 <vga_simRes_h160_v120+0xf0>
+400017c0:	7c8000ef          	jal	ra,40001f88 <print128bit>
 	print("\r\n============================================================================\r\n");
-40001720:	400037b7          	lui	a5,0x40003
-40001724:	a4478513          	addi	a0,a5,-1468 # 40002a44 <vga_simRes_h160_v120+0x104>
-40001728:	4f0000ef          	jal	ra,40001c18 <print>
+400017c4:	400037b7          	lui	a5,0x40003
+400017c8:	b3c78513          	addi	a0,a5,-1220 # 40002b3c <vga_simRes_h160_v120+0x104>
+400017cc:	4f0000ef          	jal	ra,40001cbc <print>
 }
-4000172c:	00000013          	nop
-40001730:	02c12083          	lw	ra,44(sp)
-40001734:	02812403          	lw	s0,40(sp)
-40001738:	02412483          	lw	s1,36(sp)
-4000173c:	03010113          	addi	sp,sp,48
-40001740:	00008067          	ret
+400017d0:	00000013          	nop
+400017d4:	02c12083          	lw	ra,44(sp)
+400017d8:	02812403          	lw	s0,40(sp)
+400017dc:	02412483          	lw	s1,36(sp)
+400017e0:	03010113          	addi	sp,sp,48
+400017e4:	00008067          	ret
 
-40001744 <aes_256_cipher>:
+400017e8 <aes_256_cipher>:
 
 void aes_256_cipher(unsigned char operation, uint32_t *key, uint32_t *block, uint32_t *res) {
-40001744:	fd010113          	addi	sp,sp,-48
-40001748:	02112623          	sw	ra,44(sp)
-4000174c:	02812423          	sw	s0,40(sp)
-40001750:	02912223          	sw	s1,36(sp)
-40001754:	03010413          	addi	s0,sp,48
-40001758:	00050793          	mv	a5,a0
-4000175c:	fcb42c23          	sw	a1,-40(s0)
-40001760:	fcc42a23          	sw	a2,-44(s0)
-40001764:	fcd42823          	sw	a3,-48(s0)
-40001768:	fcf40fa3          	sb	a5,-33(s0)
+400017e8:	fd010113          	addi	sp,sp,-48
+400017ec:	02112623          	sw	ra,44(sp)
+400017f0:	02812423          	sw	s0,40(sp)
+400017f4:	02912223          	sw	s1,36(sp)
+400017f8:	03010413          	addi	s0,sp,48
+400017fc:	00050793          	mv	a5,a0
+40001800:	fcb42c23          	sw	a1,-40(s0)
+40001804:	fcc42a23          	sw	a2,-44(s0)
+40001808:	fcd42823          	sw	a3,-48(s0)
+4000180c:	fcf40fa3          	sb	a5,-33(s0)
 	aes_write(key[7],AES_ADDR_KEY_BASE +7);
-4000176c:	fd842783          	lw	a5,-40(s0)
-40001770:	01c78793          	addi	a5,a5,28
-40001774:	0007a783          	lw	a5,0(a5)
-40001778:	01700593          	li	a1,23
-4000177c:	00078513          	mv	a0,a5
-40001780:	c85ff0ef          	jal	ra,40001404 <aes_write>
-	aes_write(key[6],AES_ADDR_KEY_BASE +6);
-40001784:	fd842783          	lw	a5,-40(s0)
-40001788:	01878793          	addi	a5,a5,24
-4000178c:	0007a783          	lw	a5,0(a5)
-40001790:	01600593          	li	a1,22
-40001794:	00078513          	mv	a0,a5
-40001798:	c6dff0ef          	jal	ra,40001404 <aes_write>
-	aes_write(key[5],AES_ADDR_KEY_BASE +5);
-4000179c:	fd842783          	lw	a5,-40(s0)
-400017a0:	01478793          	addi	a5,a5,20
-400017a4:	0007a783          	lw	a5,0(a5)
-400017a8:	01500593          	li	a1,21
-400017ac:	00078513          	mv	a0,a5
-400017b0:	c55ff0ef          	jal	ra,40001404 <aes_write>
-	aes_write(key[4],AES_ADDR_KEY_BASE +4);
-400017b4:	fd842783          	lw	a5,-40(s0)
-400017b8:	01078793          	addi	a5,a5,16
-400017bc:	0007a783          	lw	a5,0(a5)
-400017c0:	01400593          	li	a1,20
-400017c4:	00078513          	mv	a0,a5
-400017c8:	c3dff0ef          	jal	ra,40001404 <aes_write>
-	aes_write(key[3],AES_ADDR_KEY_BASE +3);
-400017cc:	fd842783          	lw	a5,-40(s0)
-400017d0:	00c78793          	addi	a5,a5,12
-400017d4:	0007a783          	lw	a5,0(a5)
-400017d8:	01300593          	li	a1,19
-400017dc:	00078513          	mv	a0,a5
-400017e0:	c25ff0ef          	jal	ra,40001404 <aes_write>
-	aes_write(key[2],AES_ADDR_KEY_BASE +2);
-400017e4:	fd842783          	lw	a5,-40(s0)
-400017e8:	00878793          	addi	a5,a5,8
-400017ec:	0007a783          	lw	a5,0(a5)
-400017f0:	01200593          	li	a1,18
-400017f4:	00078513          	mv	a0,a5
-400017f8:	c0dff0ef          	jal	ra,40001404 <aes_write>
-	aes_write(key[1],AES_ADDR_KEY_BASE +1);
-400017fc:	fd842783          	lw	a5,-40(s0)
-40001800:	00478793          	addi	a5,a5,4
-40001804:	0007a783          	lw	a5,0(a5)
-40001808:	01100593          	li	a1,17
-4000180c:	00078513          	mv	a0,a5
-40001810:	bf5ff0ef          	jal	ra,40001404 <aes_write>
-	aes_write(key[0],AES_ADDR_KEY_BASE);
-40001814:	fd842783          	lw	a5,-40(s0)
+40001810:	fd842783          	lw	a5,-40(s0)
+40001814:	01c78793          	addi	a5,a5,28
 40001818:	0007a783          	lw	a5,0(a5)
-4000181c:	01000593          	li	a1,16
+4000181c:	01700593          	li	a1,23
 40001820:	00078513          	mv	a0,a5
-40001824:	be1ff0ef          	jal	ra,40001404 <aes_write>
+40001824:	c85ff0ef          	jal	ra,400014a8 <aes_write>
+	aes_write(key[6],AES_ADDR_KEY_BASE +6);
+40001828:	fd842783          	lw	a5,-40(s0)
+4000182c:	01878793          	addi	a5,a5,24
+40001830:	0007a783          	lw	a5,0(a5)
+40001834:	01600593          	li	a1,22
+40001838:	00078513          	mv	a0,a5
+4000183c:	c6dff0ef          	jal	ra,400014a8 <aes_write>
+	aes_write(key[5],AES_ADDR_KEY_BASE +5);
+40001840:	fd842783          	lw	a5,-40(s0)
+40001844:	01478793          	addi	a5,a5,20
+40001848:	0007a783          	lw	a5,0(a5)
+4000184c:	01500593          	li	a1,21
+40001850:	00078513          	mv	a0,a5
+40001854:	c55ff0ef          	jal	ra,400014a8 <aes_write>
+	aes_write(key[4],AES_ADDR_KEY_BASE +4);
+40001858:	fd842783          	lw	a5,-40(s0)
+4000185c:	01078793          	addi	a5,a5,16
+40001860:	0007a783          	lw	a5,0(a5)
+40001864:	01400593          	li	a1,20
+40001868:	00078513          	mv	a0,a5
+4000186c:	c3dff0ef          	jal	ra,400014a8 <aes_write>
+	aes_write(key[3],AES_ADDR_KEY_BASE +3);
+40001870:	fd842783          	lw	a5,-40(s0)
+40001874:	00c78793          	addi	a5,a5,12
+40001878:	0007a783          	lw	a5,0(a5)
+4000187c:	01300593          	li	a1,19
+40001880:	00078513          	mv	a0,a5
+40001884:	c25ff0ef          	jal	ra,400014a8 <aes_write>
+	aes_write(key[2],AES_ADDR_KEY_BASE +2);
+40001888:	fd842783          	lw	a5,-40(s0)
+4000188c:	00878793          	addi	a5,a5,8
+40001890:	0007a783          	lw	a5,0(a5)
+40001894:	01200593          	li	a1,18
+40001898:	00078513          	mv	a0,a5
+4000189c:	c0dff0ef          	jal	ra,400014a8 <aes_write>
+	aes_write(key[1],AES_ADDR_KEY_BASE +1);
+400018a0:	fd842783          	lw	a5,-40(s0)
+400018a4:	00478793          	addi	a5,a5,4
+400018a8:	0007a783          	lw	a5,0(a5)
+400018ac:	01100593          	li	a1,17
+400018b0:	00078513          	mv	a0,a5
+400018b4:	bf5ff0ef          	jal	ra,400014a8 <aes_write>
+	aes_write(key[0],AES_ADDR_KEY_BASE);
+400018b8:	fd842783          	lw	a5,-40(s0)
+400018bc:	0007a783          	lw	a5,0(a5)
+400018c0:	01000593          	li	a1,16
+400018c4:	00078513          	mv	a0,a5
+400018c8:	be1ff0ef          	jal	ra,400014a8 <aes_write>
 
 	aes_write(AES_CONFIG_256_KEY,AES_ADDR_CONFIG);
-40001828:	00a00593          	li	a1,10
-4000182c:	00200513          	li	a0,2
-40001830:	bd5ff0ef          	jal	ra,40001404 <aes_write>
+400018cc:	00a00593          	li	a1,10
+400018d0:	00200513          	li	a0,2
+400018d4:	bd5ff0ef          	jal	ra,400014a8 <aes_write>
 	aes_write(AES_CTRL_INIT_KEY,AES_ADDR_CTRL);
-40001834:	00800593          	li	a1,8
-40001838:	00100513          	li	a0,1
-4000183c:	bc9ff0ef          	jal	ra,40001404 <aes_write>
+400018d8:	00800593          	li	a1,8
+400018dc:	00100513          	li	a0,1
+400018e0:	bc9ff0ef          	jal	ra,400014a8 <aes_write>
 
     while(aes_read(AES_ADDR_STATUS) == 0);
-40001840:	00000013          	nop
-40001844:	00900513          	li	a0,9
-40001848:	c2dff0ef          	jal	ra,40001474 <aes_read>
-4000184c:	00050793          	mv	a5,a0
-40001850:	fe078ae3          	beqz	a5,40001844 <aes_256_cipher+0x100>
+400018e4:	00000013          	nop
+400018e8:	00900513          	li	a0,9
+400018ec:	c2dff0ef          	jal	ra,40001518 <aes_read>
+400018f0:	00050793          	mv	a5,a0
+400018f4:	fe078ae3          	beqz	a5,400018e8 <aes_256_cipher+0x100>
 
     aes_write(block[3],AES_ADDR_BLOCK_BASE + 3);
-40001854:	fd442783          	lw	a5,-44(s0)
-40001858:	00c78793          	addi	a5,a5,12
-4000185c:	0007a783          	lw	a5,0(a5)
-40001860:	02300593          	li	a1,35
-40001864:	00078513          	mv	a0,a5
-40001868:	b9dff0ef          	jal	ra,40001404 <aes_write>
+400018f8:	fd442783          	lw	a5,-44(s0)
+400018fc:	00c78793          	addi	a5,a5,12
+40001900:	0007a783          	lw	a5,0(a5)
+40001904:	02300593          	li	a1,35
+40001908:	00078513          	mv	a0,a5
+4000190c:	b9dff0ef          	jal	ra,400014a8 <aes_write>
     aes_write(block[2],AES_ADDR_BLOCK_BASE + 2);
-4000186c:	fd442783          	lw	a5,-44(s0)
-40001870:	00878793          	addi	a5,a5,8
-40001874:	0007a783          	lw	a5,0(a5)
-40001878:	02200593          	li	a1,34
-4000187c:	00078513          	mv	a0,a5
-40001880:	b85ff0ef          	jal	ra,40001404 <aes_write>
+40001910:	fd442783          	lw	a5,-44(s0)
+40001914:	00878793          	addi	a5,a5,8
+40001918:	0007a783          	lw	a5,0(a5)
+4000191c:	02200593          	li	a1,34
+40001920:	00078513          	mv	a0,a5
+40001924:	b85ff0ef          	jal	ra,400014a8 <aes_write>
     aes_write(block[1],AES_ADDR_BLOCK_BASE + 1);
-40001884:	fd442783          	lw	a5,-44(s0)
-40001888:	00478793          	addi	a5,a5,4
-4000188c:	0007a783          	lw	a5,0(a5)
-40001890:	02100593          	li	a1,33
-40001894:	00078513          	mv	a0,a5
-40001898:	b6dff0ef          	jal	ra,40001404 <aes_write>
+40001928:	fd442783          	lw	a5,-44(s0)
+4000192c:	00478793          	addi	a5,a5,4
+40001930:	0007a783          	lw	a5,0(a5)
+40001934:	02100593          	li	a1,33
+40001938:	00078513          	mv	a0,a5
+4000193c:	b6dff0ef          	jal	ra,400014a8 <aes_write>
     aes_write(block[0],AES_ADDR_BLOCK_BASE + 0);
-4000189c:	fd442783          	lw	a5,-44(s0)
-400018a0:	0007a783          	lw	a5,0(a5)
-400018a4:	02000593          	li	a1,32
-400018a8:	00078513          	mv	a0,a5
-400018ac:	b59ff0ef          	jal	ra,40001404 <aes_write>
+40001940:	fd442783          	lw	a5,-44(s0)
+40001944:	0007a783          	lw	a5,0(a5)
+40001948:	02000593          	li	a1,32
+4000194c:	00078513          	mv	a0,a5
+40001950:	b59ff0ef          	jal	ra,400014a8 <aes_write>
 
 
     unsigned char AES_CONFIG = 0x00;
-400018b0:	fe0407a3          	sb	zero,-17(s0)
+40001954:	fe0407a3          	sb	zero,-17(s0)
 	if (operation == 0x01)
-400018b4:	fdf44703          	lbu	a4,-33(s0)
-400018b8:	00100793          	li	a5,1
-400018bc:	00f71863          	bne	a4,a5,400018cc <aes_256_cipher+0x188>
+40001958:	fdf44703          	lbu	a4,-33(s0)
+4000195c:	00100793          	li	a5,1
+40001960:	00f71863          	bne	a4,a5,40001970 <aes_256_cipher+0x188>
 		AES_CONFIG = AES_CONFIG_256_EN;
-400018c0:	00300793          	li	a5,3
-400018c4:	fef407a3          	sb	a5,-17(s0)
-400018c8:	00c0006f          	j	400018d4 <aes_256_cipher+0x190>
+40001964:	00300793          	li	a5,3
+40001968:	fef407a3          	sb	a5,-17(s0)
+4000196c:	00c0006f          	j	40001978 <aes_256_cipher+0x190>
 	else
 		AES_CONFIG = AES_CONFIG_256_DE;
-400018cc:	00200793          	li	a5,2
-400018d0:	fef407a3          	sb	a5,-17(s0)
+40001970:	00200793          	li	a5,2
+40001974:	fef407a3          	sb	a5,-17(s0)
 
 	aes_write(AES_CONFIG, AES_ADDR_CONFIG);
-400018d4:	fef44783          	lbu	a5,-17(s0)
-400018d8:	00a00593          	li	a1,10
-400018dc:	00078513          	mv	a0,a5
-400018e0:	b25ff0ef          	jal	ra,40001404 <aes_write>
+40001978:	fef44783          	lbu	a5,-17(s0)
+4000197c:	00a00593          	li	a1,10
+40001980:	00078513          	mv	a0,a5
+40001984:	b25ff0ef          	jal	ra,400014a8 <aes_write>
     aes_write(AES_CTRL_START, AES_ADDR_CTRL);
-400018e4:	00800593          	li	a1,8
-400018e8:	00200513          	li	a0,2
-400018ec:	b19ff0ef          	jal	ra,40001404 <aes_write>
+40001988:	00800593          	li	a1,8
+4000198c:	00200513          	li	a0,2
+40001990:	b19ff0ef          	jal	ra,400014a8 <aes_write>
 
     while(aes_read(AES_ADDR_STATUS) == 0);
-400018f0:	00000013          	nop
-400018f4:	00900513          	li	a0,9
-400018f8:	b7dff0ef          	jal	ra,40001474 <aes_read>
-400018fc:	00050793          	mv	a5,a0
-40001900:	fe078ae3          	beqz	a5,400018f4 <aes_256_cipher+0x1b0>
+40001994:	00000013          	nop
+40001998:	00900513          	li	a0,9
+4000199c:	b7dff0ef          	jal	ra,40001518 <aes_read>
+400019a0:	00050793          	mv	a5,a0
+400019a4:	fe078ae3          	beqz	a5,40001998 <aes_256_cipher+0x1b0>
 
     res[3] = aes_read(AES_ADDR_RESULT_BASE + 3);
-40001904:	fd042783          	lw	a5,-48(s0)
-40001908:	00c78493          	addi	s1,a5,12
-4000190c:	03300513          	li	a0,51
-40001910:	b65ff0ef          	jal	ra,40001474 <aes_read>
-40001914:	00050793          	mv	a5,a0
-40001918:	00f4a023          	sw	a5,0(s1)
+400019a8:	fd042783          	lw	a5,-48(s0)
+400019ac:	00c78493          	addi	s1,a5,12
+400019b0:	03300513          	li	a0,51
+400019b4:	b65ff0ef          	jal	ra,40001518 <aes_read>
+400019b8:	00050793          	mv	a5,a0
+400019bc:	00f4a023          	sw	a5,0(s1)
     res[2] = aes_read(AES_ADDR_RESULT_BASE + 2);
-4000191c:	fd042783          	lw	a5,-48(s0)
-40001920:	00878493          	addi	s1,a5,8
-40001924:	03200513          	li	a0,50
-40001928:	b4dff0ef          	jal	ra,40001474 <aes_read>
-4000192c:	00050793          	mv	a5,a0
-40001930:	00f4a023          	sw	a5,0(s1)
+400019c0:	fd042783          	lw	a5,-48(s0)
+400019c4:	00878493          	addi	s1,a5,8
+400019c8:	03200513          	li	a0,50
+400019cc:	b4dff0ef          	jal	ra,40001518 <aes_read>
+400019d0:	00050793          	mv	a5,a0
+400019d4:	00f4a023          	sw	a5,0(s1)
     res[1] = aes_read(AES_ADDR_RESULT_BASE + 1);
-40001934:	fd042783          	lw	a5,-48(s0)
-40001938:	00478493          	addi	s1,a5,4
-4000193c:	03100513          	li	a0,49
-40001940:	b35ff0ef          	jal	ra,40001474 <aes_read>
-40001944:	00050793          	mv	a5,a0
-40001948:	00f4a023          	sw	a5,0(s1)
+400019d8:	fd042783          	lw	a5,-48(s0)
+400019dc:	00478493          	addi	s1,a5,4
+400019e0:	03100513          	li	a0,49
+400019e4:	b35ff0ef          	jal	ra,40001518 <aes_read>
+400019e8:	00050793          	mv	a5,a0
+400019ec:	00f4a023          	sw	a5,0(s1)
     res[0] = aes_read(AES_ADDR_RESULT_BASE + 0);
-4000194c:	03000513          	li	a0,48
-40001950:	b25ff0ef          	jal	ra,40001474 <aes_read>
-40001954:	00050713          	mv	a4,a0
-40001958:	fd042783          	lw	a5,-48(s0)
-4000195c:	00e7a023          	sw	a4,0(a5)
+400019f0:	03000513          	li	a0,48
+400019f4:	b25ff0ef          	jal	ra,40001518 <aes_read>
+400019f8:	00050713          	mv	a4,a0
+400019fc:	fd042783          	lw	a5,-48(s0)
+40001a00:	00e7a023          	sw	a4,0(a5)
 
     //print result to terminal
 	if(operation == 0x1)
-40001960:	fdf44703          	lbu	a4,-33(s0)
-40001964:	00100793          	li	a5,1
-40001968:	00f71a63          	bne	a4,a5,4000197c <aes_256_cipher+0x238>
+40001a04:	fdf44703          	lbu	a4,-33(s0)
+40001a08:	00100793          	li	a5,1
+40001a0c:	00f71a63          	bne	a4,a5,40001a20 <aes_256_cipher+0x238>
 		print("======================================AES256 ENCRYPTTION========================================\r\n");
-4000196c:	400037b7          	lui	a5,0x40003
-40001970:	a9878513          	addi	a0,a5,-1384 # 40002a98 <vga_simRes_h160_v120+0x158>
-40001974:	2a4000ef          	jal	ra,40001c18 <print>
-40001978:	0100006f          	j	40001988 <aes_256_cipher+0x244>
+40001a10:	400037b7          	lui	a5,0x40003
+40001a14:	b9078513          	addi	a0,a5,-1136 # 40002b90 <vga_simRes_h160_v120+0x158>
+40001a18:	2a4000ef          	jal	ra,40001cbc <print>
+40001a1c:	0100006f          	j	40001a2c <aes_256_cipher+0x244>
 	else
 		print("======================================AES256 DECRYPTTION========================================\r\n");
-4000197c:	400037b7          	lui	a5,0x40003
-40001980:	afc78513          	addi	a0,a5,-1284 # 40002afc <vga_simRes_h160_v120+0x1bc>
-40001984:	294000ef          	jal	ra,40001c18 <print>
+40001a20:	400037b7          	lui	a5,0x40003
+40001a24:	bf478513          	addi	a0,a5,-1036 # 40002bf4 <vga_simRes_h160_v120+0x1bc>
+40001a28:	294000ef          	jal	ra,40001cbc <print>
 	print128bit("\r\nPLAIN_TEXT (128-bit) : ", block);
-40001988:	fd442583          	lw	a1,-44(s0)
-4000198c:	400037b7          	lui	a5,0x40003
-40001990:	a0078513          	addi	a0,a5,-1536 # 40002a00 <vga_simRes_h160_v120+0xc0>
-40001994:	550000ef          	jal	ra,40001ee4 <print128bit>
+40001a2c:	fd442583          	lw	a1,-44(s0)
+40001a30:	400037b7          	lui	a5,0x40003
+40001a34:	af878513          	addi	a0,a5,-1288 # 40002af8 <vga_simRes_h160_v120+0xc0>
+40001a38:	550000ef          	jal	ra,40001f88 <print128bit>
 	print256bit("KEY (256-bit) : ", key);
-40001998:	fd842583          	lw	a1,-40(s0)
-4000199c:	400037b7          	lui	a5,0x40003
-400019a0:	b6078513          	addi	a0,a5,-1184 # 40002b60 <vga_simRes_h160_v120+0x220>
-400019a4:	644000ef          	jal	ra,40001fe8 <print256bit>
+40001a3c:	fd842583          	lw	a1,-40(s0)
+40001a40:	400037b7          	lui	a5,0x40003
+40001a44:	c5878513          	addi	a0,a5,-936 # 40002c58 <vga_simRes_h160_v120+0x220>
+40001a48:	644000ef          	jal	ra,4000208c <print256bit>
 	print128bit("RESULT (128-bit) : ", res);
-400019a8:	fd042583          	lw	a1,-48(s0)
-400019ac:	400037b7          	lui	a5,0x40003
-400019b0:	a3078513          	addi	a0,a5,-1488 # 40002a30 <vga_simRes_h160_v120+0xf0>
-400019b4:	530000ef          	jal	ra,40001ee4 <print128bit>
+40001a4c:	fd042583          	lw	a1,-48(s0)
+40001a50:	400037b7          	lui	a5,0x40003
+40001a54:	b2878513          	addi	a0,a5,-1240 # 40002b28 <vga_simRes_h160_v120+0xf0>
+40001a58:	530000ef          	jal	ra,40001f88 <print128bit>
 	print("\r\n================================================================================================\r\n");
-400019b8:	400037b7          	lui	a5,0x40003
-400019bc:	b7478513          	addi	a0,a5,-1164 # 40002b74 <vga_simRes_h160_v120+0x234>
-400019c0:	258000ef          	jal	ra,40001c18 <print>
+40001a5c:	400037b7          	lui	a5,0x40003
+40001a60:	c6c78513          	addi	a0,a5,-916 # 40002c6c <vga_simRes_h160_v120+0x234>
+40001a64:	258000ef          	jal	ra,40001cbc <print>
 
 }
-400019c4:	00000013          	nop
-400019c8:	02c12083          	lw	ra,44(sp)
-400019cc:	02812403          	lw	s0,40(sp)
-400019d0:	02412483          	lw	s1,36(sp)
-400019d4:	03010113          	addi	sp,sp,48
-400019d8:	00008067          	ret
+40001a68:	00000013          	nop
+40001a6c:	02c12083          	lw	ra,44(sp)
+40001a70:	02812403          	lw	s0,40(sp)
+40001a74:	02412483          	lw	s1,36(sp)
+40001a78:	03010113          	addi	sp,sp,48
+40001a7c:	00008067          	ret
 
-400019dc <timer_init>:
+40001a80 <timer_init>:
 static void timer_init(Timer_Reg *reg){
-400019dc:	fe010113          	addi	sp,sp,-32
-400019e0:	00812e23          	sw	s0,28(sp)
-400019e4:	02010413          	addi	s0,sp,32
-400019e8:	fea42623          	sw	a0,-20(s0)
+40001a80:	fe010113          	addi	sp,sp,-32
+40001a84:	00812e23          	sw	s0,28(sp)
+40001a88:	02010413          	addi	s0,sp,32
+40001a8c:	fea42623          	sw	a0,-20(s0)
 	reg->CLEARS_TICKS  = 0;
-400019ec:	fec42783          	lw	a5,-20(s0)
-400019f0:	0007a023          	sw	zero,0(a5)
+40001a90:	fec42783          	lw	a5,-20(s0)
+40001a94:	0007a023          	sw	zero,0(a5)
 	reg->VALUE = 0;
-400019f4:	fec42783          	lw	a5,-20(s0)
-400019f8:	0007a423          	sw	zero,8(a5)
+40001a98:	fec42783          	lw	a5,-20(s0)
+40001a9c:	0007a423          	sw	zero,8(a5)
 }
-400019fc:	00000013          	nop
-40001a00:	01c12403          	lw	s0,28(sp)
-40001a04:	02010113          	addi	sp,sp,32
-40001a08:	00008067          	ret
+40001aa0:	00000013          	nop
+40001aa4:	01c12403          	lw	s0,28(sp)
+40001aa8:	02010113          	addi	sp,sp,32
+40001aac:	00008067          	ret
 
-40001a0c <prescaler_init>:
+40001ab0 <prescaler_init>:
 static void prescaler_init(Prescaler_Reg* reg){
-40001a0c:	fe010113          	addi	sp,sp,-32
-40001a10:	00812e23          	sw	s0,28(sp)
-40001a14:	02010413          	addi	s0,sp,32
-40001a18:	fea42623          	sw	a0,-20(s0)
+40001ab0:	fe010113          	addi	sp,sp,-32
+40001ab4:	00812e23          	sw	s0,28(sp)
+40001ab8:	02010413          	addi	s0,sp,32
+40001abc:	fea42623          	sw	a0,-20(s0)
 }
-40001a1c:	00000013          	nop
-40001a20:	01c12403          	lw	s0,28(sp)
-40001a24:	02010113          	addi	sp,sp,32
-40001a28:	00008067          	ret
+40001ac0:	00000013          	nop
+40001ac4:	01c12403          	lw	s0,28(sp)
+40001ac8:	02010113          	addi	sp,sp,32
+40001acc:	00008067          	ret
 
-40001a2c <interruptCtrl_init>:
+40001ad0 <interruptCtrl_init>:
 static void interruptCtrl_init(InterruptCtrl_Reg* reg){
-40001a2c:	fe010113          	addi	sp,sp,-32
-40001a30:	00812e23          	sw	s0,28(sp)
-40001a34:	02010413          	addi	s0,sp,32
-40001a38:	fea42623          	sw	a0,-20(s0)
+40001ad0:	fe010113          	addi	sp,sp,-32
+40001ad4:	00812e23          	sw	s0,28(sp)
+40001ad8:	02010413          	addi	s0,sp,32
+40001adc:	fea42623          	sw	a0,-20(s0)
 	reg->MASKS = 0;
-40001a3c:	fec42783          	lw	a5,-20(s0)
-40001a40:	0007a223          	sw	zero,4(a5)
+40001ae0:	fec42783          	lw	a5,-20(s0)
+40001ae4:	0007a223          	sw	zero,4(a5)
 	reg->PENDINGS = 0xFFFFFFFF;
-40001a44:	fec42783          	lw	a5,-20(s0)
-40001a48:	fff00713          	li	a4,-1
-40001a4c:	00e7a023          	sw	a4,0(a5)
-}
-40001a50:	00000013          	nop
-40001a54:	01c12403          	lw	s0,28(sp)
-40001a58:	02010113          	addi	sp,sp,32
-40001a5c:	00008067          	ret
-
-40001a60 <uart_writeAvailability>:
-static uint32_t uart_writeAvailability(Uart_Reg *reg){
-40001a60:	fe010113          	addi	sp,sp,-32
-40001a64:	00812e23          	sw	s0,28(sp)
-40001a68:	02010413          	addi	s0,sp,32
-40001a6c:	fea42623          	sw	a0,-20(s0)
-	return (reg->STATUS >> 16) & 0xFF;
-40001a70:	fec42783          	lw	a5,-20(s0)
-40001a74:	0047a783          	lw	a5,4(a5)
-40001a78:	0107d793          	srli	a5,a5,0x10
-40001a7c:	0ff7f793          	zext.b	a5,a5
-}
-40001a80:	00078513          	mv	a0,a5
-40001a84:	01c12403          	lw	s0,28(sp)
-40001a88:	02010113          	addi	sp,sp,32
-40001a8c:	00008067          	ret
-
-40001a90 <uart_readOccupancy>:
-static uint32_t uart_readOccupancy(Uart_Reg *reg){
-40001a90:	fe010113          	addi	sp,sp,-32
-40001a94:	00812e23          	sw	s0,28(sp)
-40001a98:	02010413          	addi	s0,sp,32
-40001a9c:	fea42623          	sw	a0,-20(s0)
-	return reg->STATUS >> 24;
-40001aa0:	fec42783          	lw	a5,-20(s0)
-40001aa4:	0047a783          	lw	a5,4(a5)
-40001aa8:	0187d793          	srli	a5,a5,0x18
-}
-40001aac:	00078513          	mv	a0,a5
-40001ab0:	01c12403          	lw	s0,28(sp)
-40001ab4:	02010113          	addi	sp,sp,32
-40001ab8:	00008067          	ret
-
-40001abc <uart_write>:
-static void uart_write(Uart_Reg *reg, uint32_t data){
-40001abc:	fe010113          	addi	sp,sp,-32
-40001ac0:	00112e23          	sw	ra,28(sp)
-40001ac4:	00812c23          	sw	s0,24(sp)
-40001ac8:	02010413          	addi	s0,sp,32
-40001acc:	fea42623          	sw	a0,-20(s0)
-40001ad0:	feb42423          	sw	a1,-24(s0)
-	while(uart_writeAvailability(reg) == 0);
-40001ad4:	00000013          	nop
-40001ad8:	fec42503          	lw	a0,-20(s0)
-40001adc:	f85ff0ef          	jal	ra,40001a60 <uart_writeAvailability>
-40001ae0:	00050793          	mv	a5,a0
-40001ae4:	fe078ae3          	beqz	a5,40001ad8 <uart_write+0x1c>
-	reg->DATA = data;
 40001ae8:	fec42783          	lw	a5,-20(s0)
-40001aec:	fe842703          	lw	a4,-24(s0)
+40001aec:	fff00713          	li	a4,-1
 40001af0:	00e7a023          	sw	a4,0(a5)
 }
 40001af4:	00000013          	nop
-40001af8:	01c12083          	lw	ra,28(sp)
-40001afc:	01812403          	lw	s0,24(sp)
-40001b00:	02010113          	addi	sp,sp,32
-40001b04:	00008067          	ret
+40001af8:	01c12403          	lw	s0,28(sp)
+40001afc:	02010113          	addi	sp,sp,32
+40001b00:	00008067          	ret
 
-40001b08 <uart_applyConfig>:
+40001b04 <uart_writeAvailability>:
+static uint32_t uart_writeAvailability(Uart_Reg *reg){
+40001b04:	fe010113          	addi	sp,sp,-32
+40001b08:	00812e23          	sw	s0,28(sp)
+40001b0c:	02010413          	addi	s0,sp,32
+40001b10:	fea42623          	sw	a0,-20(s0)
+	return (reg->STATUS >> 16) & 0xFF;
+40001b14:	fec42783          	lw	a5,-20(s0)
+40001b18:	0047a783          	lw	a5,4(a5)
+40001b1c:	0107d793          	srli	a5,a5,0x10
+40001b20:	0ff7f793          	zext.b	a5,a5
+}
+40001b24:	00078513          	mv	a0,a5
+40001b28:	01c12403          	lw	s0,28(sp)
+40001b2c:	02010113          	addi	sp,sp,32
+40001b30:	00008067          	ret
+
+40001b34 <uart_readOccupancy>:
+static uint32_t uart_readOccupancy(Uart_Reg *reg){
+40001b34:	fe010113          	addi	sp,sp,-32
+40001b38:	00812e23          	sw	s0,28(sp)
+40001b3c:	02010413          	addi	s0,sp,32
+40001b40:	fea42623          	sw	a0,-20(s0)
+	return reg->STATUS >> 24;
+40001b44:	fec42783          	lw	a5,-20(s0)
+40001b48:	0047a783          	lw	a5,4(a5)
+40001b4c:	0187d793          	srli	a5,a5,0x18
+}
+40001b50:	00078513          	mv	a0,a5
+40001b54:	01c12403          	lw	s0,28(sp)
+40001b58:	02010113          	addi	sp,sp,32
+40001b5c:	00008067          	ret
+
+40001b60 <uart_write>:
+static void uart_write(Uart_Reg *reg, uint32_t data){
+40001b60:	fe010113          	addi	sp,sp,-32
+40001b64:	00112e23          	sw	ra,28(sp)
+40001b68:	00812c23          	sw	s0,24(sp)
+40001b6c:	02010413          	addi	s0,sp,32
+40001b70:	fea42623          	sw	a0,-20(s0)
+40001b74:	feb42423          	sw	a1,-24(s0)
+	while(uart_writeAvailability(reg) == 0);
+40001b78:	00000013          	nop
+40001b7c:	fec42503          	lw	a0,-20(s0)
+40001b80:	f85ff0ef          	jal	ra,40001b04 <uart_writeAvailability>
+40001b84:	00050793          	mv	a5,a0
+40001b88:	fe078ae3          	beqz	a5,40001b7c <uart_write+0x1c>
+	reg->DATA = data;
+40001b8c:	fec42783          	lw	a5,-20(s0)
+40001b90:	fe842703          	lw	a4,-24(s0)
+40001b94:	00e7a023          	sw	a4,0(a5)
+}
+40001b98:	00000013          	nop
+40001b9c:	01c12083          	lw	ra,28(sp)
+40001ba0:	01812403          	lw	s0,24(sp)
+40001ba4:	02010113          	addi	sp,sp,32
+40001ba8:	00008067          	ret
+
+40001bac <uart_applyConfig>:
 static void uart_applyConfig(Uart_Reg *reg, Uart_Config *config){
-40001b08:	fe010113          	addi	sp,sp,-32
-40001b0c:	00812e23          	sw	s0,28(sp)
-40001b10:	02010413          	addi	s0,sp,32
-40001b14:	fea42623          	sw	a0,-20(s0)
-40001b18:	feb42423          	sw	a1,-24(s0)
+40001bac:	fe010113          	addi	sp,sp,-32
+40001bb0:	00812e23          	sw	s0,28(sp)
+40001bb4:	02010413          	addi	s0,sp,32
+40001bb8:	fea42623          	sw	a0,-20(s0)
+40001bbc:	feb42423          	sw	a1,-24(s0)
 	reg->CLOCK_DIVIDER = config->clockDivider;
-40001b1c:	fe842783          	lw	a5,-24(s0)
-40001b20:	00c7a703          	lw	a4,12(a5)
-40001b24:	fec42783          	lw	a5,-20(s0)
-40001b28:	00e7a423          	sw	a4,8(a5)
+40001bc0:	fe842783          	lw	a5,-24(s0)
+40001bc4:	00c7a703          	lw	a4,12(a5)
+40001bc8:	fec42783          	lw	a5,-20(s0)
+40001bcc:	00e7a423          	sw	a4,8(a5)
 	reg->FRAME_CONFIG = ((config->dataLength-1) << 0) | (config->parity << 8) | (config->stop << 16);
-40001b2c:	fe842783          	lw	a5,-24(s0)
-40001b30:	0007a783          	lw	a5,0(a5)
-40001b34:	fff78713          	addi	a4,a5,-1
-40001b38:	fe842783          	lw	a5,-24(s0)
-40001b3c:	0047a783          	lw	a5,4(a5)
-40001b40:	00879793          	slli	a5,a5,0x8
-40001b44:	00f76733          	or	a4,a4,a5
-40001b48:	fe842783          	lw	a5,-24(s0)
-40001b4c:	0087a783          	lw	a5,8(a5)
-40001b50:	01079793          	slli	a5,a5,0x10
-40001b54:	00f76733          	or	a4,a4,a5
-40001b58:	fec42783          	lw	a5,-20(s0)
-40001b5c:	00e7a623          	sw	a4,12(a5)
+40001bd0:	fe842783          	lw	a5,-24(s0)
+40001bd4:	0007a783          	lw	a5,0(a5)
+40001bd8:	fff78713          	addi	a4,a5,-1
+40001bdc:	fe842783          	lw	a5,-24(s0)
+40001be0:	0047a783          	lw	a5,4(a5)
+40001be4:	00879793          	slli	a5,a5,0x8
+40001be8:	00f76733          	or	a4,a4,a5
+40001bec:	fe842783          	lw	a5,-24(s0)
+40001bf0:	0087a783          	lw	a5,8(a5)
+40001bf4:	01079793          	slli	a5,a5,0x10
+40001bf8:	00f76733          	or	a4,a4,a5
+40001bfc:	fec42783          	lw	a5,-20(s0)
+40001c00:	00e7a623          	sw	a4,12(a5)
 }
-40001b60:	00000013          	nop
-40001b64:	01c12403          	lw	s0,28(sp)
-40001b68:	02010113          	addi	sp,sp,32
-40001b6c:	00008067          	ret
-
-40001b70 <vga_isBusy>:
-static uint32_t vga_isBusy(Vga_Reg *reg){
-40001b70:	fe010113          	addi	sp,sp,-32
-40001b74:	00812e23          	sw	s0,28(sp)
-40001b78:	02010413          	addi	s0,sp,32
-40001b7c:	fea42623          	sw	a0,-20(s0)
-	return (reg->STATUS & 2) != 0;
-40001b80:	fec42783          	lw	a5,-20(s0)
-40001b84:	0007a783          	lw	a5,0(a5)
-40001b88:	0027f793          	andi	a5,a5,2
-40001b8c:	00f037b3          	snez	a5,a5
-40001b90:	0ff7f793          	zext.b	a5,a5
-}
-40001b94:	00078513          	mv	a0,a5
-40001b98:	01c12403          	lw	s0,28(sp)
-40001b9c:	02010113          	addi	sp,sp,32
-40001ba0:	00008067          	ret
-
-40001ba4 <vga_run>:
-static void vga_run(Vga_Reg *reg){
-40001ba4:	fe010113          	addi	sp,sp,-32
-40001ba8:	00812e23          	sw	s0,28(sp)
-40001bac:	02010413          	addi	s0,sp,32
-40001bb0:	fea42623          	sw	a0,-20(s0)
-	reg->STATUS  = 1;
-40001bb4:	fec42783          	lw	a5,-20(s0)
-40001bb8:	00100713          	li	a4,1
-40001bbc:	00e7a023          	sw	a4,0(a5)
-}
-40001bc0:	00000013          	nop
-40001bc4:	01c12403          	lw	s0,28(sp)
-40001bc8:	02010113          	addi	sp,sp,32
-40001bcc:	00008067          	ret
-
-40001bd0 <vga_stop>:
-static void vga_stop(Vga_Reg *reg){
-40001bd0:	fe010113          	addi	sp,sp,-32
-40001bd4:	00112e23          	sw	ra,28(sp)
-40001bd8:	00812c23          	sw	s0,24(sp)
-40001bdc:	02010413          	addi	s0,sp,32
-40001be0:	fea42623          	sw	a0,-20(s0)
-	reg->STATUS  = 0;
-40001be4:	fec42783          	lw	a5,-20(s0)
-40001be8:	0007a023          	sw	zero,0(a5)
-	while(vga_isBusy(reg));
-40001bec:	00000013          	nop
-40001bf0:	fec42503          	lw	a0,-20(s0)
-40001bf4:	f7dff0ef          	jal	ra,40001b70 <vga_isBusy>
-40001bf8:	00050793          	mv	a5,a0
-40001bfc:	fe079ae3          	bnez	a5,40001bf0 <vga_stop+0x20>
-}
-40001c00:	00000013          	nop
 40001c04:	00000013          	nop
-40001c08:	01c12083          	lw	ra,28(sp)
-40001c0c:	01812403          	lw	s0,24(sp)
-40001c10:	02010113          	addi	sp,sp,32
-40001c14:	00008067          	ret
+40001c08:	01c12403          	lw	s0,28(sp)
+40001c0c:	02010113          	addi	sp,sp,32
+40001c10:	00008067          	ret
 
-40001c18 <print>:
+40001c14 <vga_isBusy>:
+static uint32_t vga_isBusy(Vga_Reg *reg){
+40001c14:	fe010113          	addi	sp,sp,-32
+40001c18:	00812e23          	sw	s0,28(sp)
+40001c1c:	02010413          	addi	s0,sp,32
+40001c20:	fea42623          	sw	a0,-20(s0)
+	return (reg->STATUS & 2) != 0;
+40001c24:	fec42783          	lw	a5,-20(s0)
+40001c28:	0007a783          	lw	a5,0(a5)
+40001c2c:	0027f793          	andi	a5,a5,2
+40001c30:	00f037b3          	snez	a5,a5
+40001c34:	0ff7f793          	zext.b	a5,a5
+}
+40001c38:	00078513          	mv	a0,a5
+40001c3c:	01c12403          	lw	s0,28(sp)
+40001c40:	02010113          	addi	sp,sp,32
+40001c44:	00008067          	ret
+
+40001c48 <vga_run>:
+static void vga_run(Vga_Reg *reg){
+40001c48:	fe010113          	addi	sp,sp,-32
+40001c4c:	00812e23          	sw	s0,28(sp)
+40001c50:	02010413          	addi	s0,sp,32
+40001c54:	fea42623          	sw	a0,-20(s0)
+	reg->STATUS  = 1;
+40001c58:	fec42783          	lw	a5,-20(s0)
+40001c5c:	00100713          	li	a4,1
+40001c60:	00e7a023          	sw	a4,0(a5)
+}
+40001c64:	00000013          	nop
+40001c68:	01c12403          	lw	s0,28(sp)
+40001c6c:	02010113          	addi	sp,sp,32
+40001c70:	00008067          	ret
+
+40001c74 <vga_stop>:
+static void vga_stop(Vga_Reg *reg){
+40001c74:	fe010113          	addi	sp,sp,-32
+40001c78:	00112e23          	sw	ra,28(sp)
+40001c7c:	00812c23          	sw	s0,24(sp)
+40001c80:	02010413          	addi	s0,sp,32
+40001c84:	fea42623          	sw	a0,-20(s0)
+	reg->STATUS  = 0;
+40001c88:	fec42783          	lw	a5,-20(s0)
+40001c8c:	0007a023          	sw	zero,0(a5)
+	while(vga_isBusy(reg));
+40001c90:	00000013          	nop
+40001c94:	fec42503          	lw	a0,-20(s0)
+40001c98:	f7dff0ef          	jal	ra,40001c14 <vga_isBusy>
+40001c9c:	00050793          	mv	a5,a0
+40001ca0:	fe079ae3          	bnez	a5,40001c94 <vga_stop+0x20>
+}
+40001ca4:	00000013          	nop
+40001ca8:	00000013          	nop
+40001cac:	01c12083          	lw	ra,28(sp)
+40001cb0:	01812403          	lw	s0,24(sp)
+40001cb4:	02010113          	addi	sp,sp,32
+40001cb8:	00008067          	ret
+
+40001cbc <print>:
 #include <briey.h>
 
 void print(char *str){
-40001c18:	fe010113          	addi	sp,sp,-32
-40001c1c:	00112e23          	sw	ra,28(sp)
-40001c20:	00812c23          	sw	s0,24(sp)
-40001c24:	02010413          	addi	s0,sp,32
-40001c28:	fea42623          	sw	a0,-20(s0)
+40001cbc:	fe010113          	addi	sp,sp,-32
+40001cc0:	00112e23          	sw	ra,28(sp)
+40001cc4:	00812c23          	sw	s0,24(sp)
+40001cc8:	02010413          	addi	s0,sp,32
+40001ccc:	fea42623          	sw	a0,-20(s0)
 	while(*str){
-40001c2c:	0200006f          	j	40001c4c <print+0x34>
+40001cd0:	0200006f          	j	40001cf0 <print+0x34>
 		uart_write(UART,*(str++));
-40001c30:	fec42783          	lw	a5,-20(s0)
-40001c34:	00178713          	addi	a4,a5,1
-40001c38:	fee42623          	sw	a4,-20(s0)
-40001c3c:	0007c783          	lbu	a5,0(a5)
-40001c40:	00078593          	mv	a1,a5
-40001c44:	f0010537          	lui	a0,0xf0010
-40001c48:	e75ff0ef          	jal	ra,40001abc <uart_write>
+40001cd4:	fec42783          	lw	a5,-20(s0)
+40001cd8:	00178713          	addi	a4,a5,1
+40001cdc:	fee42623          	sw	a4,-20(s0)
+40001ce0:	0007c783          	lbu	a5,0(a5)
+40001ce4:	00078593          	mv	a1,a5
+40001ce8:	f0010537          	lui	a0,0xf0010
+40001cec:	e75ff0ef          	jal	ra,40001b60 <uart_write>
 	while(*str){
-40001c4c:	fec42783          	lw	a5,-20(s0)
-40001c50:	0007c783          	lbu	a5,0(a5)
-40001c54:	fc079ee3          	bnez	a5,40001c30 <print+0x18>
+40001cf0:	fec42783          	lw	a5,-20(s0)
+40001cf4:	0007c783          	lbu	a5,0(a5)
+40001cf8:	fc079ee3          	bnez	a5,40001cd4 <print+0x18>
 	}
 }
-40001c58:	00000013          	nop
-40001c5c:	00000013          	nop
-40001c60:	01c12083          	lw	ra,28(sp)
-40001c64:	01812403          	lw	s0,24(sp)
-40001c68:	02010113          	addi	sp,sp,32
-40001c6c:	00008067          	ret
+40001cfc:	00000013          	nop
+40001d00:	00000013          	nop
+40001d04:	01c12083          	lw	ra,28(sp)
+40001d08:	01812403          	lw	s0,24(sp)
+40001d0c:	02010113          	addi	sp,sp,32
+40001d10:	00008067          	ret
 
-40001c70 <print16bit>:
+40001d14 <print16bit>:
 
 void print16bit(uint32_t n)
 {
-40001c70:	fc010113          	addi	sp,sp,-64
-40001c74:	02112e23          	sw	ra,60(sp)
-40001c78:	02812c23          	sw	s0,56(sp)
-40001c7c:	04010413          	addi	s0,sp,64
-40001c80:	fca42623          	sw	a0,-52(s0)
+40001d14:	fc010113          	addi	sp,sp,-64
+40001d18:	02112e23          	sw	ra,60(sp)
+40001d1c:	02812c23          	sw	s0,56(sp)
+40001d20:	04010413          	addi	s0,sp,64
+40001d24:	fca42623          	sw	a0,-52(s0)
 
     int i = 0;
-40001c84:	fe042623          	sw	zero,-20(s0)
+40001d28:	fe042623          	sw	zero,-20(s0)
     char outbuf_inv[8]="";
-40001c88:	fc042e23          	sw	zero,-36(s0)
-40001c8c:	fe042023          	sw	zero,-32(s0)
+40001d2c:	fc042e23          	sw	zero,-36(s0)
+40001d30:	fe042023          	sw	zero,-32(s0)
     do{
     	outbuf_inv[i] = "0123456789abcdef"[n % 16];
-40001c90:	fcc42783          	lw	a5,-52(s0)
-40001c94:	00f7f793          	andi	a5,a5,15
-40001c98:	40003737          	lui	a4,0x40003
-40001c9c:	c4070713          	addi	a4,a4,-960 # 40002c40 <vga_simRes_h160_v120+0x24>
-40001ca0:	00f707b3          	add	a5,a4,a5
-40001ca4:	0007c703          	lbu	a4,0(a5)
-40001ca8:	fec42783          	lw	a5,-20(s0)
-40001cac:	ff040693          	addi	a3,s0,-16
-40001cb0:	00f687b3          	add	a5,a3,a5
-40001cb4:	fee78623          	sb	a4,-20(a5)
+40001d34:	fcc42783          	lw	a5,-52(s0)
+40001d38:	00f7f793          	andi	a5,a5,15
+40001d3c:	40003737          	lui	a4,0x40003
+40001d40:	d3870713          	addi	a4,a4,-712 # 40002d38 <vga_simRes_h160_v120+0x24>
+40001d44:	00f707b3          	add	a5,a4,a5
+40001d48:	0007c703          	lbu	a4,0(a5)
+40001d4c:	fec42783          	lw	a5,-20(s0)
+40001d50:	ff040693          	addi	a3,s0,-16
+40001d54:	00f687b3          	add	a5,a3,a5
+40001d58:	fee78623          	sb	a4,-20(a5)
         i++;
-40001cb8:	fec42783          	lw	a5,-20(s0)
-40001cbc:	00178793          	addi	a5,a5,1
-40001cc0:	fef42623          	sw	a5,-20(s0)
+40001d5c:	fec42783          	lw	a5,-20(s0)
+40001d60:	00178793          	addi	a5,a5,1
+40001d64:	fef42623          	sw	a5,-20(s0)
         n = n/16;
-40001cc4:	fcc42783          	lw	a5,-52(s0)
-40001cc8:	0047d793          	srli	a5,a5,0x4
-40001ccc:	fcf42623          	sw	a5,-52(s0)
+40001d68:	fcc42783          	lw	a5,-52(s0)
+40001d6c:	0047d793          	srli	a5,a5,0x4
+40001d70:	fcf42623          	sw	a5,-52(s0)
     }while( n > 0);
-40001cd0:	fcc42783          	lw	a5,-52(s0)
-40001cd4:	fa079ee3          	bnez	a5,40001c90 <print16bit+0x20>
+40001d74:	fcc42783          	lw	a5,-52(s0)
+40001d78:	fa079ee3          	bnez	a5,40001d34 <print16bit+0x20>
     if(i<8) {
-40001cd8:	fec42703          	lw	a4,-20(s0)
-40001cdc:	00700793          	li	a5,7
-40001ce0:	02e7ce63          	blt	a5,a4,40001d1c <print16bit+0xac>
+40001d7c:	fec42703          	lw	a4,-20(s0)
+40001d80:	00700793          	li	a5,7
+40001d84:	02e7ce63          	blt	a5,a4,40001dc0 <print16bit+0xac>
     	for(int j=7;j>=i;j--){
-40001ce4:	00700793          	li	a5,7
-40001ce8:	fef42423          	sw	a5,-24(s0)
-40001cec:	0240006f          	j	40001d10 <print16bit+0xa0>
+40001d88:	00700793          	li	a5,7
+40001d8c:	fef42423          	sw	a5,-24(s0)
+40001d90:	0240006f          	j	40001db4 <print16bit+0xa0>
     		outbuf_inv[j]="0"[0];
-40001cf0:	03000713          	li	a4,48
-40001cf4:	fe842783          	lw	a5,-24(s0)
-40001cf8:	ff040693          	addi	a3,s0,-16
-40001cfc:	00f687b3          	add	a5,a3,a5
-40001d00:	fee78623          	sb	a4,-20(a5)
+40001d94:	03000713          	li	a4,48
+40001d98:	fe842783          	lw	a5,-24(s0)
+40001d9c:	ff040693          	addi	a3,s0,-16
+40001da0:	00f687b3          	add	a5,a3,a5
+40001da4:	fee78623          	sb	a4,-20(a5)
     	for(int j=7;j>=i;j--){
-40001d04:	fe842783          	lw	a5,-24(s0)
-40001d08:	fff78793          	addi	a5,a5,-1
-40001d0c:	fef42423          	sw	a5,-24(s0)
-40001d10:	fe842703          	lw	a4,-24(s0)
-40001d14:	fec42783          	lw	a5,-20(s0)
-40001d18:	fcf75ce3          	bge	a4,a5,40001cf0 <print16bit+0x80>
+40001da8:	fe842783          	lw	a5,-24(s0)
+40001dac:	fff78793          	addi	a5,a5,-1
+40001db0:	fef42423          	sw	a5,-24(s0)
+40001db4:	fe842703          	lw	a4,-24(s0)
+40001db8:	fec42783          	lw	a5,-20(s0)
+40001dbc:	fcf75ce3          	bge	a4,a5,40001d94 <print16bit+0x80>
     	}
     }
     for(int j=3;j>=0;j--)
-40001d1c:	00300793          	li	a5,3
-40001d20:	fef42223          	sw	a5,-28(s0)
-40001d24:	02c0006f          	j	40001d50 <print16bit+0xe0>
+40001dc0:	00300793          	li	a5,3
+40001dc4:	fef42223          	sw	a5,-28(s0)
+40001dc8:	02c0006f          	j	40001df4 <print16bit+0xe0>
     {
     	uart_write(UART,outbuf_inv[j]);
-40001d28:	fe442783          	lw	a5,-28(s0)
-40001d2c:	ff040713          	addi	a4,s0,-16
-40001d30:	00f707b3          	add	a5,a4,a5
-40001d34:	fec7c783          	lbu	a5,-20(a5)
-40001d38:	00078593          	mv	a1,a5
-40001d3c:	f0010537          	lui	a0,0xf0010
-40001d40:	d7dff0ef          	jal	ra,40001abc <uart_write>
+40001dcc:	fe442783          	lw	a5,-28(s0)
+40001dd0:	ff040713          	addi	a4,s0,-16
+40001dd4:	00f707b3          	add	a5,a4,a5
+40001dd8:	fec7c783          	lbu	a5,-20(a5)
+40001ddc:	00078593          	mv	a1,a5
+40001de0:	f0010537          	lui	a0,0xf0010
+40001de4:	d7dff0ef          	jal	ra,40001b60 <uart_write>
     for(int j=3;j>=0;j--)
-40001d44:	fe442783          	lw	a5,-28(s0)
-40001d48:	fff78793          	addi	a5,a5,-1
-40001d4c:	fef42223          	sw	a5,-28(s0)
-40001d50:	fe442783          	lw	a5,-28(s0)
-40001d54:	fc07dae3          	bgez	a5,40001d28 <print16bit+0xb8>
+40001de8:	fe442783          	lw	a5,-28(s0)
+40001dec:	fff78793          	addi	a5,a5,-1
+40001df0:	fef42223          	sw	a5,-28(s0)
+40001df4:	fe442783          	lw	a5,-28(s0)
+40001df8:	fc07dae3          	bgez	a5,40001dcc <print16bit+0xb8>
     }
     print(" ");
-40001d58:	400037b7          	lui	a5,0x40003
-40001d5c:	c3c78513          	addi	a0,a5,-964 # 40002c3c <vga_simRes_h160_v120+0x20>
-40001d60:	eb9ff0ef          	jal	ra,40001c18 <print>
+40001dfc:	400037b7          	lui	a5,0x40003
+40001e00:	d3478513          	addi	a0,a5,-716 # 40002d34 <vga_simRes_h160_v120+0x20>
+40001e04:	eb9ff0ef          	jal	ra,40001cbc <print>
 }
-40001d64:	00000013          	nop
-40001d68:	03c12083          	lw	ra,60(sp)
-40001d6c:	03812403          	lw	s0,56(sp)
-40001d70:	04010113          	addi	sp,sp,64
-40001d74:	00008067          	ret
+40001e08:	00000013          	nop
+40001e0c:	03c12083          	lw	ra,60(sp)
+40001e10:	03812403          	lw	s0,56(sp)
+40001e14:	04010113          	addi	sp,sp,64
+40001e18:	00008067          	ret
 
-40001d78 <print32bit>:
+40001e1c <print32bit>:
 void print32bit(uint32_t n)
 {
-40001d78:	fc010113          	addi	sp,sp,-64
-40001d7c:	02112e23          	sw	ra,60(sp)
-40001d80:	02812c23          	sw	s0,56(sp)
-40001d84:	04010413          	addi	s0,sp,64
-40001d88:	fca42623          	sw	a0,-52(s0)
+40001e1c:	fc010113          	addi	sp,sp,-64
+40001e20:	02112e23          	sw	ra,60(sp)
+40001e24:	02812c23          	sw	s0,56(sp)
+40001e28:	04010413          	addi	s0,sp,64
+40001e2c:	fca42623          	sw	a0,-52(s0)
 
     int i = 0;
-40001d8c:	fe042623          	sw	zero,-20(s0)
+40001e30:	fe042623          	sw	zero,-20(s0)
     char outbuf_inv[8]="";
-40001d90:	fc042e23          	sw	zero,-36(s0)
-40001d94:	fe042023          	sw	zero,-32(s0)
+40001e34:	fc042e23          	sw	zero,-36(s0)
+40001e38:	fe042023          	sw	zero,-32(s0)
     do{
     	outbuf_inv[i] = "0123456789abcdef"[n % 16];
-40001d98:	fcc42783          	lw	a5,-52(s0)
-40001d9c:	00f7f793          	andi	a5,a5,15
-40001da0:	40003737          	lui	a4,0x40003
-40001da4:	c4070713          	addi	a4,a4,-960 # 40002c40 <vga_simRes_h160_v120+0x24>
-40001da8:	00f707b3          	add	a5,a4,a5
-40001dac:	0007c703          	lbu	a4,0(a5)
-40001db0:	fec42783          	lw	a5,-20(s0)
-40001db4:	ff040693          	addi	a3,s0,-16
-40001db8:	00f687b3          	add	a5,a3,a5
-40001dbc:	fee78623          	sb	a4,-20(a5)
+40001e3c:	fcc42783          	lw	a5,-52(s0)
+40001e40:	00f7f793          	andi	a5,a5,15
+40001e44:	40003737          	lui	a4,0x40003
+40001e48:	d3870713          	addi	a4,a4,-712 # 40002d38 <vga_simRes_h160_v120+0x24>
+40001e4c:	00f707b3          	add	a5,a4,a5
+40001e50:	0007c703          	lbu	a4,0(a5)
+40001e54:	fec42783          	lw	a5,-20(s0)
+40001e58:	ff040693          	addi	a3,s0,-16
+40001e5c:	00f687b3          	add	a5,a3,a5
+40001e60:	fee78623          	sb	a4,-20(a5)
         i++;
-40001dc0:	fec42783          	lw	a5,-20(s0)
-40001dc4:	00178793          	addi	a5,a5,1
-40001dc8:	fef42623          	sw	a5,-20(s0)
+40001e64:	fec42783          	lw	a5,-20(s0)
+40001e68:	00178793          	addi	a5,a5,1
+40001e6c:	fef42623          	sw	a5,-20(s0)
         n = n/16;
-40001dcc:	fcc42783          	lw	a5,-52(s0)
-40001dd0:	0047d793          	srli	a5,a5,0x4
-40001dd4:	fcf42623          	sw	a5,-52(s0)
+40001e70:	fcc42783          	lw	a5,-52(s0)
+40001e74:	0047d793          	srli	a5,a5,0x4
+40001e78:	fcf42623          	sw	a5,-52(s0)
     }while( n > 0);
-40001dd8:	fcc42783          	lw	a5,-52(s0)
-40001ddc:	fa079ee3          	bnez	a5,40001d98 <print32bit+0x20>
+40001e7c:	fcc42783          	lw	a5,-52(s0)
+40001e80:	fa079ee3          	bnez	a5,40001e3c <print32bit+0x20>
     if(i<8) {
-40001de0:	fec42703          	lw	a4,-20(s0)
-40001de4:	00700793          	li	a5,7
-40001de8:	02e7ce63          	blt	a5,a4,40001e24 <print32bit+0xac>
+40001e84:	fec42703          	lw	a4,-20(s0)
+40001e88:	00700793          	li	a5,7
+40001e8c:	02e7ce63          	blt	a5,a4,40001ec8 <print32bit+0xac>
     	for(int j=7;j>=i;j--){
-40001dec:	00700793          	li	a5,7
-40001df0:	fef42423          	sw	a5,-24(s0)
-40001df4:	0240006f          	j	40001e18 <print32bit+0xa0>
+40001e90:	00700793          	li	a5,7
+40001e94:	fef42423          	sw	a5,-24(s0)
+40001e98:	0240006f          	j	40001ebc <print32bit+0xa0>
     		outbuf_inv[j]="0"[0];
-40001df8:	03000713          	li	a4,48
-40001dfc:	fe842783          	lw	a5,-24(s0)
-40001e00:	ff040693          	addi	a3,s0,-16
-40001e04:	00f687b3          	add	a5,a3,a5
-40001e08:	fee78623          	sb	a4,-20(a5)
+40001e9c:	03000713          	li	a4,48
+40001ea0:	fe842783          	lw	a5,-24(s0)
+40001ea4:	ff040693          	addi	a3,s0,-16
+40001ea8:	00f687b3          	add	a5,a3,a5
+40001eac:	fee78623          	sb	a4,-20(a5)
     	for(int j=7;j>=i;j--){
-40001e0c:	fe842783          	lw	a5,-24(s0)
-40001e10:	fff78793          	addi	a5,a5,-1
-40001e14:	fef42423          	sw	a5,-24(s0)
-40001e18:	fe842703          	lw	a4,-24(s0)
-40001e1c:	fec42783          	lw	a5,-20(s0)
-40001e20:	fcf75ce3          	bge	a4,a5,40001df8 <print32bit+0x80>
+40001eb0:	fe842783          	lw	a5,-24(s0)
+40001eb4:	fff78793          	addi	a5,a5,-1
+40001eb8:	fef42423          	sw	a5,-24(s0)
+40001ebc:	fe842703          	lw	a4,-24(s0)
+40001ec0:	fec42783          	lw	a5,-20(s0)
+40001ec4:	fcf75ce3          	bge	a4,a5,40001e9c <print32bit+0x80>
     	}
     }
     for(int j=7;j>=0;j--)
-40001e24:	00700793          	li	a5,7
-40001e28:	fef42223          	sw	a5,-28(s0)
-40001e2c:	02c0006f          	j	40001e58 <print32bit+0xe0>
+40001ec8:	00700793          	li	a5,7
+40001ecc:	fef42223          	sw	a5,-28(s0)
+40001ed0:	02c0006f          	j	40001efc <print32bit+0xe0>
     {
     	uart_write(UART,outbuf_inv[j]);
-40001e30:	fe442783          	lw	a5,-28(s0)
-40001e34:	ff040713          	addi	a4,s0,-16
-40001e38:	00f707b3          	add	a5,a4,a5
-40001e3c:	fec7c783          	lbu	a5,-20(a5)
-40001e40:	00078593          	mv	a1,a5
-40001e44:	f0010537          	lui	a0,0xf0010
-40001e48:	c75ff0ef          	jal	ra,40001abc <uart_write>
+40001ed4:	fe442783          	lw	a5,-28(s0)
+40001ed8:	ff040713          	addi	a4,s0,-16
+40001edc:	00f707b3          	add	a5,a4,a5
+40001ee0:	fec7c783          	lbu	a5,-20(a5)
+40001ee4:	00078593          	mv	a1,a5
+40001ee8:	f0010537          	lui	a0,0xf0010
+40001eec:	c75ff0ef          	jal	ra,40001b60 <uart_write>
     for(int j=7;j>=0;j--)
-40001e4c:	fe442783          	lw	a5,-28(s0)
-40001e50:	fff78793          	addi	a5,a5,-1
-40001e54:	fef42223          	sw	a5,-28(s0)
-40001e58:	fe442783          	lw	a5,-28(s0)
-40001e5c:	fc07dae3          	bgez	a5,40001e30 <print32bit+0xb8>
+40001ef0:	fe442783          	lw	a5,-28(s0)
+40001ef4:	fff78793          	addi	a5,a5,-1
+40001ef8:	fef42223          	sw	a5,-28(s0)
+40001efc:	fe442783          	lw	a5,-28(s0)
+40001f00:	fc07dae3          	bgez	a5,40001ed4 <print32bit+0xb8>
     }
     print(" ");
-40001e60:	400037b7          	lui	a5,0x40003
-40001e64:	c3c78513          	addi	a0,a5,-964 # 40002c3c <vga_simRes_h160_v120+0x20>
-40001e68:	db1ff0ef          	jal	ra,40001c18 <print>
+40001f04:	400037b7          	lui	a5,0x40003
+40001f08:	d3478513          	addi	a0,a5,-716 # 40002d34 <vga_simRes_h160_v120+0x20>
+40001f0c:	db1ff0ef          	jal	ra,40001cbc <print>
 }
-40001e6c:	00000013          	nop
-40001e70:	03c12083          	lw	ra,60(sp)
-40001e74:	03812403          	lw	s0,56(sp)
-40001e78:	04010113          	addi	sp,sp,64
-40001e7c:	00008067          	ret
+40001f10:	00000013          	nop
+40001f14:	03c12083          	lw	ra,60(sp)
+40001f18:	03812403          	lw	s0,56(sp)
+40001f1c:	04010113          	addi	sp,sp,64
+40001f20:	00008067          	ret
 
-40001e80 <print64bit>:
+40001f24 <print64bit>:
 
 void print64bit(char *message,uint32_t *num)
 {
-40001e80:	fe010113          	addi	sp,sp,-32
-40001e84:	00112e23          	sw	ra,28(sp)
-40001e88:	00812c23          	sw	s0,24(sp)
-40001e8c:	02010413          	addi	s0,sp,32
-40001e90:	fea42623          	sw	a0,-20(s0)
-40001e94:	feb42423          	sw	a1,-24(s0)
+40001f24:	fe010113          	addi	sp,sp,-32
+40001f28:	00112e23          	sw	ra,28(sp)
+40001f2c:	00812c23          	sw	s0,24(sp)
+40001f30:	02010413          	addi	s0,sp,32
+40001f34:	fea42623          	sw	a0,-20(s0)
+40001f38:	feb42423          	sw	a1,-24(s0)
 	print(message);
-40001e98:	fec42503          	lw	a0,-20(s0)
-40001e9c:	d7dff0ef          	jal	ra,40001c18 <print>
+40001f3c:	fec42503          	lw	a0,-20(s0)
+40001f40:	d7dff0ef          	jal	ra,40001cbc <print>
 	print32bit(num[1]);
-40001ea0:	fe842783          	lw	a5,-24(s0)
-40001ea4:	00478793          	addi	a5,a5,4
-40001ea8:	0007a783          	lw	a5,0(a5)
-40001eac:	00078513          	mv	a0,a5
-40001eb0:	ec9ff0ef          	jal	ra,40001d78 <print32bit>
+40001f44:	fe842783          	lw	a5,-24(s0)
+40001f48:	00478793          	addi	a5,a5,4
+40001f4c:	0007a783          	lw	a5,0(a5)
+40001f50:	00078513          	mv	a0,a5
+40001f54:	ec9ff0ef          	jal	ra,40001e1c <print32bit>
 	print32bit(num[0]);
-40001eb4:	fe842783          	lw	a5,-24(s0)
-40001eb8:	0007a783          	lw	a5,0(a5)
-40001ebc:	00078513          	mv	a0,a5
-40001ec0:	eb9ff0ef          	jal	ra,40001d78 <print32bit>
+40001f58:	fe842783          	lw	a5,-24(s0)
+40001f5c:	0007a783          	lw	a5,0(a5)
+40001f60:	00078513          	mv	a0,a5
+40001f64:	eb9ff0ef          	jal	ra,40001e1c <print32bit>
 	print("\r\n");
-40001ec4:	400037b7          	lui	a5,0x40003
-40001ec8:	c5478513          	addi	a0,a5,-940 # 40002c54 <vga_simRes_h160_v120+0x38>
-40001ecc:	d4dff0ef          	jal	ra,40001c18 <print>
+40001f68:	400037b7          	lui	a5,0x40003
+40001f6c:	d4c78513          	addi	a0,a5,-692 # 40002d4c <vga_simRes_h160_v120+0x38>
+40001f70:	d4dff0ef          	jal	ra,40001cbc <print>
 }
-40001ed0:	00000013          	nop
-40001ed4:	01c12083          	lw	ra,28(sp)
-40001ed8:	01812403          	lw	s0,24(sp)
-40001edc:	02010113          	addi	sp,sp,32
-40001ee0:	00008067          	ret
+40001f74:	00000013          	nop
+40001f78:	01c12083          	lw	ra,28(sp)
+40001f7c:	01812403          	lw	s0,24(sp)
+40001f80:	02010113          	addi	sp,sp,32
+40001f84:	00008067          	ret
 
-40001ee4 <print128bit>:
+40001f88 <print128bit>:
 void print128bit(char *message, uint32_t *num)
 {
-40001ee4:	fe010113          	addi	sp,sp,-32
-40001ee8:	00112e23          	sw	ra,28(sp)
-40001eec:	00812c23          	sw	s0,24(sp)
-40001ef0:	02010413          	addi	s0,sp,32
-40001ef4:	fea42623          	sw	a0,-20(s0)
-40001ef8:	feb42423          	sw	a1,-24(s0)
+40001f88:	fe010113          	addi	sp,sp,-32
+40001f8c:	00112e23          	sw	ra,28(sp)
+40001f90:	00812c23          	sw	s0,24(sp)
+40001f94:	02010413          	addi	s0,sp,32
+40001f98:	fea42623          	sw	a0,-20(s0)
+40001f9c:	feb42423          	sw	a1,-24(s0)
 	print(message);
-40001efc:	fec42503          	lw	a0,-20(s0)
-40001f00:	d19ff0ef          	jal	ra,40001c18 <print>
+40001fa0:	fec42503          	lw	a0,-20(s0)
+40001fa4:	d19ff0ef          	jal	ra,40001cbc <print>
 	print32bit(num[3]);
-40001f04:	fe842783          	lw	a5,-24(s0)
-40001f08:	00c78793          	addi	a5,a5,12
-40001f0c:	0007a783          	lw	a5,0(a5)
-40001f10:	00078513          	mv	a0,a5
-40001f14:	e65ff0ef          	jal	ra,40001d78 <print32bit>
+40001fa8:	fe842783          	lw	a5,-24(s0)
+40001fac:	00c78793          	addi	a5,a5,12
+40001fb0:	0007a783          	lw	a5,0(a5)
+40001fb4:	00078513          	mv	a0,a5
+40001fb8:	e65ff0ef          	jal	ra,40001e1c <print32bit>
 	print32bit(num[2]);
-40001f18:	fe842783          	lw	a5,-24(s0)
-40001f1c:	00878793          	addi	a5,a5,8
-40001f20:	0007a783          	lw	a5,0(a5)
-40001f24:	00078513          	mv	a0,a5
-40001f28:	e51ff0ef          	jal	ra,40001d78 <print32bit>
+40001fbc:	fe842783          	lw	a5,-24(s0)
+40001fc0:	00878793          	addi	a5,a5,8
+40001fc4:	0007a783          	lw	a5,0(a5)
+40001fc8:	00078513          	mv	a0,a5
+40001fcc:	e51ff0ef          	jal	ra,40001e1c <print32bit>
 	print32bit(num[1]);
-40001f2c:	fe842783          	lw	a5,-24(s0)
-40001f30:	00478793          	addi	a5,a5,4
-40001f34:	0007a783          	lw	a5,0(a5)
-40001f38:	00078513          	mv	a0,a5
-40001f3c:	e3dff0ef          	jal	ra,40001d78 <print32bit>
+40001fd0:	fe842783          	lw	a5,-24(s0)
+40001fd4:	00478793          	addi	a5,a5,4
+40001fd8:	0007a783          	lw	a5,0(a5)
+40001fdc:	00078513          	mv	a0,a5
+40001fe0:	e3dff0ef          	jal	ra,40001e1c <print32bit>
 	print32bit(num[0]);
-40001f40:	fe842783          	lw	a5,-24(s0)
-40001f44:	0007a783          	lw	a5,0(a5)
-40001f48:	00078513          	mv	a0,a5
-40001f4c:	e2dff0ef          	jal	ra,40001d78 <print32bit>
+40001fe4:	fe842783          	lw	a5,-24(s0)
+40001fe8:	0007a783          	lw	a5,0(a5)
+40001fec:	00078513          	mv	a0,a5
+40001ff0:	e2dff0ef          	jal	ra,40001e1c <print32bit>
 	print("\r\n");
-40001f50:	400037b7          	lui	a5,0x40003
-40001f54:	c5478513          	addi	a0,a5,-940 # 40002c54 <vga_simRes_h160_v120+0x38>
-40001f58:	cc1ff0ef          	jal	ra,40001c18 <print>
+40001ff4:	400037b7          	lui	a5,0x40003
+40001ff8:	d4c78513          	addi	a0,a5,-692 # 40002d4c <vga_simRes_h160_v120+0x38>
+40001ffc:	cc1ff0ef          	jal	ra,40001cbc <print>
 }
-40001f5c:	00000013          	nop
-40001f60:	01c12083          	lw	ra,28(sp)
-40001f64:	01812403          	lw	s0,24(sp)
-40001f68:	02010113          	addi	sp,sp,32
-40001f6c:	00008067          	ret
+40002000:	00000013          	nop
+40002004:	01c12083          	lw	ra,28(sp)
+40002008:	01812403          	lw	s0,24(sp)
+4000200c:	02010113          	addi	sp,sp,32
+40002010:	00008067          	ret
 
-40001f70 <print80bit>:
+40002014 <print80bit>:
 void print80bit(char *message,uint32_t *num)
 {
-40001f70:	fe010113          	addi	sp,sp,-32
-40001f74:	00112e23          	sw	ra,28(sp)
-40001f78:	00812c23          	sw	s0,24(sp)
-40001f7c:	02010413          	addi	s0,sp,32
-40001f80:	fea42623          	sw	a0,-20(s0)
-40001f84:	feb42423          	sw	a1,-24(s0)
+40002014:	fe010113          	addi	sp,sp,-32
+40002018:	00112e23          	sw	ra,28(sp)
+4000201c:	00812c23          	sw	s0,24(sp)
+40002020:	02010413          	addi	s0,sp,32
+40002024:	fea42623          	sw	a0,-20(s0)
+40002028:	feb42423          	sw	a1,-24(s0)
 	print(message);
-40001f88:	fec42503          	lw	a0,-20(s0)
-40001f8c:	c8dff0ef          	jal	ra,40001c18 <print>
+4000202c:	fec42503          	lw	a0,-20(s0)
+40002030:	c8dff0ef          	jal	ra,40001cbc <print>
 	print32bit(num[2]);
-40001f90:	fe842783          	lw	a5,-24(s0)
-40001f94:	00878793          	addi	a5,a5,8
-40001f98:	0007a783          	lw	a5,0(a5)
-40001f9c:	00078513          	mv	a0,a5
-40001fa0:	dd9ff0ef          	jal	ra,40001d78 <print32bit>
+40002034:	fe842783          	lw	a5,-24(s0)
+40002038:	00878793          	addi	a5,a5,8
+4000203c:	0007a783          	lw	a5,0(a5)
+40002040:	00078513          	mv	a0,a5
+40002044:	dd9ff0ef          	jal	ra,40001e1c <print32bit>
 	print32bit(num[1]);
-40001fa4:	fe842783          	lw	a5,-24(s0)
-40001fa8:	00478793          	addi	a5,a5,4
-40001fac:	0007a783          	lw	a5,0(a5)
-40001fb0:	00078513          	mv	a0,a5
-40001fb4:	dc5ff0ef          	jal	ra,40001d78 <print32bit>
+40002048:	fe842783          	lw	a5,-24(s0)
+4000204c:	00478793          	addi	a5,a5,4
+40002050:	0007a783          	lw	a5,0(a5)
+40002054:	00078513          	mv	a0,a5
+40002058:	dc5ff0ef          	jal	ra,40001e1c <print32bit>
 	print16bit(num[0]);
-40001fb8:	fe842783          	lw	a5,-24(s0)
-40001fbc:	0007a783          	lw	a5,0(a5)
-40001fc0:	00078513          	mv	a0,a5
-40001fc4:	cadff0ef          	jal	ra,40001c70 <print16bit>
-	print("\r\n");
-40001fc8:	400037b7          	lui	a5,0x40003
-40001fcc:	c5478513          	addi	a0,a5,-940 # 40002c54 <vga_simRes_h160_v120+0x38>
-40001fd0:	c49ff0ef          	jal	ra,40001c18 <print>
-}
-40001fd4:	00000013          	nop
-40001fd8:	01c12083          	lw	ra,28(sp)
-40001fdc:	01812403          	lw	s0,24(sp)
-40001fe0:	02010113          	addi	sp,sp,32
-40001fe4:	00008067          	ret
-
-40001fe8 <print256bit>:
-void print256bit(char *message, uint32_t *num)
-{
-40001fe8:	fe010113          	addi	sp,sp,-32
-40001fec:	00112e23          	sw	ra,28(sp)
-40001ff0:	00812c23          	sw	s0,24(sp)
-40001ff4:	02010413          	addi	s0,sp,32
-40001ff8:	fea42623          	sw	a0,-20(s0)
-40001ffc:	feb42423          	sw	a1,-24(s0)
-	print(message);
-40002000:	fec42503          	lw	a0,-20(s0)
-40002004:	c15ff0ef          	jal	ra,40001c18 <print>
-	print32bit(num[7]);
-40002008:	fe842783          	lw	a5,-24(s0)
-4000200c:	01c78793          	addi	a5,a5,28
-40002010:	0007a783          	lw	a5,0(a5)
-40002014:	00078513          	mv	a0,a5
-40002018:	d61ff0ef          	jal	ra,40001d78 <print32bit>
-	print32bit(num[6]);
-4000201c:	fe842783          	lw	a5,-24(s0)
-40002020:	01878793          	addi	a5,a5,24
-40002024:	0007a783          	lw	a5,0(a5)
-40002028:	00078513          	mv	a0,a5
-4000202c:	d4dff0ef          	jal	ra,40001d78 <print32bit>
-	print32bit(num[5]);
-40002030:	fe842783          	lw	a5,-24(s0)
-40002034:	01478793          	addi	a5,a5,20
-40002038:	0007a783          	lw	a5,0(a5)
-4000203c:	00078513          	mv	a0,a5
-40002040:	d39ff0ef          	jal	ra,40001d78 <print32bit>
-	print32bit(num[4]);
-40002044:	fe842783          	lw	a5,-24(s0)
-40002048:	01078793          	addi	a5,a5,16
-4000204c:	0007a783          	lw	a5,0(a5)
-40002050:	00078513          	mv	a0,a5
-40002054:	d25ff0ef          	jal	ra,40001d78 <print32bit>
-	print32bit(num[3]);
-40002058:	fe842783          	lw	a5,-24(s0)
-4000205c:	00c78793          	addi	a5,a5,12
+4000205c:	fe842783          	lw	a5,-24(s0)
 40002060:	0007a783          	lw	a5,0(a5)
 40002064:	00078513          	mv	a0,a5
-40002068:	d11ff0ef          	jal	ra,40001d78 <print32bit>
-	print32bit(num[2]);
-4000206c:	fe842783          	lw	a5,-24(s0)
-40002070:	00878793          	addi	a5,a5,8
-40002074:	0007a783          	lw	a5,0(a5)
-40002078:	00078513          	mv	a0,a5
-4000207c:	cfdff0ef          	jal	ra,40001d78 <print32bit>
-	print32bit(num[1]);
-40002080:	fe842783          	lw	a5,-24(s0)
-40002084:	00478793          	addi	a5,a5,4
-40002088:	0007a783          	lw	a5,0(a5)
-4000208c:	00078513          	mv	a0,a5
-40002090:	ce9ff0ef          	jal	ra,40001d78 <print32bit>
-	print32bit(num[0]);
-40002094:	fe842783          	lw	a5,-24(s0)
-40002098:	0007a783          	lw	a5,0(a5)
-4000209c:	00078513          	mv	a0,a5
-400020a0:	cd9ff0ef          	jal	ra,40001d78 <print32bit>
+40002068:	cadff0ef          	jal	ra,40001d14 <print16bit>
 	print("\r\n");
-400020a4:	400037b7          	lui	a5,0x40003
-400020a8:	c5478513          	addi	a0,a5,-940 # 40002c54 <vga_simRes_h160_v120+0x38>
-400020ac:	b6dff0ef          	jal	ra,40001c18 <print>
+4000206c:	400037b7          	lui	a5,0x40003
+40002070:	d4c78513          	addi	a0,a5,-692 # 40002d4c <vga_simRes_h160_v120+0x38>
+40002074:	c49ff0ef          	jal	ra,40001cbc <print>
 }
-400020b0:	00000013          	nop
-400020b4:	01c12083          	lw	ra,28(sp)
-400020b8:	01812403          	lw	s0,24(sp)
-400020bc:	02010113          	addi	sp,sp,32
-400020c0:	00008067          	ret
+40002078:	00000013          	nop
+4000207c:	01c12083          	lw	ra,28(sp)
+40002080:	01812403          	lw	s0,24(sp)
+40002084:	02010113          	addi	sp,sp,32
+40002088:	00008067          	ret
+
+4000208c <print256bit>:
+void print256bit(char *message, uint32_t *num)
+{
+4000208c:	fe010113          	addi	sp,sp,-32
+40002090:	00112e23          	sw	ra,28(sp)
+40002094:	00812c23          	sw	s0,24(sp)
+40002098:	02010413          	addi	s0,sp,32
+4000209c:	fea42623          	sw	a0,-20(s0)
+400020a0:	feb42423          	sw	a1,-24(s0)
+	print(message);
+400020a4:	fec42503          	lw	a0,-20(s0)
+400020a8:	c15ff0ef          	jal	ra,40001cbc <print>
+	print32bit(num[7]);
+400020ac:	fe842783          	lw	a5,-24(s0)
+400020b0:	01c78793          	addi	a5,a5,28
+400020b4:	0007a783          	lw	a5,0(a5)
+400020b8:	00078513          	mv	a0,a5
+400020bc:	d61ff0ef          	jal	ra,40001e1c <print32bit>
+	print32bit(num[6]);
+400020c0:	fe842783          	lw	a5,-24(s0)
+400020c4:	01878793          	addi	a5,a5,24
+400020c8:	0007a783          	lw	a5,0(a5)
+400020cc:	00078513          	mv	a0,a5
+400020d0:	d4dff0ef          	jal	ra,40001e1c <print32bit>
+	print32bit(num[5]);
+400020d4:	fe842783          	lw	a5,-24(s0)
+400020d8:	01478793          	addi	a5,a5,20
+400020dc:	0007a783          	lw	a5,0(a5)
+400020e0:	00078513          	mv	a0,a5
+400020e4:	d39ff0ef          	jal	ra,40001e1c <print32bit>
+	print32bit(num[4]);
+400020e8:	fe842783          	lw	a5,-24(s0)
+400020ec:	01078793          	addi	a5,a5,16
+400020f0:	0007a783          	lw	a5,0(a5)
+400020f4:	00078513          	mv	a0,a5
+400020f8:	d25ff0ef          	jal	ra,40001e1c <print32bit>
+	print32bit(num[3]);
+400020fc:	fe842783          	lw	a5,-24(s0)
+40002100:	00c78793          	addi	a5,a5,12
+40002104:	0007a783          	lw	a5,0(a5)
+40002108:	00078513          	mv	a0,a5
+4000210c:	d11ff0ef          	jal	ra,40001e1c <print32bit>
+	print32bit(num[2]);
+40002110:	fe842783          	lw	a5,-24(s0)
+40002114:	00878793          	addi	a5,a5,8
+40002118:	0007a783          	lw	a5,0(a5)
+4000211c:	00078513          	mv	a0,a5
+40002120:	cfdff0ef          	jal	ra,40001e1c <print32bit>
+	print32bit(num[1]);
+40002124:	fe842783          	lw	a5,-24(s0)
+40002128:	00478793          	addi	a5,a5,4
+4000212c:	0007a783          	lw	a5,0(a5)
+40002130:	00078513          	mv	a0,a5
+40002134:	ce9ff0ef          	jal	ra,40001e1c <print32bit>
+	print32bit(num[0]);
+40002138:	fe842783          	lw	a5,-24(s0)
+4000213c:	0007a783          	lw	a5,0(a5)
+40002140:	00078513          	mv	a0,a5
+40002144:	cd9ff0ef          	jal	ra,40001e1c <print32bit>
+	print("\r\n");
+40002148:	400037b7          	lui	a5,0x40003
+4000214c:	d4c78513          	addi	a0,a5,-692 # 40002d4c <vga_simRes_h160_v120+0x38>
+40002150:	b6dff0ef          	jal	ra,40001cbc <print>
+}
+40002154:	00000013          	nop
+40002158:	01c12083          	lw	ra,28(sp)
+4000215c:	01812403          	lw	s0,24(sp)
+40002160:	02010113          	addi	sp,sp,32
+40002164:	00008067          	ret

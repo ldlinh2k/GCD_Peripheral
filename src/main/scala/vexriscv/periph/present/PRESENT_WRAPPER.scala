@@ -11,7 +11,7 @@ class PRESENT_WRAPPER() extends BlackBox {
      val iChipselect_n = in Bool()
      val iWrite_n = in Bool()
      val iRead_n = in Bool()
-     val iAddress = in UInt (2 bits)
+     val iAddress = in UInt (4 bits)
      val idat = in UInt (32 bits)
      val odat = out Bits (32 bits)
    }

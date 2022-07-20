@@ -29,9 +29,9 @@ void present_cipher(unsigned char operation, uint32_t *key, uint32_t *block, uin
 	present_write(block[0],PRESENT_ADDR_BLOCK_BASE);
 
 	//KEY
-	present_write(key[2],PRESENT_ADDR_BLOCK_BASE +2);
-	present_write(key[1],PRESENT_ADDR_BLOCK_BASE +1);
-	present_write(key[0],PRESENT_ADDR_BLOCK_BASE);
+	present_write(key[2],PRESENT_ADDR_KEY_BASE +2);
+	present_write(key[1],PRESENT_ADDR_KEY_BASE +1);
+	present_write(key[0],PRESENT_ADDR_KEY_BASE);
 
 	//START
 	present_write(0x1,PRESENT_ADDR_START);

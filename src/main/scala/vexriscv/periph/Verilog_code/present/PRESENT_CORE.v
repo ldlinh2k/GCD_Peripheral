@@ -71,24 +71,5 @@ begin
 	done <= already_de | already_en;
 end
 	PRESENT_ENCRYPT en(odreg_en, idreg, kdreg, load_reg, clk, chip_enable_en,already_en);	
-	PRESENT_DECRYPT de(odreg_de, idreg, kdreg, load_reg, clk, chip_enable_de,already_de);
-// To print test vectors at simulation time
-`ifdef PRINT
-always @(posedge clk)
-begin
-	if (load)
-	begin
-		$display("1. INPUT:");
-		$display("KEY(Hex):  %x",key);
-		$display("Plaintext(Hex):  %x\n",idat);
-    end
-	if (done)
-	begin
-		$display("2. OUTPUT:");
-		$display("Ciphertesx(Hex):  %x",odat);
-		$display("----------------------------------------------------------------");
-	end
-	
-end
-`endif	
+	PRESENT_DECRYPT de(odreg_de, idreg, kdreg, load_reg, clk, chip_enable_de,already_de);	
 endmodule 

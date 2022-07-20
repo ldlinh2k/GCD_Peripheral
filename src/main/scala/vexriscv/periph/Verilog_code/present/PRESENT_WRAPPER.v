@@ -51,12 +51,12 @@ begin
 				//load
 					4'd0:	load <=idat[0];
 				//KEY
-					4'd1:	iKey[79:48] <= idat;
+					4'd3:	iKey[79:48] <= idat;
 					4'd2:	iKey[47:16]	<= idat;
-					4'd3:	iKey[15:0]	<= idat[15:0];
+					4'd1:	iKey[15:0]	<= idat[15:0];
 				//iData
-					4'd4:	data[63:32] <= idat;
-					4'd5:	data[31:0]	<= idat;
+					4'd5:	data[63:32] <= idat;
+					4'd4:	data[31:0]	<= idat;
 				//control encrypt or decrypt
 					4'd8:	control <= idat[0];
 				endcase
@@ -67,8 +67,8 @@ begin
 				load <= 1'b0;
 				if(~iRead_n)
 					case(iAddress[3:0])
-						4'd6:	odat <= odreg[63:32];
-						4'd7:	odat <= odreg[31:0];
+						4'd7:	odat <= odreg[63:32];
+						4'd6:	odat <= odreg[31:0];
 					endcase	
 				else
 					odat <= odat;
@@ -80,22 +80,4 @@ begin
 end
 
 PRESENT_CORE dut(.odat(odreg),.iReset_n(reset_n),.idat(data),.key(iKey),.load(load),.clk(clk),.control(control),.done(done));
-// To print test vectors at simulation time
-`ifdef PRINT
-always @(posedge clk)
-begin
-	if (load)
-	begin
-		$display("1. INPUT:");
-		$display("KEY(Hex):  %x",key);
-		$display("Plaintext(Hex):  %x\n",idat);
-    end
-	if (done)
-	begin
-		$display("2. OUTPUT:");
-		$display("Ciphertesx(Hex):  %x",odreg);
-		$display("----------------------------------------------------------------");
-	end
-end
-`endif	
 endmodule

@@ -1,5 +1,4 @@
-build/src/print_functions.o: src/print_functions.c libs/briey.h \
- libs/timer.h \
+build/src/present.o: src/present.c libs/briey.h libs/timer.h \
  /opt/riscv/lib/gcc/riscv64-unknown-elf/10.2.0/include/stdint.h \
  /opt/riscv/riscv64-unknown-elf/include/stdint.h \
  /opt/riscv/riscv64-unknown-elf/include/machine/_default_types.h \

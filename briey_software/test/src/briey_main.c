@@ -13,8 +13,8 @@ int main() {
 	uart_applyConfig(UART,&uartConfig);
 
 	print("\r\t**********************************PRINCE TEST*******************************\r\n");
-	uint32_t prince_key[4] 		= {0x0, 0x0, 0x0, 0x0};
-	uint32_t prince_block[2] 		= {0x0, 0x0};
+	uint32_t prince_key[4] 	= {0x0, 0x0, 0x0, 0x0};
+	uint32_t prince_block[2]= {0x0, 0x0};
 	uint32_t prince_res[2] 	= {0x0,0x0};
 	print("\r\n\t===================================TEST 1===================================\r\n");
 
@@ -81,7 +81,8 @@ int main() {
     aes_key_128[0]	= 0x39383736;
 
    	aes_128_cipher(AES_OP_EN, aes_key_128, aes_block, aes_res);
-	print("\r\n\t=================================TEST 2=====================================\r\n");
+
+   	print("\r\n\t=================================TEST 2=====================================\r\n");
 
     aes_block[3] 	= 0xfd1ee6b4;
     aes_block[2] 	= 0xbd2fb855;
@@ -94,6 +95,7 @@ int main() {
     aes_key_128[0]	= 0x31323334;
 
    	aes_128_cipher(AES_OP_DE, aes_key_128, aes_block, aes_res);
+
 	print("\r\n\t=================================TEST 3=====================================\r\n");
 
     aes_block[3] 	= 0x7393172a;
@@ -106,7 +108,8 @@ int main() {
     aes_key_128[1] 	= 0x28aed2a6;
     aes_key_128[0]	= 0x2b7e1516;
    	aes_128_cipher(AES_OP_EN, aes_key_128, aes_block, aes_res);
-	print("\r\n\t=================================TEST 4=====================================\r\n");
+
+   	print("\r\n\t=================================TEST 4=====================================\r\n");
 
     aes_block[3] 	= 0x2466ef97;
     aes_block[2] 	= 0xa89ecaf3;

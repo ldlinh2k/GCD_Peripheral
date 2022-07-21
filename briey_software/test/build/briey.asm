@@ -512,14 +512,14 @@ void prince_cipher(uint32_t mode, uint32_t *key, uint32_t *block, uint32_t *res)
 4000031c:	f21ff0ef          	jal	ra,4000023c <prince_write>
 
 		//BLOCK----
-		prince_write(block[1],PRINCE_ADDR_BLOCK1);
+		prince_write(block[1],PRINCE_ADDR_BLOCK_BASE +1);
 40000320:	fe442783          	lw	a5,-28(s0)
 40000324:	00478793          	addi	a5,a5,4
 40000328:	0007a783          	lw	a5,0(a5)
 4000032c:	02100593          	li	a1,33
 40000330:	00078513          	mv	a0,a5
 40000334:	f09ff0ef          	jal	ra,4000023c <prince_write>
-		prince_write(block[0],PRINCE_ADDR_BLOCK0);
+		prince_write(block[0],PRINCE_ADDR_BLOCK_BASE);
 40000338:	fe442783          	lw	a5,-28(s0)
 4000033c:	0007a783          	lw	a5,0(a5)
 40000340:	02000593          	li	a1,32
@@ -528,28 +528,28 @@ void prince_cipher(uint32_t mode, uint32_t *key, uint32_t *block, uint32_t *res)
 
 		//KEY----
 
-		prince_write(key[3],PRINCE_ADDR_KEY3);
+		prince_write(key[3],PRINCE_ADDR_KEY_BASE +3);
 4000034c:	fe842783          	lw	a5,-24(s0)
 40000350:	00c78793          	addi	a5,a5,12
 40000354:	0007a783          	lw	a5,0(a5)
 40000358:	01300593          	li	a1,19
 4000035c:	00078513          	mv	a0,a5
 40000360:	eddff0ef          	jal	ra,4000023c <prince_write>
-		prince_write(key[2],PRINCE_ADDR_KEY2);
+		prince_write(key[2],PRINCE_ADDR_KEY_BASE +2);
 40000364:	fe842783          	lw	a5,-24(s0)
 40000368:	00878793          	addi	a5,a5,8
 4000036c:	0007a783          	lw	a5,0(a5)
 40000370:	01200593          	li	a1,18
 40000374:	00078513          	mv	a0,a5
 40000378:	ec5ff0ef          	jal	ra,4000023c <prince_write>
-		prince_write(key[1],PRINCE_ADDR_KEY1);
+		prince_write(key[1],PRINCE_ADDR_KEY_BASE +1);
 4000037c:	fe842783          	lw	a5,-24(s0)
 40000380:	00478793          	addi	a5,a5,4
 40000384:	0007a783          	lw	a5,0(a5)
 40000388:	01100593          	li	a1,17
 4000038c:	00078513          	mv	a0,a5
 40000390:	eadff0ef          	jal	ra,4000023c <prince_write>
-		prince_write(key[0],PRINCE_ADDR_KEY0);
+		prince_write(key[0],PRINCE_ADDR_KEY_BASE);
 40000394:	fe842783          	lw	a5,-24(s0)
 40000398:	0007a783          	lw	a5,0(a5)
 4000039c:	01000593          	li	a1,16
@@ -569,14 +569,14 @@ void prince_cipher(uint32_t mode, uint32_t *key, uint32_t *block, uint32_t *res)
 400003bc:	eddff0ef          	jal	ra,40000298 <prince_read>
 400003c0:	00050793          	mv	a5,a0
 400003c4:	fe078ae3          	beqz	a5,400003b8 <prince_cipher+0xc8>
-		res[1] = prince_read(PRINCE_ADDR_RESULT1);
+		res[1] = prince_read(PRINCE_ADDR_RESULT_BASE +1);
 400003c8:	fe042783          	lw	a5,-32(s0)
 400003cc:	00478493          	addi	s1,a5,4
 400003d0:	03100513          	li	a0,49
 400003d4:	ec5ff0ef          	jal	ra,40000298 <prince_read>
 400003d8:	00050793          	mv	a5,a0
 400003dc:	00f4a023          	sw	a5,0(s1)
-		res[0] = prince_read(PRINCE_ADDR_RESULT0);
+		res[0] = prince_read(PRINCE_ADDR_RESULT_BASE);
 400003e0:	03000513          	li	a0,48
 400003e4:	eb5ff0ef          	jal	ra,40000298 <prince_read>
 400003e8:	00050713          	mv	a4,a0
@@ -856,12 +856,12 @@ int main() {
 400006e4:	400027b7          	lui	a5,0x40002
 400006e8:	3f478513          	addi	a0,a5,1012 # 400023f4 <vga_simRes_h160_v120+0x20>
 400006ec:	680010ef          	jal	ra,40001d6c <print>
-	uint32_t prince_key[4] 		= {0x0, 0x0, 0x0, 0x0};
+	uint32_t prince_key[4] 	= {0x0, 0x0, 0x0, 0x0};
 400006f0:	fc042823          	sw	zero,-48(s0)
 400006f4:	fc042a23          	sw	zero,-44(s0)
 400006f8:	fc042c23          	sw	zero,-40(s0)
 400006fc:	fc042e23          	sw	zero,-36(s0)
-	uint32_t prince_block[2] 		= {0x0, 0x0};
+	uint32_t prince_block[2]= {0x0, 0x0};
 40000700:	fc042423          	sw	zero,-56(s0)
 40000704:	fc042623          	sw	zero,-52(s0)
 	uint32_t prince_res[2] 	= {0x0,0x0};
@@ -1081,7 +1081,8 @@ int main() {
 40000958:	00078593          	mv	a1,a5
 4000095c:	00100513          	li	a0,1
 40000960:	4d5000ef          	jal	ra,40001634 <aes_128_cipher>
-	print("\r\n\t=================================TEST 2=====================================\r\n");
+
+   	print("\r\n\t=================================TEST 2=====================================\r\n");
 40000964:	400027b7          	lui	a5,0x40002
 40000968:	64078513          	addi	a0,a5,1600 # 40002640 <vga_simRes_h160_v120+0x26c>
 4000096c:	400010ef          	jal	ra,40001d6c <print>
@@ -1128,6 +1129,7 @@ int main() {
 400009e0:	00078593          	mv	a1,a5
 400009e4:	00000513          	li	a0,0
 400009e8:	44d000ef          	jal	ra,40001634 <aes_128_cipher>
+
 	print("\r\n\t=================================TEST 3=====================================\r\n");
 400009ec:	400027b7          	lui	a5,0x40002
 400009f0:	69478513          	addi	a0,a5,1684 # 40002694 <vga_simRes_h160_v120+0x2c0>
@@ -1174,7 +1176,8 @@ int main() {
 40000a68:	00078593          	mv	a1,a5
 40000a6c:	00100513          	li	a0,1
 40000a70:	3c5000ef          	jal	ra,40001634 <aes_128_cipher>
-	print("\r\n\t=================================TEST 4=====================================\r\n");
+
+   	print("\r\n\t=================================TEST 4=====================================\r\n");
 40000a74:	400027b7          	lui	a5,0x40002
 40000a78:	6e878513          	addi	a0,a5,1768 # 400026e8 <vga_simRes_h160_v120+0x314>
 40000a7c:	2f0010ef          	jal	ra,40001d6c <print>

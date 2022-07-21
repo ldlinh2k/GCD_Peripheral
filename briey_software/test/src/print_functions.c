@@ -51,6 +51,7 @@ void print32bit(uint32_t n)
 
 void print64bit(char *message,uint32_t *num)
 {
+	print("\r\t");
 	print(message);
 	print32bit(num[1]);
 	print32bit(num[0]);
@@ -58,6 +59,7 @@ void print64bit(char *message,uint32_t *num)
 }
 void print128bit(char *message, uint32_t *num)
 {
+	print("\r\t");
 	print(message);
 	print32bit(num[3]);
 	print32bit(num[2]);
@@ -67,6 +69,7 @@ void print128bit(char *message, uint32_t *num)
 }
 void print80bit(char *message,uint32_t *num)
 {
+	print("\r\t");
 	print(message);
 	print32bit(num[2]);
 	print32bit(num[1]);
@@ -75,6 +78,7 @@ void print80bit(char *message,uint32_t *num)
 }
 void print256bit(char *message, uint32_t *num)
 {
+	print("\r\t");
 	print(message);
 	print32bit(num[7]);
 	print32bit(num[6]);

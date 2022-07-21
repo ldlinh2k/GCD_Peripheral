@@ -154,7 +154,7 @@ LOAD /opt/riscv/bin/../lib/gcc/riscv64-unknown-elf/10.2.0/libgcc.a
                 0x0000000080000000                crtStart
                 0x0000000080000020                trap_entry
 
-.memory         0x0000000040000000     0x2218
+.memory         0x0000000040000000     0x2248
  *(.text)
  .text          0x0000000040000000      0x470 build/src/prince.o
                 0x000000004000023c                prince_write
@@ -172,96 +172,95 @@ LOAD /opt/riscv/bin/../lib/gcc/riscv64-unknown-elf/10.2.0/libgcc.a
                 0x00000000400015c8                aes_read
                 0x0000000040001634                aes_128_cipher
                 0x0000000040001898                aes_256_cipher
- .text          0x0000000040001b30      0x6e8 build/src/print_functions.o
+ .text          0x0000000040001b30      0x718 build/src/print_functions.o
                 0x0000000040001d6c                print
                 0x0000000040001dc4                print16bit
                 0x0000000040001ecc                print32bit
                 0x0000000040001fd4                print64bit
-                0x0000000040002038                print128bit
-                0x00000000400020c4                print80bit
-                0x000000004000213c                print256bit
-                0x0000000040002218                end = .
+                0x0000000040002044                print128bit
+                0x00000000400020dc                print80bit
+                0x0000000040002160                print256bit
+                0x0000000040002248                end = .
 
-.rodata         0x0000000040002218      0xb83
+.rodata         0x0000000040002248      0xb87
  *(.rdata)
  *(.rodata .rodata.*)
- .rodata        0x0000000040002218      0x14b build/src/prince.o
- *fill*         0x0000000040002363        0x1 
- .rodata        0x0000000040002364      0x622 build/src/briey_main.o
- *fill*         0x0000000040002986        0x2 
- .rodata        0x0000000040002988      0x14b build/src/present.o
- *fill*         0x0000000040002ad3        0x1 
- .rodata        0x0000000040002ad4      0x249 build/src/aes.o
- *fill*         0x0000000040002d1d        0x3 
- .rodata        0x0000000040002d20       0x7b build/src/print_functions.o
+ .rodata        0x0000000040002248      0x14b build/src/prince.o
+ *fill*         0x0000000040002393        0x1 
+ .rodata        0x0000000040002394      0x622 build/src/briey_main.o
+ *fill*         0x00000000400029b6        0x2 
+ .rodata        0x00000000400029b8      0x14b build/src/present.o
+ *fill*         0x0000000040002b03        0x1 
+ .rodata        0x0000000040002b04      0x249 build/src/aes.o
+ *fill*         0x0000000040002d4d        0x3 
+ .rodata        0x0000000040002d50       0x7f build/src/print_functions.o
  *(.gnu.linkonce.r.*)
 
-.rela.dyn       0x0000000040002d9c        0x0
- .rela.text     0x0000000040002d9c        0x0 build/src/prince.o
+.rela.dyn       0x0000000040002dd0        0x0
+ .rela.text     0x0000000040002dd0        0x0 build/src/prince.o
 
-.ctors          0x0000000040002d9b        0x1
-                0x0000000040002d9c                . = ALIGN (0x4)
- *fill*         0x0000000040002d9b        0x1 
-                0x0000000040002d9c                _ctors_start = .
+.ctors          0x0000000040002dcf        0x1
+                0x0000000040002dd0                . = ALIGN (0x4)
+ *fill*         0x0000000040002dcf        0x1 
+                0x0000000040002dd0                _ctors_start = .
  *(.init_array*)
  *(SORT_BY_NAME(.ctors.*))
  *(.ctors)
-                0x0000000040002d9c                . = ALIGN (0x4)
-                0x0000000040002d9c                _ctors_end = .
+                0x0000000040002dd0                . = ALIGN (0x4)
+                0x0000000040002dd0                _ctors_end = .
 
-.data           0x0000000040002d9c        0x4
+.data           0x0000000040002dd0        0x0
  *(.rdata)
  *(.rodata .rodata.*)
  *(.gnu.linkonce.r.*)
  *(.data .data.*)
- .data          0x0000000040002d9c        0x0 build/src/prince.o
- .data          0x0000000040002d9c        0x0 build/src/briey_main.o
- .data          0x0000000040002d9c        0x0 build/src/present.o
- .data          0x0000000040002d9c        0x0 build/src/aes.o
- .data          0x0000000040002d9c        0x0 build/src/print_functions.o
- .data          0x0000000040002d9c        0x0 build/src/briey_crt.o
+ .data          0x0000000040002dd0        0x0 build/src/prince.o
+ .data          0x0000000040002dd0        0x0 build/src/briey_main.o
+ .data          0x0000000040002dd0        0x0 build/src/present.o
+ .data          0x0000000040002dd0        0x0 build/src/aes.o
+ .data          0x0000000040002dd0        0x0 build/src/print_functions.o
+ .data          0x0000000040002dd0        0x0 build/src/briey_crt.o
  *(.gnu.linkonce.d.*)
-                0x0000000040002da0                . = ALIGN (0x8)
- *fill*         0x0000000040002d9c        0x4 
-                0x00000000400035a0                PROVIDE (__global_pointer$ = (. + 0x800))
+                0x0000000040002dd0                . = ALIGN (0x8)
+                0x00000000400035d0                PROVIDE (__global_pointer$ = (. + 0x800))
  *(.sdata .sdata.*)
  *(.gnu.linkonce.s.*)
-                0x0000000040002da0                . = ALIGN (0x8)
+                0x0000000040002dd0                . = ALIGN (0x8)
  *(.srodata.cst16)
  *(.srodata.cst8)
  *(.srodata.cst4)
  *(.srodata.cst2)
  *(.srodata .srodata.*)
 
-.bss            0x0000000040002da0        0x0
-                0x0000000040002da0                . = ALIGN (0x4)
-                0x0000000040002da0                _bss_start = .
+.bss            0x0000000040002dd0        0x0
+                0x0000000040002dd0                . = ALIGN (0x4)
+                0x0000000040002dd0                _bss_start = .
  *(.sbss*)
  *(.gnu.linkonce.sb.*)
  *(.bss .bss.*)
- .bss           0x0000000040002da0        0x0 build/src/prince.o
- .bss           0x0000000040002da0        0x0 build/src/briey_main.o
- .bss           0x0000000040002da0        0x0 build/src/present.o
- .bss           0x0000000040002da0        0x0 build/src/aes.o
- .bss           0x0000000040002da0        0x0 build/src/print_functions.o
- .bss           0x0000000040002da0        0x0 build/src/briey_crt.o
+ .bss           0x0000000040002dd0        0x0 build/src/prince.o
+ .bss           0x0000000040002dd0        0x0 build/src/briey_main.o
+ .bss           0x0000000040002dd0        0x0 build/src/present.o
+ .bss           0x0000000040002dd0        0x0 build/src/aes.o
+ .bss           0x0000000040002dd0        0x0 build/src/print_functions.o
+ .bss           0x0000000040002dd0        0x0 build/src/briey_crt.o
  *(.gnu.linkonce.b.*)
  *(COMMON)
-                0x0000000040002da0                . = ALIGN (0x4)
-                0x0000000040002da0                _bss_end = .
+                0x0000000040002dd0                . = ALIGN (0x4)
+                0x0000000040002dd0                _bss_end = .
 
-.noinit         0x0000000040002da0        0x0
-                0x0000000040002da0                . = ALIGN (0x4)
+.noinit         0x0000000040002dd0        0x0
+                0x0000000040002dd0                . = ALIGN (0x4)
  *(.noinit .noinit.*)
-                0x0000000040002da0                . = ALIGN (0x4)
+                0x0000000040002dd0                . = ALIGN (0x4)
 
-._user_heap     0x0000000040002da0        0x0
-                0x0000000040002da0                . = ALIGN (0x8)
+._user_heap     0x0000000040002dd0        0x0
+                0x0000000040002dd0                . = ALIGN (0x8)
                 [!provide]                        PROVIDE (end = .)
                 [!provide]                        PROVIDE (_end = .)
                 [!provide]                        PROVIDE (_heap_start = .)
-                0x0000000040002da0                . = (. + _heap_size)
-                0x0000000040002da0                . = ALIGN (0x8)
+                0x0000000040002dd0                . = (. + _heap_size)
+                0x0000000040002dd0                . = ALIGN (0x8)
                 [!provide]                        PROVIDE (_heap_end = .)
 
 ._stack         0x000000008000013c      0x804
@@ -354,13 +353,13 @@ OUTPUT(build/briey.elf elf32-littleriscv)
  .debug_macro   0x0000000000001e60       0xc9 build/src/aes.o
  .debug_macro   0x0000000000001f29       0xc9 build/src/print_functions.o
 
-.debug_line     0x0000000000000000     0x2415
+.debug_line     0x0000000000000000     0x242d
  .debug_line    0x0000000000000000      0x52e build/src/prince.o
  .debug_line    0x000000000000052e      0x908 build/src/briey_main.o
  .debug_line    0x0000000000000e36      0x555 build/src/present.o
  .debug_line    0x000000000000138b      0x7a1 build/src/aes.o
- .debug_line    0x0000000000001b2c      0x713 build/src/print_functions.o
- .debug_line    0x000000000000223f      0x1d6 build/src/briey_crt.o
+ .debug_line    0x0000000000001b2c      0x72b build/src/print_functions.o
+ .debug_line    0x0000000000002257      0x1d6 build/src/briey_crt.o
 
 .debug_str      0x0000000000000000     0x7894
  .debug_str     0x0000000000000000     0x3c57 build/src/prince.o

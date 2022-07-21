@@ -19,7 +19,6 @@ class Apb3PrinceCtrl(apb3Config : Apb3Config) extends Component {
   val io = new Bundle {
       val apb = slave(Apb3(Apb3PrinceCtrl.getApb3Config))
   }
-
   val prince_module = new prince
   val apbCtrl = Apb3SlaveFactory(io.apb)
 
@@ -28,6 +27,5 @@ class Apb3PrinceCtrl(apb3Config : Apb3Config) extends Component {
   apbCtrl.driveAndRead(prince_module.io.address, address=8)
   apbCtrl.driveAndRead(prince_module.io.write_data, address=12)
 
-  //val resSyncBuf = RegNextWhen(gcdCtrl.io.res, gcdCtrl.io.ready)
   apbCtrl.read(prince_module.io.read_data, address=16)
 }

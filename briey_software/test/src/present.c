@@ -43,11 +43,12 @@ void present_cipher(unsigned char operation, uint32_t *key, uint32_t *block, uin
 
     //print result to terminal
 	if(operation == PRESENT_OP_EN)
-		print("============================PRESENT ENCRYPTTION==============================\r\n");
+		print("\r\t===========================PRESENT ENCRYPTTION==============================\r\n");
 	else
-		print("============================PRESENT DECRYPTTION==============================\r\n");
-	print64bit("\r\nPLAIN_TEXT (64-bit) : ", block);
+		print("\r\t===========================PRESENT DECRYPTTION==============================\r\n");
+	print("\r\n");
+	print64bit("\r\tPLAIN_TEXT (64-bit) : ", block);
 	print80bit("KEY (80-bit) : ", key);
 	print64bit("RESULT (64-bit) : ", res);
-	print("\r\n============================================================================\r\n");
+	//print("\r\n============================================================================\r\n");
 }

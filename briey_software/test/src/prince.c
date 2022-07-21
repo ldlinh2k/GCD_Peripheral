@@ -43,14 +43,14 @@ void prince_cipher(uint32_t mode, uint32_t *key, uint32_t *block, uint32_t *res)
 
 		//print result to terminal
 		if(mode == PRINCE_OP_EN)
-			print("=============================PRINCE ENCRYPTTION=============================\r\n");
+			print("\r\t=============================PRINCE ENCRYPTTION=============================\r\n");
 		else
-			print("=============================PRINCE DECRYPTTION=============================\r\n");
+			print("\r\t=============================PRINCE DECRYPTTION=============================\r\n");
 		print("\r\n");
 		print64bit("PLAIN_TEXT (64-bit) : ", block);
 		print128bit("KEY (128-bit) : ", key);
 		print64bit("RESULT (64-bit) : ", res);
-		print("\r\n============================================================================\r\n");
+		//print("\r\n============================================================================\r\n");
 
 }
 

@@ -11,6 +11,7 @@ Discarded input sections
  .group         0x0000000000000000        0xc build/src/prince.o
  .group         0x0000000000000000        0xc build/src/prince.o
  .group         0x0000000000000000        0xc build/src/prince.o
+ .group         0x0000000000000000        0xc build/src/prince.o
  .group         0x0000000000000000        0xc build/src/briey_main.o
  .group         0x0000000000000000        0xc build/src/briey_main.o
  .group         0x0000000000000000        0xc build/src/briey_main.o
@@ -59,6 +60,8 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x1df build/src/briey_main.o
  .debug_macro   0x0000000000000000       0x6a build/src/briey_main.o
  .debug_macro   0x0000000000000000       0x6a build/src/briey_main.o
+ .debug_macro   0x0000000000000000       0x34 build/src/briey_main.o
+ .debug_macro   0x0000000000000000       0x5e build/src/briey_main.o
  .group         0x0000000000000000        0xc build/src/present.o
  .group         0x0000000000000000        0xc build/src/present.o
  .group         0x0000000000000000        0xc build/src/present.o
@@ -91,6 +94,7 @@ Discarded input sections
  .group         0x0000000000000000        0xc build/src/aes.o
  .group         0x0000000000000000        0xc build/src/aes.o
  .group         0x0000000000000000        0xc build/src/aes.o
+ .group         0x0000000000000000        0xc build/src/aes.o
  .debug_macro   0x0000000000000000      0x766 build/src/aes.o
  .debug_macro   0x0000000000000000       0x22 build/src/aes.o
  .debug_macro   0x0000000000000000       0x8e build/src/aes.o
@@ -100,7 +104,8 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x1df build/src/aes.o
  .debug_macro   0x0000000000000000       0x6a build/src/aes.o
  .debug_macro   0x0000000000000000       0x6a build/src/aes.o
- .debug_macro   0x0000000000000000       0x58 build/src/aes.o
+ .debug_macro   0x0000000000000000       0x34 build/src/aes.o
+ .debug_macro   0x0000000000000000       0x5e build/src/aes.o
  .group         0x0000000000000000        0xc build/src/print_functions.o
  .group         0x0000000000000000        0xc build/src/print_functions.o
  .group         0x0000000000000000        0xc build/src/print_functions.o
@@ -122,6 +127,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x6a build/src/print_functions.o
  .debug_macro   0x0000000000000000       0x6a build/src/print_functions.o
  .debug_macro   0x0000000000000000       0x34 build/src/print_functions.o
+ .debug_macro   0x0000000000000000       0x5e build/src/print_functions.o
 
 Memory Configuration
 
@@ -148,114 +154,114 @@ LOAD /opt/riscv/bin/../lib/gcc/riscv64-unknown-elf/10.2.0/libgcc.a
                 0x0000000080000000                crtStart
                 0x0000000080000020                trap_entry
 
-.memory         0x0000000040000000     0x226c
+.memory         0x0000000040000000     0x2218
  *(.text)
- .text          0x0000000040000000      0x47c build/src/prince.o
+ .text          0x0000000040000000      0x470 build/src/prince.o
                 0x000000004000023c                prince_write
                 0x0000000040000298                prince_read
                 0x00000000400002f0                prince_cipher
- .text          0x000000004000047c      0xa40 build/src/briey_main.o
-                0x00000000400006b8                main
-                0x0000000040000ea0                irqCallback
- .text          0x0000000040000ebc      0x4b4 build/src/present.o
-                0x00000000400010f8                present_write
-                0x0000000040001174                present_read
-                0x00000000400011f0                present_cipher
- .text          0x0000000040001370      0x814 build/src/aes.o
-                0x00000000400015ac                aes_write
-                0x000000004000161c                aes_read
-                0x0000000040001688                aes_128_cipher
-                0x00000000400018ec                aes_256_cipher
- .text          0x0000000040001b84      0x6e8 build/src/print_functions.o
-                0x0000000040001dc0                print
-                0x0000000040001e18                print16bit
-                0x0000000040001f20                print32bit
-                0x0000000040002028                print64bit
-                0x000000004000208c                print128bit
-                0x0000000040002118                print80bit
-                0x0000000040002190                print256bit
-                0x000000004000226c                end = .
+ .text          0x0000000040000470      0x9f8 build/src/briey_main.o
+                0x00000000400006ac                main
+                0x0000000040000e4c                irqCallback
+ .text          0x0000000040000e68      0x4b4 build/src/present.o
+                0x00000000400010a4                present_write
+                0x0000000040001120                present_read
+                0x000000004000119c                present_cipher
+ .text          0x000000004000131c      0x814 build/src/aes.o
+                0x0000000040001558                aes_write
+                0x00000000400015c8                aes_read
+                0x0000000040001634                aes_128_cipher
+                0x0000000040001898                aes_256_cipher
+ .text          0x0000000040001b30      0x6e8 build/src/print_functions.o
+                0x0000000040001d6c                print
+                0x0000000040001dc4                print16bit
+                0x0000000040001ecc                print32bit
+                0x0000000040001fd4                print64bit
+                0x0000000040002038                print128bit
+                0x00000000400020c4                print80bit
+                0x000000004000213c                print256bit
+                0x0000000040002218                end = .
 
-.rodata         0x000000004000226c      0xbe7
+.rodata         0x0000000040002218      0xb83
  *(.rdata)
  *(.rodata .rodata.*)
- .rodata        0x000000004000226c      0x195 build/src/prince.o
- *fill*         0x0000000040002401        0x3 
- .rodata        0x0000000040002404      0x563 build/src/briey_main.o
- *fill*         0x0000000040002967        0x1 
- .rodata        0x0000000040002968      0x191 build/src/present.o
- *fill*         0x0000000040002af9        0x3 
- .rodata        0x0000000040002afc      0x2d9 build/src/aes.o
- *fill*         0x0000000040002dd5        0x3 
- .rodata        0x0000000040002dd8       0x7b build/src/print_functions.o
+ .rodata        0x0000000040002218      0x14b build/src/prince.o
+ *fill*         0x0000000040002363        0x1 
+ .rodata        0x0000000040002364      0x622 build/src/briey_main.o
+ *fill*         0x0000000040002986        0x2 
+ .rodata        0x0000000040002988      0x14b build/src/present.o
+ *fill*         0x0000000040002ad3        0x1 
+ .rodata        0x0000000040002ad4      0x249 build/src/aes.o
+ *fill*         0x0000000040002d1d        0x3 
+ .rodata        0x0000000040002d20       0x7b build/src/print_functions.o
  *(.gnu.linkonce.r.*)
 
-.rela.dyn       0x0000000040002e54        0x0
- .rela.text     0x0000000040002e54        0x0 build/src/prince.o
+.rela.dyn       0x0000000040002d9c        0x0
+ .rela.text     0x0000000040002d9c        0x0 build/src/prince.o
 
-.ctors          0x0000000040002e53        0x1
-                0x0000000040002e54                . = ALIGN (0x4)
- *fill*         0x0000000040002e53        0x1 
-                0x0000000040002e54                _ctors_start = .
+.ctors          0x0000000040002d9b        0x1
+                0x0000000040002d9c                . = ALIGN (0x4)
+ *fill*         0x0000000040002d9b        0x1 
+                0x0000000040002d9c                _ctors_start = .
  *(.init_array*)
  *(SORT_BY_NAME(.ctors.*))
  *(.ctors)
-                0x0000000040002e54                . = ALIGN (0x4)
-                0x0000000040002e54                _ctors_end = .
+                0x0000000040002d9c                . = ALIGN (0x4)
+                0x0000000040002d9c                _ctors_end = .
 
-.data           0x0000000040002e54        0x4
+.data           0x0000000040002d9c        0x4
  *(.rdata)
  *(.rodata .rodata.*)
  *(.gnu.linkonce.r.*)
  *(.data .data.*)
- .data          0x0000000040002e54        0x0 build/src/prince.o
- .data          0x0000000040002e54        0x0 build/src/briey_main.o
- .data          0x0000000040002e54        0x0 build/src/present.o
- .data          0x0000000040002e54        0x0 build/src/aes.o
- .data          0x0000000040002e54        0x0 build/src/print_functions.o
- .data          0x0000000040002e54        0x0 build/src/briey_crt.o
+ .data          0x0000000040002d9c        0x0 build/src/prince.o
+ .data          0x0000000040002d9c        0x0 build/src/briey_main.o
+ .data          0x0000000040002d9c        0x0 build/src/present.o
+ .data          0x0000000040002d9c        0x0 build/src/aes.o
+ .data          0x0000000040002d9c        0x0 build/src/print_functions.o
+ .data          0x0000000040002d9c        0x0 build/src/briey_crt.o
  *(.gnu.linkonce.d.*)
-                0x0000000040002e58                . = ALIGN (0x8)
- *fill*         0x0000000040002e54        0x4 
-                0x0000000040003658                PROVIDE (__global_pointer$ = (. + 0x800))
+                0x0000000040002da0                . = ALIGN (0x8)
+ *fill*         0x0000000040002d9c        0x4 
+                0x00000000400035a0                PROVIDE (__global_pointer$ = (. + 0x800))
  *(.sdata .sdata.*)
  *(.gnu.linkonce.s.*)
-                0x0000000040002e58                . = ALIGN (0x8)
+                0x0000000040002da0                . = ALIGN (0x8)
  *(.srodata.cst16)
  *(.srodata.cst8)
  *(.srodata.cst4)
  *(.srodata.cst2)
  *(.srodata .srodata.*)
 
-.bss            0x0000000040002e58        0x0
-                0x0000000040002e58                . = ALIGN (0x4)
-                0x0000000040002e58                _bss_start = .
+.bss            0x0000000040002da0        0x0
+                0x0000000040002da0                . = ALIGN (0x4)
+                0x0000000040002da0                _bss_start = .
  *(.sbss*)
  *(.gnu.linkonce.sb.*)
  *(.bss .bss.*)
- .bss           0x0000000040002e58        0x0 build/src/prince.o
- .bss           0x0000000040002e58        0x0 build/src/briey_main.o
- .bss           0x0000000040002e58        0x0 build/src/present.o
- .bss           0x0000000040002e58        0x0 build/src/aes.o
- .bss           0x0000000040002e58        0x0 build/src/print_functions.o
- .bss           0x0000000040002e58        0x0 build/src/briey_crt.o
+ .bss           0x0000000040002da0        0x0 build/src/prince.o
+ .bss           0x0000000040002da0        0x0 build/src/briey_main.o
+ .bss           0x0000000040002da0        0x0 build/src/present.o
+ .bss           0x0000000040002da0        0x0 build/src/aes.o
+ .bss           0x0000000040002da0        0x0 build/src/print_functions.o
+ .bss           0x0000000040002da0        0x0 build/src/briey_crt.o
  *(.gnu.linkonce.b.*)
  *(COMMON)
-                0x0000000040002e58                . = ALIGN (0x4)
-                0x0000000040002e58                _bss_end = .
+                0x0000000040002da0                . = ALIGN (0x4)
+                0x0000000040002da0                _bss_end = .
 
-.noinit         0x0000000040002e58        0x0
-                0x0000000040002e58                . = ALIGN (0x4)
+.noinit         0x0000000040002da0        0x0
+                0x0000000040002da0                . = ALIGN (0x4)
  *(.noinit .noinit.*)
-                0x0000000040002e58                . = ALIGN (0x4)
+                0x0000000040002da0                . = ALIGN (0x4)
 
-._user_heap     0x0000000040002e58        0x0
-                0x0000000040002e58                . = ALIGN (0x8)
+._user_heap     0x0000000040002da0        0x0
+                0x0000000040002da0                . = ALIGN (0x8)
                 [!provide]                        PROVIDE (end = .)
                 [!provide]                        PROVIDE (_end = .)
                 [!provide]                        PROVIDE (_heap_start = .)
-                0x0000000040002e58                . = (. + _heap_size)
-                0x0000000040002e58                . = ALIGN (0x8)
+                0x0000000040002da0                . = (. + _heap_size)
+                0x0000000040002da0                . = ALIGN (0x8)
                 [!provide]                        PROVIDE (_heap_end = .)
 
 ._stack         0x000000008000013c      0x804
@@ -298,78 +304,76 @@ OUTPUT(build/briey.elf elf32-littleriscv)
  .debug_aranges
                 0x00000000000000a0       0x20 build/src/briey_crt.o
 
-.debug_macro    0x0000000000000000     0x2096
- .debug_macro   0x0000000000000000       0xc0 build/src/prince.o
- .debug_macro   0x00000000000000c0      0x766 build/src/prince.o
- .debug_macro   0x0000000000000826       0x22 build/src/prince.o
- .debug_macro   0x0000000000000848       0x8e build/src/prince.o
- .debug_macro   0x00000000000008d6       0x51 build/src/prince.o
- .debug_macro   0x0000000000000927      0x103 build/src/prince.o
- .debug_macro   0x0000000000000a2a       0x6a build/src/prince.o
- .debug_macro   0x0000000000000a94      0x1df build/src/prince.o
- .debug_macro   0x0000000000000c73       0x6a build/src/prince.o
- .debug_macro   0x0000000000000cdd       0x6a build/src/prince.o
- .debug_macro   0x0000000000000d47       0x58 build/src/prince.o
- .debug_macro   0x0000000000000d9f      0x24c build/src/briey_main.o
- .debug_macro   0x0000000000000feb       0x52 build/src/briey_main.o
- .debug_macro   0x000000000000103d       0x19 build/src/briey_main.o
- .debug_macro   0x0000000000001056       0x94 build/src/briey_main.o
- .debug_macro   0x00000000000010ea       0x34 build/src/briey_main.o
- .debug_macro   0x000000000000111e       0x34 build/src/briey_main.o
- .debug_macro   0x0000000000001152       0x16 build/src/briey_main.o
- .debug_macro   0x0000000000001168       0x57 build/src/briey_main.o
- .debug_macro   0x00000000000011bf       0x97 build/src/briey_main.o
- .debug_macro   0x0000000000001256      0x341 build/src/briey_main.o
- .debug_macro   0x0000000000001597       0xfd build/src/briey_main.o
- .debug_macro   0x0000000000001694       0x10 build/src/briey_main.o
- .debug_macro   0x00000000000016a4       0x16 build/src/briey_main.o
- .debug_macro   0x00000000000016ba       0x43 build/src/briey_main.o
- .debug_macro   0x00000000000016fd       0x34 build/src/briey_main.o
- .debug_macro   0x0000000000001731       0x10 build/src/briey_main.o
- .debug_macro   0x0000000000001741       0x52 build/src/briey_main.o
- .debug_macro   0x0000000000001793      0x182 build/src/briey_main.o
- .debug_macro   0x0000000000001915       0x10 build/src/briey_main.o
- .debug_macro   0x0000000000001925       0x1c build/src/briey_main.o
- .debug_macro   0x0000000000001941       0x52 build/src/briey_main.o
- .debug_macro   0x0000000000001993       0x22 build/src/briey_main.o
- .debug_macro   0x00000000000019b5       0x10 build/src/briey_main.o
- .debug_macro   0x00000000000019c5       0x52 build/src/briey_main.o
- .debug_macro   0x0000000000001a17       0xd5 build/src/briey_main.o
- .debug_macro   0x0000000000001aec       0x1c build/src/briey_main.o
- .debug_macro   0x0000000000001b08       0x3d build/src/briey_main.o
- .debug_macro   0x0000000000001b45       0x16 build/src/briey_main.o
- .debug_macro   0x0000000000001b5b      0x16f build/src/briey_main.o
- .debug_macro   0x0000000000001cca       0x16 build/src/briey_main.o
- .debug_macro   0x0000000000001ce0       0x35 build/src/briey_main.o
- .debug_macro   0x0000000000001d15       0x16 build/src/briey_main.o
- .debug_macro   0x0000000000001d2b       0x29 build/src/briey_main.o
- .debug_macro   0x0000000000001d54       0x34 build/src/briey_main.o
- .debug_macro   0x0000000000001d88       0x5e build/src/briey_main.o
- .debug_macro   0x0000000000001de6       0xc9 build/src/present.o
- .debug_macro   0x0000000000001eaf       0xc0 build/src/aes.o
- .debug_macro   0x0000000000001f6f       0xc9 build/src/print_functions.o
- .debug_macro   0x0000000000002038       0x5e build/src/print_functions.o
+.debug_macro    0x0000000000000000     0x1ff2
+ .debug_macro   0x0000000000000000       0xc9 build/src/prince.o
+ .debug_macro   0x00000000000000c9      0x766 build/src/prince.o
+ .debug_macro   0x000000000000082f       0x22 build/src/prince.o
+ .debug_macro   0x0000000000000851       0x8e build/src/prince.o
+ .debug_macro   0x00000000000008df       0x51 build/src/prince.o
+ .debug_macro   0x0000000000000930      0x103 build/src/prince.o
+ .debug_macro   0x0000000000000a33       0x6a build/src/prince.o
+ .debug_macro   0x0000000000000a9d      0x1df build/src/prince.o
+ .debug_macro   0x0000000000000c7c       0x6a build/src/prince.o
+ .debug_macro   0x0000000000000ce6       0x6a build/src/prince.o
+ .debug_macro   0x0000000000000d50       0x34 build/src/prince.o
+ .debug_macro   0x0000000000000d84       0x5e build/src/prince.o
+ .debug_macro   0x0000000000000de2      0x24c build/src/briey_main.o
+ .debug_macro   0x000000000000102e       0x52 build/src/briey_main.o
+ .debug_macro   0x0000000000001080       0x19 build/src/briey_main.o
+ .debug_macro   0x0000000000001099       0x94 build/src/briey_main.o
+ .debug_macro   0x000000000000112d       0x34 build/src/briey_main.o
+ .debug_macro   0x0000000000001161       0x34 build/src/briey_main.o
+ .debug_macro   0x0000000000001195       0x16 build/src/briey_main.o
+ .debug_macro   0x00000000000011ab       0x57 build/src/briey_main.o
+ .debug_macro   0x0000000000001202       0x97 build/src/briey_main.o
+ .debug_macro   0x0000000000001299      0x341 build/src/briey_main.o
+ .debug_macro   0x00000000000015da       0xfd build/src/briey_main.o
+ .debug_macro   0x00000000000016d7       0x10 build/src/briey_main.o
+ .debug_macro   0x00000000000016e7       0x16 build/src/briey_main.o
+ .debug_macro   0x00000000000016fd       0x43 build/src/briey_main.o
+ .debug_macro   0x0000000000001740       0x34 build/src/briey_main.o
+ .debug_macro   0x0000000000001774       0x10 build/src/briey_main.o
+ .debug_macro   0x0000000000001784       0x52 build/src/briey_main.o
+ .debug_macro   0x00000000000017d6      0x182 build/src/briey_main.o
+ .debug_macro   0x0000000000001958       0x10 build/src/briey_main.o
+ .debug_macro   0x0000000000001968       0x1c build/src/briey_main.o
+ .debug_macro   0x0000000000001984       0x52 build/src/briey_main.o
+ .debug_macro   0x00000000000019d6       0x22 build/src/briey_main.o
+ .debug_macro   0x00000000000019f8       0x10 build/src/briey_main.o
+ .debug_macro   0x0000000000001a08       0x52 build/src/briey_main.o
+ .debug_macro   0x0000000000001a5a       0xd5 build/src/briey_main.o
+ .debug_macro   0x0000000000001b2f       0x1c build/src/briey_main.o
+ .debug_macro   0x0000000000001b4b       0x3d build/src/briey_main.o
+ .debug_macro   0x0000000000001b88       0x16 build/src/briey_main.o
+ .debug_macro   0x0000000000001b9e      0x16f build/src/briey_main.o
+ .debug_macro   0x0000000000001d0d       0x16 build/src/briey_main.o
+ .debug_macro   0x0000000000001d23       0x35 build/src/briey_main.o
+ .debug_macro   0x0000000000001d58       0x16 build/src/briey_main.o
+ .debug_macro   0x0000000000001d6e       0x29 build/src/briey_main.o
+ .debug_macro   0x0000000000001d97       0xc9 build/src/present.o
+ .debug_macro   0x0000000000001e60       0xc9 build/src/aes.o
+ .debug_macro   0x0000000000001f29       0xc9 build/src/print_functions.o
 
-.debug_line     0x0000000000000000     0x2425
- .debug_line    0x0000000000000000      0x527 build/src/prince.o
- .debug_line    0x0000000000000527      0x92c build/src/briey_main.o
- .debug_line    0x0000000000000e53      0x555 build/src/present.o
- .debug_line    0x00000000000013a8      0x794 build/src/aes.o
- .debug_line    0x0000000000001b3c      0x713 build/src/print_functions.o
- .debug_line    0x000000000000224f      0x1d6 build/src/briey_crt.o
+.debug_line     0x0000000000000000     0x2415
+ .debug_line    0x0000000000000000      0x52e build/src/prince.o
+ .debug_line    0x000000000000052e      0x908 build/src/briey_main.o
+ .debug_line    0x0000000000000e36      0x555 build/src/present.o
+ .debug_line    0x000000000000138b      0x7a1 build/src/aes.o
+ .debug_line    0x0000000000001b2c      0x713 build/src/print_functions.o
+ .debug_line    0x000000000000223f      0x1d6 build/src/briey_crt.o
 
-.debug_str      0x0000000000000000     0x78ba
- .debug_str     0x0000000000000000     0x3b74 build/src/prince.o
-                                       0x3ced (size before relaxing)
- .debug_str     0x0000000000003b74     0x3bfd build/src/briey_main.o
+.debug_str      0x0000000000000000     0x7894
+ .debug_str     0x0000000000000000     0x3c57 build/src/prince.o
+                                       0x3dd0 (size before relaxing)
+ .debug_str     0x0000000000003c57     0x3b1a build/src/briey_main.o
                                        0x78d3 (size before relaxing)
  .debug_str     0x0000000000007771       0x67 build/src/present.o
                                        0x3ddd (size before relaxing)
  .debug_str     0x00000000000077d8       0x3c build/src/aes.o
-                                       0x3d02 (size before relaxing)
- .debug_str     0x0000000000007814       0x65 build/src/print_functions.o
-                                       0x3d9c (size before relaxing)
- .debug_str     0x0000000000007879       0x41 build/src/briey_crt.o
+                                       0x3de5 (size before relaxing)
+ .debug_str     0x0000000000007814       0x3f build/src/print_functions.o
+                                       0x3da0 (size before relaxing)
+ .debug_str     0x0000000000007853       0x41 build/src/briey_crt.o
 
 .comment        0x0000000000000000       0x30
  .comment       0x0000000000000000       0x30 build/src/prince.o
